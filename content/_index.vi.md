@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 20/04/2026 đến ngày 13/07/2026
 
-![Ảnh đại diện của bạn](/project-aws/images/anhquan.jpg)
+<img src="/project-aws/images/anhquan.jpg" alt="Ảnh đại diện của bạn" style="width: 200px; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 10px; margin-bottom: 20px;">
 
 
 
