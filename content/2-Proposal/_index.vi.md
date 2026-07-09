@@ -1,108 +1,324 @@
-﻿---
+---
 title: "Bản đề xuất"
 date: 2026-04-20
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
+# ĐỀ XUẤT DỰ ÁN
 
-# IoT Weather Platform for Lab Research  
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực  
+## Tên dự án: SyncQuiz - Hệ thống trắc nghiệm thời gian thực (Real-time Quiz System)
 
-### 1. Tóm tắt điều hành  
-IoT Weather Platform được thiết kế dành cho nhóm *ITea Lab* tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.  
+---
 
-### 2. Tuyên bố vấn đề  
-*Vấn đề hiện tại*  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.  
+## 1. Tóm tắt điều hành
 
-*Giải pháp*  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.  
+SyncQuiz là nền tảng trắc nghiệm thời gian thực cho phép quản trò (host) tạo các câu hỏi trắc nghiệm, mở phòng đấu trực tiếp, mời người chơi tham gia bằng mã PIN phòng và vận hành các phiên chơi đồng bộ theo thời gian thực. Người chơi có thể tham gia từ thiết bị cá nhân của mình, gửi đáp án ngay lập tức, nhận cập nhật điểm số và xem bảng xếp hạng chung cuộc sau khi trò chơi kết thúc.
 
-*Lợi ích và hoàn vốn đầu tư (ROI)*  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.  
+Dự án được thiết kế sử dụng kiến trúc không máy chủ (serverless) trên AWS để giảm thiểu việc quản lý hạ tầng, cải thiện khả năng mở rộng và tối ưu hóa chi phí. Các dịch vụ cốt lõi bao gồm Amazon Cognito để xác thực, Amazon DynamoDB để lưu trữ dữ liệu, AWS Lambda cho logic backend, Amazon API Gateway cho giao tiếp HTTP và WebSocket, Amazon EventBridge để xử lý hướng sự kiện, Amazon S3 và CloudFront để lưu trữ và phân phối frontend, và Amazon CloudWatch để giám sát hệ thống.
 
-### 3. Kiến trúc giải pháp  
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.  
+Mục tiêu chính của SyncQuiz là cung cấp một nền tảng gọn nhẹ, có khả năng mở rộng cao và tiết kiệm chi phí phục vụ cho việc học tập tương tác, hoạt động lớp học, đào tạo trực tuyến, workshop và các buổi gắn kết nội bộ đội ngũ.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+---
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+## 2. Tuyên bố vấn đề
 
-*Dịch vụ AWS sử dụng*  
-- *AWS IoT Core*: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.  
-- *AWS Lambda*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
-- *Amazon API Gateway*: Giao tiếp với ứng dụng web.  
-- *Amazon S3*: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).  
-- *AWS Glue*: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.  
-- *AWS Amplify*: Lưu trữ giao diện web Next.js.  
-- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng phòng lab.  
+### 2.1 Vấn đề hiện tại
 
-*Thiết kế thành phần*  
-- *Thiết bị biên*: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.  
-- *Tiếp nhận dữ liệu*: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.  
-- *Lưu trữ dữ liệu*: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.  
-- *Xử lý dữ liệu*: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.  
-- *Giao diện web*: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.  
-- *Quản lý người dùng*: Amazon Cognito giới hạn 5 tài khoản hoạt động.  
+Các hệ thống làm quiz truyền thống thường thiếu sự tương tác và đồng bộ thời gian thực giữa quản trò và người tham gia. Trong nhiều trường hợp, người dùng phải tải lại trang thủ công, gặp hiện tượng trễ thông tin, hoặc phải phụ thuộc vào các công cụ bên thứ ba tốn kém và khó tùy chỉnh.
 
-### 4. Triển khai kỹ thuật  
-*Các giai đoạn triển khai*  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:  
-1. *Nghiên cứu và vẽ kiến trúc*: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).  
-2. *Tính toán chi phí và kiểm tra tính khả thi*: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).  
-3. *Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp*: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).  
-4. *Phát triển, kiểm thử, triển khai*: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).  
+Các vấn đề chính bao gồm:
 
-*Yêu cầu kỹ thuật*  
-- *Trạm thời tiết biên*: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.  
-- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.  
+* Thiếu giao tiếp thời gian thực giữa quản trò và người chơi.
+* Gặp khó khăn trong việc quản lý trạng thái của các phòng đấu trực tiếp và người tham gia.
+* Tính toán điểm số và cập nhật bảng xếp hạng bị chậm trễ.
+* Khả năng mở rộng hạn chế khi có số lượng lớn người chơi tham gia cùng lúc.
+* Chi phí hạ tầng cao do sử dụng các máy chủ chạy liên tục (always-on).
+* Triển khai và bảo trì phức tạp đối với các đội ngũ nhỏ hoặc dự án sinh viên.
+* Khả năng giám sát yếu, gây khó khăn cho việc phát hiện lỗi trong các phiên chơi trực tiếp.
 
-### 5. Lộ trình & Mốc triển khai  
-- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  
-- *Thực tập (Tháng 1–3)*:  
-    - Tháng 1: Học AWS và nâng cấp phần cứng.  
-    - Tháng 2: Thiết kế và điều chỉnh kiến trúc.  
-    - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.  
-- *Sau triển khai*: Nghiên cứu thêm trong vòng 1 năm.  
+### 2.2 Giải pháp
 
-### 6. Ước tính ngân sách  
-Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
-Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).  
+SyncQuiz giải quyết các vấn đề này bằng cách sử dụng kiến trúc AWS Serverless và hướng sự kiện (event-driven). Frontend được lưu trữ trên Amazon S3 và phân phối qua CloudFront. Người dùng được xác thực qua Amazon Cognito. Dữ liệu về quiz, phòng đấu, người chơi, kết nối, trạng thái game và kết quả được lưu trữ trong DynamoDB.
 
-*Chi phí hạ tầng*  
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).  
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).  
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).  
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).  
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).  
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).  
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).  
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).  
+Hệ thống sử dụng API Gateway HTTP API cho các hoạt động REST thông thường như tạo quiz, tạo phòng và tham gia phòng. Đối với trải nghiệm chơi trực tiếp, API Gateway WebSocket API được sử dụng để duy trì kết nối trực tiếp giữa quản trò và người chơi. AWS Lambda xử lý các logic backend như CRUD quiz, quản lý phòng đấu, xử lý kết nối WebSocket, gửi đáp án, tính điểm và lưu kết quả.
 
-*Tổng*: 0,7 USD/tháng, 8,40 USD/12 tháng  
-- *Phần cứng*: 265 USD một lần (Raspberry Pi 5 và cảm biến).  
+EventBridge được sử dụng để kích hoạt các tác vụ không đồng bộ như tính điểm khi người chơi gửi đáp án và lưu kết quả chung cuộc khi trò chơi kết thúc.
 
-### 7. Đánh giá rủi ro  
-*Ma trận rủi ro*  
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.  
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.  
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.  
+### 2.3 Lợi ích và hoàn vốn đầu tư
 
-*Chiến lược giảm thiểu*  
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.  
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.  
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.  
+SyncQuiz mang lại nhiều lợi ích vượt trội:
 
-*Kế hoạch dự phòng*  
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.  
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.  
+* Trải nghiệm chơi trực tiếp thời gian thực mượt mà cho cả quản trò và người chơi.
+* Kiến trúc serverless giảm thiểu tối đa nỗ lực vận hành hạ tầng.
+* Mô hình thanh toán theo thực tế sử dụng (pay-as-you-go) giúp giảm thiểu chi phí khi lưu lượng truy cập thấp.
+* Chế độ on-demand của DynamoDB hỗ trợ các mức tải linh hoạt.
+* WebSocket API cho phép giao tiếp tức thời mà không cần tải lại trang.
+* EventBridge tăng tính mô-đun của hệ thống và tách biệt rõ ràng logic nghiệp vụ.
+* Hệ thống giám sát CloudWatch giúp nhanh chóng phát hiện lỗi, hiện tượng nghẽn (throttling) và các vấn đề về hiệu năng.
+* Hệ thống dễ dàng mở rộng trong tương lai để phục vụ trường học, sự kiện, khóa học online và đào tạo doanh nghiệp.
 
-### 8. Kết quả kỳ vọng  
-*Cải tiến kỹ thuật*: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-*Giá trị dài hạn*: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+Hiệu quả đầu tư kỳ vọng bao gồm chi phí lưu trữ thấp hơn, tốc độ phát triển nhanh hơn, khả năng mở rộng dễ dàng và mức độ tương tác của người dùng tốt hơn so với các nền tảng chạy máy chủ truyền thống.
+
+---
+
+## 3. Kiến trúc giải pháp
+
+SyncQuiz áp dụng kiến trúc Serverless. Frontend được deploy lên Amazon S3 và phân phối toàn cầu qua Amazon CloudFront. Người dùng truy cập ứng dụng web thông qua CloudFront. Xác thực người dùng được quản lý bởi Amazon Cognito.
+
+Backend được chia nhỏ thành nhiều hàm Lambda. HTTP API được dùng cho các thao tác về quiz và phòng đấu, trong khi WebSocket API được sử dụng cho luồng chơi game trực tiếp. DynamoDB lưu trữ toàn bộ dữ liệu ứng dụng, bao gồm người dùng, quiz, câu hỏi, phòng đấu, kết nối active, trạng thái game và kết quả cuối cùng. EventBridge kết nối các sự kiện trong game với các hàm xử lý nền như tính điểm và lưu kết quả.
+
+### 3.1 Dịch vụ AWS sử dụng
+
+Dự án sử dụng các dịch vụ AWS sau:
+
+* **Amazon Cognito**: Quản lý xác thực người dùng và User Pool.
+* **Amazon DynamoDB**: Lưu trữ dữ liệu người dùng, quiz, câu hỏi, phòng đấu, kết nối WebSocket, trạng thái game và kết quả.
+* **AWS Lambda**: Thực thi logic backend mà không cần quản lý máy chủ.
+* **Amazon API Gateway - HTTP API**: Cung cấp các endpoint REST cho quản lý quiz và phòng đấu.
+* **Amazon API Gateway - WebSocket API**: Hỗ trợ giao tiếp thời gian thực giữa quản trò và người chơi.
+* **Amazon EventBridge**: Điều phối các luồng công việc hướng sự kiện như nộp đáp án và kết thúc game.
+* **Amazon S3**: Lưu trữ các tệp tĩnh của ứng dụng frontend.
+* **Amazon CloudFront**: Phân phối frontend toàn cầu với giao thức HTTPS và cơ chế bộ nhớ đệm (caching).
+* **AWS IAM**: Quản lý quyền truy cập và phân quyền giữa Lambda, DynamoDB, EventBridge và quản lý WebSocket.
+* **Amazon CloudWatch**: Cung cấp logs, metrics, cảnh báo (alarms) và dashboards phục vụ giám sát hệ thống.
+* **AWS WAF**: Dịch vụ tùy chọn để tăng cường bảo mật web trong môi trường production.
+
+### 3.2 Thiết kế thành phần
+
+Hệ thống được chia thành các thành phần sau:
+
+* **Thành phần Frontend (Frontend Component)**
+  Giao diện web nơi quản trò có thể tạo quiz, bắt đầu phòng đấu, quản lý tiến trình trò chơi và xem kết quả. Người chơi có thể tham gia bằng mã PIN phòng, trả lời câu hỏi và xem điểm số cập nhật.
+
+* **Thành phần Xác thực (Authentication Component)**
+  Amazon Cognito quản lý việc đăng ký, đăng nhập của người dùng, cấp mã token JWT và bảo vệ quyền truy cập vào các tính năng của quản trò như tạo quiz và tạo phòng đấu.
+
+* **Thành phần Quản lý Quiz (Quiz Management Component)**
+  Hàm Lambda xử lý các thao tác CRUD của quiz, bao gồm tạo mới, liệt kê, xem chi tiết, cập nhật quiz và thêm câu hỏi.
+
+* **Thành phần Quản lý Phòng đấu (Room Management Component)**
+  Hàm Lambda xử lý việc tạo phòng, tìm kiếm phòng và người chơi tham gia phòng. Mỗi phòng có một mã PIN duy nhất và lưu các trạng thái như đang chờ (waiting), đang chơi (playing) hoặc đã kết thúc (finished).
+
+* **Thành phần WebSocket thời gian thực (Real-time WebSocket Component)**
+  WebSocket API xử lý các sự kiện trực tiếp như kết nối, ngắt kết nối, bắt đầu game, chuyển câu hỏi tiếp theo, gửi câu trả lời và kết thúc game.
+
+* **Thành phần Tính điểm (Score Calculation Component)**
+  Khi người chơi gửi câu trả lời, EventBridge sẽ kích hoạt một hàm Lambda để tính điểm dựa trên tính đúng đắn của đáp án, thời gian trả lời còn lại và chuỗi trả lời đúng (streak).
+
+* **Thành phần Lưu kết quả (Result Saving Component)**
+  Khi trò chơi kết thúc, EventBridge kích hoạt hàm Lambda để lưu kết quả chung cuộc của người chơi và thứ hạng của họ vào DynamoDB.
+
+* **Thành phần Giám sát (Monitoring Component)**
+  CloudWatch theo dõi lỗi Lambda, hoạt động của API, số tin nhắn WebSocket, nghẽn DynamoDB và hiệu năng tổng thể của ứng dụng.
+
+---
+
+## 4. Triển khai kỹ thuật
+
+Quy trình triển khai kỹ thuật của SyncQuiz bao gồm các bước sau:
+
+1. **Thiết lập xác thực với Cognito**
+   * Tạo một Cognito User Pool.
+   * Cấu hình đăng nhập bằng Email.
+   * Tạo client ứng dụng cho frontend web.
+   * Sử dụng token JWT để bảo vệ các API dành cho quản trò.
+
+2. **Tạo các bảng DynamoDB**
+   * `webquiz-dev-users`: lưu thông tin người dùng.
+   * `webquiz-dev-quizzes`: lưu siêu dữ liệu của quiz.
+   * `webquiz-dev-questions`: lưu các câu hỏi của quiz.
+   * `webquiz-dev-rooms`: lưu thông tin phòng chơi đang kích hoạt.
+   * `webquiz-dev-connections`: lưu các kết nối WebSocket đang hoạt động.
+   * `webquiz-dev-game-state`: lưu trạng thái game trực tiếp, danh sách người chơi, câu trả lời và điểm số.
+   * `webquiz-dev-game-results`: lưu kết quả cuối cùng.
+
+3. **Cấu hình IAM Role và Policies**
+   * Tạo IAM execution role cho các hàm Lambda.
+   * Gắn quyền ghi log vào CloudWatch.
+   * Thêm các policy tùy chỉnh cho phép truy cập DynamoDB, EventBridge và quyền quản lý kết nối WebSocket.
+
+4. **Phát triển các hàm Lambda**
+   * `webquiz-dev-quiz-crud`: Xử lý các thao tác với quiz và câu hỏi.
+   * `webquiz-dev-room-management`: Xử lý tạo phòng đấu và người chơi tham gia phòng.
+   * `webquiz-dev-ws-connect`: Lưu thông tin kết nối WebSocket mới thiết lập.
+   * `webquiz-dev-ws-disconnect`: Xóa thông tin kết nối khi client ngắt kết nối.
+   * `webquiz-dev-ws-message`: Xử lý và điều phối các tin nhắn trong game theo thời gian thực.
+   * `webquiz-dev-score-calculator`: Tính toán điểm số sau khi nhận câu trả lời từ người chơi.
+   * `webquiz-dev-game-results-saver`: Lưu kết quả chung cuộc của trò chơi.
+
+5. **Tạo API Gateway HTTP API**
+   * Cấu hình các route cho việc quản lý quiz và phòng đấu.
+   * Tích hợp các route với hàm Lambda tương ứng.
+   * Cấu hình Cognito JWT Authorizer để bảo vệ các route nhạy cảm.
+   * Bật CORS để cho phép frontend giao tiếp với backend.
+
+6. **Tạo API Gateway WebSocket API**
+   * Cấu hình các route mặc định: `$connect`, `$disconnect`, và `$default`.
+   * Liên kết các route với các hàm Lambda xử lý tương ứng.
+   * Định nghĩa các action WebSocket như `START_GAME`, `NEXT_QUESTION`, `SUBMIT_ANSWER`, và `END_GAME`.
+
+7. **Cấu hình EventBridge**
+   * Tạo một Event Bus tùy chỉnh.
+   * Tạo rule cho sự kiện `AnswerSubmitted` để kích hoạt hàm tính điểm.
+   * Tạo rule cho sự kiện `GameEnded` để kích hoạt hàm lưu kết quả chung cuộc.
+
+8. **Triển khai Frontend**
+   * Tải các tệp build frontend lên Amazon S3.
+   * Cấu hình phân phối CloudFront.
+   * Sử dụng Origin Access Control (OAC) để bảo mật quyền truy cập vào S3.
+   * Cấu hình custom error responses để hỗ trợ routing trên ứng dụng Single Page Application (SPA).
+
+9. **Thiết lập giám sát hệ thống**
+   * Tạo các cảnh báo CloudWatch Alarms khi có lỗi Lambda hoặc lỗi API.
+   * Tạo cảnh báo khi DynamoDB bị nghẽn (throttling).
+   * Xây dựng CloudWatch dashboard theo dõi các số liệu của Lambda, API Gateway, WebSocket và DynamoDB.
+
+10. **Kiểm thử**
+    * Kiểm thử tạo quiz thông qua HTTP API.
+    * Kiểm thử tạo phòng đấu và người chơi tham gia.
+    * Kiểm thử kết nối WebSocket bằng công cụ như `wscat`.
+    * Kiểm thử toàn bộ luồng gửi câu trả lời, cập nhật điểm, kết thúc game và hiển thị bảng xếp hạng.
+
+---
+
+## 5. Lộ trình & Mốc triển khai
+
+| Tuần | Mốc triển khai | Các công việc chính |
+| --- | --- | --- |
+| Tuần 1 | Kế hoạch dự án & Thiết lập AWS | Xác định phạm vi dự án, xem xét kiến trúc, tạo tài khoản AWS, cấu hình AWS CLI, chuẩn bị quyền IAM. |
+| Tuần 2 | Xác thực & Thiết kế cơ sở dữ liệu | Thiết lập Cognito User Pool, thiết kế các bảng DynamoDB (users, quizzes, questions, rooms, connections, game state, results). |
+| Tuần 3 | Xây dựng nền tảng Backend | Tạo IAM role, cấu hình quyền Lambda, lập trình các hàm Lambda cho CRUD quiz và quản lý phòng. |
+| Tuần 4 | Phát triển HTTP API | Tạo API Gateway HTTP API, cấu hình routes, tích hợp Lambda, thêm Cognito JWT Authorizer, kiểm thử các API quản lý quiz và phòng. |
+| Tuần 5 | Hệ thống thời gian thực WebSocket | Tạo WebSocket API, lập trình các handler kết nối/ngắt kết nối/tin nhắn, kiểm thử giao tiếp trực tiếp giữa host và player. |
+| Tuần 6 | Logic game hướng sự kiện | Cấu hình EventBridge, lập trình quy trình gửi câu trả lời, bộ tính điểm, bộ lưu kết quả và logic bảng xếp hạng. |
+| Tuần 7 | Triển khai Frontend | Build ứng dụng frontend, deploy lên S3, cấu hình CloudFront, kết nối frontend với các API HTTP và WebSocket. |
+| Tuần 8 | Giám sát, Kiểm thử & Tối ưu | Tạo CloudWatch alarms và dashboard, thực hiện kiểm thử toàn trình (end-to-end), tối ưu chi phí, sửa lỗi, hoàn thiện tài liệu. |
+
+---
+
+## 6. Ước tính ngân sách
+
+Dự án sử dụng mô hình serverless, do đó hầu hết các dịch vụ được tính phí dựa trên lượng sử dụng thực tế. Điều này giúp SyncQuiz cực kỳ phù hợp cho môi trường phát triển, dự án sinh viên, sự kiện nhỏ và các khối lượng công việc có lưu lượng truy cập từ thấp đến trung bình.
+
+Ước tính chi phí hàng tháng cho môi trường phát triển (development env):
+
+| Dịch vụ | Chi phí ước tính hàng tháng |
+| --- | ---: |
+| AWS Lambda | $0 - $5 |
+| Amazon DynamoDB (On-demand) | $0 - $10 |
+| Amazon API Gateway (HTTP/WebSocket) | $1 - $5 |
+| Amazon CloudFront | $0 - $5 |
+| Amazon S3 | ~$0.50 |
+| Amazon EventBridge | $0 - $1 |
+| Amazon CloudWatch | $0 - $3 |
+| **Tổng chi phí ước tính** | **~$2 - $30/tháng** |
+
+### 6.1 Chi phí hạ tầng
+
+Các yếu tố chính cấu thành chi phí hạ tầng bao gồm:
+
+* Số lượng request tới HTTP API.
+* Số lượng kết nối và tin nhắn truyền qua WebSocket API.
+* Số lần thực thi và thời gian chạy của các hàm Lambda.
+* Số lượng yêu cầu đọc/ghi (read/write requests) trên DynamoDB.
+* Dung lượng lưu trữ log và số liệu (metrics) trên CloudWatch.
+* Dung lượng truyền dữ liệu (data transfer) qua CloudFront.
+* Dung lượng lưu trữ các tệp tĩnh frontend trên S3.
+
+Các phương pháp tối ưu hóa chi phí:
+
+* Sử dụng DynamoDB on-demand để tự động điều chỉnh theo tải thực tế.
+* Sử dụng Lambda thay vì duy trì các máy chủ EC2 luôn chạy.
+* Sử dụng bộ nhớ đệm CloudFront để phân phối frontend hiệu quả.
+* Thiết lập TTL (Time to Live) trên các dữ liệu tạm thời như phòng đấu, kết nối và trạng thái game để tự động dọn dẹp DynamoDB.
+* Điều chỉnh thời gian lưu giữ logs (retention policy) của CloudWatch để tránh chi phí lưu trữ log không cần thiết.
+* Tránh sử dụng NAT Gateway và các tài nguyên VPC không cần thiết trong môi trường dev.
+
+---
+
+## 7. Đánh giá rủi ro
+
+### 7.1 Ma trận rủi ro
+
+| Rủi ro | Xác suất | Ảnh hưởng | Mức độ |
+| --- | --- | --- | --- |
+| Mất kết nối WebSocket giữa chừng trong phiên chơi | Trung bình | Cao | Cao |
+| Nghẽn DynamoDB (throttling) khi nhiều người chơi cùng gửi đáp án | Trung bình | Trung bình | Trung bình |
+| Lambda bị timeout khi gửi thông điệp broadcast đến quá nhiều kết nối | Trung bình | Cao | Cao |
+| Logic tính điểm bị sai lệch | Thấp | Cao | Trung bình |
+| Lỗi cấu hình Cognito chặn Host đăng nhập | Trung bình | Trung bình | Trung bình |
+| Lỗi cấu hình route hoặc authorizer trên API Gateway | Trung bình | Trung bình | Trung bình |
+| Lỗi triển khai CloudFront/S3 khiến frontend không truy cập được | Thấp | Trung bình | Thấp |
+| Chi phí CloudWatch tăng vọt do ghi log quá nhiều | Trung bình | Thấp | Thấp |
+| Rủi ro bảo mật do cấp quyền IAM quá rộng | Trung bình | Cao | Cao |
+
+### 7.2 Chiến lược giảm thiểu
+
+* Sử dụng DynamoDB TTL để tự động xóa các phòng đấu, kết nối và trạng thái game đã hết hạn.
+* Thực hiện dọn dẹp các kết nối WebSocket đã chết khi API Gateway báo lỗi gửi tin nhắn không thành công (stale connections).
+* Thiết kế các hàm Lambda nhỏ gọn, tập trung xử lý một nhiệm vụ duy nhất (quiz, room, WebSocket, scoring, results).
+* Sử dụng EventBridge để tách biệt việc nhận tin nhắn thời gian thực với logic tính điểm không đồng bộ.
+* Áp dụng nguyên tắc đặc quyền tối thiểu (least privilege) khi cấu hình IAM policies.
+* Sử dụng Cognito JWT Authorizer để bảo vệ các route nhạy cảm dành cho quản trò.
+* Thiết lập CloudWatch Alarms để sớm cảnh báo lỗi Lambda và hiện tượng nghẽn DynamoDB.
+* Kiểm thử kỹ lượng các kịch bản kết nối WebSocket trước khi đưa vào chạy thử nghiệm thực tế.
+* Sử dụng CloudFront kết hợp OAC để ẩn hoàn toàn S3 bucket chứa frontend với công cộng.
+* Phân chia rõ ràng môi trường phát triển (dev) và sản xuất (prod) thông qua quy tắc đặt tên tài nguyên.
+
+### 7.3 Kế hoạch dự phòng
+
+* Nếu kết nối WebSocket bị mất, người chơi có thể kết nối lại bằng cách sử dụng mã PIN phòng và ID người chơi hiện tại mà không mất điểm số.
+* Nếu xảy ra nghẽn DynamoDB, phân tích lại mẫu truy cập để tối ưu hóa chỉ mục hoặc chuyển sang chế độ provisioned capacity có tự động mở rộng.
+* Nếu việc broadcast bằng Lambda bị chậm, chia nhỏ danh sách kết nối để gửi theo các lô nhỏ (batches) hoặc sử dụng hàng đợi bất đồng bộ.
+* Nếu logic tính điểm gặp lỗi, lưu trữ tạm thời đáp án thô của người chơi để thực hiện tính toán lại sau.
+* Nếu Cognito gặp lỗi đăng nhập, tạm thời mở cổng API công cộng trong môi trường thử nghiệm nội bộ để tiếp tục debug backend.
+* Nếu lỗi deploy CloudFront, nhà phát triển có thể truy cập trực tiếp S3 tĩnh để kiểm tra trước.
+* Nếu chi phí AWS tăng bất thường, sử dụng Cost Explorer để rà soát, giảm thời gian lưu logs và xóa bỏ các tài nguyên dư thừa.
+
+---
+
+## 8. Kết quả kỳ vọng
+
+Sau khi hoàn thành dự án, SyncQuiz kỳ vọng bàn giao một hệ thống trắc nghiệm thời gian thực hoàn chỉnh với các kết quả sau:
+
+* Quản trò có thể tạo, chỉnh sửa và quản lý các bộ câu hỏi trắc nghiệm.
+* Quản trò có thể mở phòng chơi trực tiếp với mã PIN phòng ngẫu nhiên.
+* Người chơi dễ dàng tham gia phòng mà không cần đăng ký tài khoản.
+* Quản trò và người chơi giao tiếp đồng bộ thời gian thực thông qua kết nối WebSocket.
+* Người chơi có thể gửi đáp án ngay lập tức và hệ thống tự động ghi nhận.
+* Điểm số được tính toán tự động sau mỗi câu hỏi dựa trên thời gian phản hồi.
+* Bảng xếp hạng được cập nhật liên tục và kết quả cuối cùng được lưu trữ đầy đủ.
+* Ứng dụng frontend được triển khai bảo mật qua S3 và CloudFront.
+* Hoạt động hệ thống được theo dõi thông qua bảng điều khiển CloudWatch dashboard.
+* Chi phí vận hành hạ tầng duy trì ở mức tối thiểu nhờ mô hình Serverless.
+
+### 8.1 Cải tiến kỹ thuật
+
+Dự án mang lại các cải tiến kỹ thuật nổi bật:
+
+* Khả năng mở rộng linh hoạt nhờ các dịch vụ serverless Lambda và DynamoDB.
+* Giảm thiểu công sức quản lý và vận hành hệ thống nhờ mô hình không máy chủ.
+* Giao tiếp hai chiều thời gian thực hiệu quả cao bằng API Gateway WebSocket API.
+* Tách biệt logic nghiệp vụ và xử lý bất đồng bộ thông qua kiến trúc hướng sự kiện với EventBridge.
+* Bảo mật tốt hơn với Cognito quản lý user và phân quyền IAM role chi tiết.
+* Tăng tốc độ phản hồi frontend toàn cầu nhờ CDN CloudFront.
+* Tăng tính quan sát (observability) với metrics, logs, dashboard của CloudWatch.
+* Tối ưu bộ nhớ database bằng DynamoDB TTL.
+
+### 8.2 Giá trị dài hạn
+
+SyncQuiz sở hữu giá trị dài hạn lớn nhờ khả năng nâng cấp và phát triển rộng rãi:
+
+* Bổ sung trang quản trị (Admin Dashboard) để phân tích báo cáo và quản lý nâng cao.
+* Hỗ trợ nhiều chế độ chơi phong phú hơn (chơi tự luyện, chơi thi đấu, chế độ thi cử).
+* Phân tích sâu hiệu suất của người chơi và tỷ lệ trả lời đúng của từng câu hỏi.
+* Chế độ chơi theo nhóm/đội (Team-based quiz).
+* Tích hợp với các hệ thống quản lý học tập (LMS) hoặc nền tảng đào tạo doanh nghiệp.
+* Hỗ trợ đa ngôn ngữ.
+* Giao diện tối ưu hơn trên thiết bị di động.
+* Triển khai môi trường production với tên miền riêng, AWS WAF và các chính sách bảo mật chặt chẽ.
+* Tích hợp pipeline CI/CD hoàn chỉnh để tự động hóa kiểm thử và triển khai.
+
+Trong dài hạn, SyncQuiz có thể phát triển thành nền tảng tương tác thời gian thực đa năng ứng dụng rộng rãi trong các lớp học, hội thảo, đào tạo doanh nghiệp và sự kiện tập thể.

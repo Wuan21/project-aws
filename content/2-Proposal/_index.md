@@ -1,115 +1,326 @@
-﻿---
+---
 title: "Proposal"
 date: 2026-04-20
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
+# PROJECT PROPOSAL
 
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+## Project Name: SyncQuiz - Real-time Quiz System
 
-### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+---
 
-### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
+## 1. Executive Summary
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+SyncQuiz is a real-time quiz platform that allows hosts to create quizzes, open live rooms, invite players using a room PIN, and run synchronized quiz sessions in real time. Players can join from their devices, submit answers instantly, receive score updates, and view the final leaderboard after the game ends.
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+The project is designed using a serverless architecture on AWS to reduce infrastructure management, improve scalability, and optimize cost. Core services include Amazon Cognito for authentication, Amazon DynamoDB for data storage, AWS Lambda for backend logic, Amazon API Gateway for HTTP and WebSocket communication, Amazon EventBridge for event-driven processing, Amazon S3 and CloudFront for frontend hosting, and Amazon CloudWatch for monitoring.
 
-### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
+The main goal of SyncQuiz is to provide a lightweight, scalable, and cost-efficient platform for interactive learning, classroom activities, online training, workshops, and team engagement sessions.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+---
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+## 2. Problem Statement
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+### 2.1 What’s the Problem?
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+Traditional quiz systems often lack real-time interaction and synchronization between the host and participants. In many cases, users have to refresh pages manually, wait for delayed updates, or rely on third-party tools that may be expensive or difficult to customize.
 
-### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
+The main problems include:
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+* Lack of real-time communication between host and players.
+* Difficulty managing live quiz rooms and participant states.
+* Delayed score calculation and leaderboard updates.
+* Limited scalability when many players join at the same time.
+* High infrastructure cost if using always-on servers.
+* Complicated deployment and maintenance for small teams or student projects.
+* Weak monitoring, making it hard to detect errors during live quiz sessions.
 
-### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+### 2.2 The Solution
 
-### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+SyncQuiz solves these problems by using a serverless, event-driven AWS architecture. The frontend is hosted on Amazon S3 and delivered through CloudFront. Users authenticate through Amazon Cognito. Quiz, room, player, connection, game state, and result data are stored in DynamoDB.
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+The system uses API Gateway HTTP API for normal REST operations such as creating quizzes, creating rooms, and joining rooms. For real-time gameplay, API Gateway WebSocket API is used to maintain live communication between host and players. AWS Lambda handles backend logic such as quiz CRUD, room management, WebSocket connection handling, answer submission, score calculation, and result saving.
 
-Total: $0.7/month, $8.40/12 months
+EventBridge is used to trigger asynchronous tasks such as calculating scores when a player submits an answer and saving final results when the game ends.
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+### 2.3 Benefits and Return on Investment
 
-### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+SyncQuiz provides several benefits:
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+* Real-time gameplay experience for both host and players.
+* Serverless architecture reduces operational effort.
+* Pay-as-you-go pricing helps minimize cost during low traffic.
+* DynamoDB on-demand capacity supports flexible workloads.
+* WebSocket API enables instant communication without page refresh.
+* EventBridge improves system modularity and separates business logic.
+* CloudWatch monitoring helps detect errors, throttling, and performance issues.
+* The system can be extended later for classrooms, events, online courses, and corporate training.
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+Expected return on investment includes lower hosting costs, faster development, easier scaling, and better user engagement compared to traditional server-based quiz platforms.
 
-### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+---
+
+## 3. Solution Architecture
+
+SyncQuiz follows a serverless architecture. The frontend is deployed to Amazon S3 and distributed globally using Amazon CloudFront. Users access the web application through CloudFront. Authentication is handled by Amazon Cognito.
+
+The backend is divided into multiple Lambda functions. HTTP API is used for quiz and room operations, while WebSocket API is used for live game communication. DynamoDB stores all application data, including users, quizzes, questions, rooms, active connections, game state, and final results. EventBridge connects gameplay events to background processing functions such as score calculation and result saving.
+
+### 3.1 AWS Services Used
+
+The project uses the following AWS services:
+
+* **Amazon Cognito**: Handles user authentication and user pool management.
+* **Amazon DynamoDB**: Stores users, quizzes, questions, rooms, WebSocket connections, game state, and game results.
+* **AWS Lambda**: Runs backend logic without managing servers.
+* **Amazon API Gateway - HTTP API**: Provides REST endpoints for quiz and room management.
+* **Amazon API Gateway - WebSocket API**: Provides real-time communication between host and players.
+* **Amazon EventBridge**: Handles event-driven workflows such as answer submission and game ending.
+* **Amazon S3**: Hosts the static frontend application.
+* **Amazon CloudFront**: Delivers the frontend globally with HTTPS and caching.
+* **AWS IAM**: Manages permissions for Lambda, DynamoDB, EventBridge, and WebSocket management.
+* **Amazon CloudWatch**: Provides logs, metrics, alarms, and dashboards for monitoring.
+* **AWS WAF**: Optional service for additional web security in production.
+
+### 3.2 Component Design
+
+The system is divided into the following components:
+
+* **Frontend Component**
+  A web interface where hosts can create quizzes, start rooms, manage game flow, and view results. Players can join using a room PIN, answer questions, and view score updates.
+
+* **Authentication Component**
+  Amazon Cognito manages user sign-up, sign-in, JWT tokens, and protected access for host features such as quiz creation and room creation.
+
+* **Quiz Management Component**
+  Lambda function handles quiz CRUD operations, including creating quizzes, listing quizzes, viewing quiz details, updating quizzes, and adding questions.
+
+* **Room Management Component**
+  Lambda function handles room creation, room lookup, and player joining. Each room has a unique PIN and stores status such as waiting, playing, or finished.
+
+* **Real-time WebSocket Component**
+  WebSocket API handles live actions such as connecting, disconnecting, starting the game, moving to the next question, submitting answers, and ending the game.
+
+* **Score Calculation Component**
+  When a player submits an answer, EventBridge triggers a Lambda function to calculate score based on correctness, remaining time, and answer streak.
+
+* **Result Saving Component**
+  When the game ends, EventBridge triggers a Lambda function to save final player results and rankings into DynamoDB.
+
+* **Monitoring Component**
+  CloudWatch tracks Lambda errors, API activity, WebSocket messages, DynamoDB throttling, and overall application performance.
+
+---
+
+## 4. Technical Implementation
+
+The technical implementation of SyncQuiz includes the following steps:
+
+1. **Set up Cognito Authentication**
+   * Create a Cognito User Pool.
+   * Configure email-based sign-in.
+   * Create an application client for the web frontend.
+   * Use JWT tokens to protect host APIs.
+
+2. **Create DynamoDB Tables**
+   * `webquiz-dev-users` for user data.
+   * `webquiz-dev-quizzes` for quiz metadata.
+   * `webquiz-dev-questions` for quiz questions.
+   * `webquiz-dev-rooms` for live room information.
+   * `webquiz-dev-connections` for active WebSocket connections.
+   * `webquiz-dev-game-state` for live game state, players, answers, and scores.
+   * `webquiz-dev-game-results` for final results.
+
+3. **Configure IAM Role and Policies**
+   * Create Lambda execution role.
+   * Attach CloudWatch logging permission.
+   * Add custom policy for DynamoDB, EventBridge, and WebSocket connection management.
+
+4. **Develop Lambda Functions**
+   * `webquiz-dev-quiz-crud`: Handles quiz and question operations.
+   * `webquiz-dev-room-management`: Handles room creation and player joining.
+   * `webquiz-dev-ws-connect`: Stores WebSocket connection information.
+   * `webquiz-dev-ws-disconnect`: Removes disconnected clients.
+   * `webquiz-dev-ws-message`: Processes real-time game messages.
+   * `webquiz-dev-score-calculator`: Calculates score after answer submission.
+   * `webquiz-dev-game-results-saver`: Saves final game results.
+
+5. **Create API Gateway HTTP API**
+   * Configure routes for quiz and room operations.
+   * Attach Lambda integrations.
+   * Configure Cognito JWT Authorizer for protected routes.
+   * Enable CORS for frontend communication.
+
+6. **Create API Gateway WebSocket API**
+   * Configure `$connect`, `$disconnect`, and `$default` routes.
+   * Connect routes to corresponding Lambda functions.
+   * Use WebSocket actions such as `START_GAME`, `NEXT_QUESTION`, `SUBMIT_ANSWER`, and `END_GAME`.
+
+7. **Configure EventBridge**
+   * Create custom event bus.
+   * Create rule for `AnswerSubmitted` event to trigger score calculation.
+   * Create rule for `GameEnded` event to trigger final result saving.
+
+8. **Deploy Frontend**
+   * Upload frontend build files to Amazon S3.
+   * Configure CloudFront distribution.
+   * Use Origin Access Control to secure S3 access.
+   * Configure custom error responses for single-page application routing.
+
+9. **Set up Monitoring**
+   * Create CloudWatch alarms for Lambda errors.
+   * Create alarms for DynamoDB throttling.
+   * Build CloudWatch dashboard for Lambda, API Gateway, WebSocket, and DynamoDB metrics.
+
+10. **Testing**
+    * Test quiz creation using HTTP API.
+    * Test room creation and joining.
+    * Test WebSocket connection using tools such as `wscat`.
+    * Test answer submission, score update, game ending, and leaderboard display.
+
+---
+
+## 5. Timeline & Milestones
+
+| Week | Milestone | Main Tasks |
+| --- | --- | --- |
+| Week 1 | Project Planning & AWS Setup | Define project scope, review architecture, create AWS account, configure AWS CLI, prepare IAM access. |
+| Week 2 | Authentication & Database Design | Set up Cognito User Pool, design DynamoDB tables, create users, quizzes, questions, rooms, connections, game state, and results tables. |
+| Week 3 | Backend Foundation | Create IAM role, configure Lambda permissions, implement quiz CRUD and room management Lambda functions. |
+| Week 4 | HTTP API Development | Create API Gateway HTTP API, configure routes, attach Lambda integrations, add Cognito JWT Authorizer, test quiz and room APIs. |
+| Week 5 | WebSocket Real-time System | Create WebSocket API, implement connect/disconnect/message handlers, test host and player live communication. |
+| Week 6 | Event-driven Game Logic | Configure EventBridge, implement answer submission workflow, score calculator, result saver, and leaderboard logic. |
+| Week 7 | Frontend Deployment | Build frontend application, deploy to S3, configure CloudFront, connect frontend with HTTP and WebSocket APIs. |
+| Week 8 | Monitoring, Testing & Optimization | Create CloudWatch alarms and dashboard, perform end-to-end testing, optimize cost, fix bugs, finalize documentation. |
+
+---
+
+## 6. Budget Estimation
+
+The project uses a serverless model, so most services are billed based on actual usage. This makes SyncQuiz suitable for development, student projects, small events, and low-to-medium traffic workloads.
+
+Estimated monthly cost for the development environment:
+
+| Service | Estimated Monthly Cost |
+| --- | ---: |
+| AWS Lambda | $0 - $5 |
+| Amazon DynamoDB On-demand | $0 - $10 |
+| Amazon API Gateway HTTP/WebSocket | $1 - $5 |
+| Amazon CloudFront | $0 - $5 |
+| Amazon S3 | ~$0.50 |
+| Amazon EventBridge | $0 - $1 |
+| Amazon CloudWatch | $0 - $3 |
+| **Total Estimated Cost** | **~$2 - $30/month** |
+
+### 6.1 Infrastructure Costs
+
+Main infrastructure cost factors include:
+
+* Number of HTTP API requests.
+* Number of WebSocket connections and messages.
+* Lambda execution count and duration.
+* DynamoDB read/write request volume.
+* CloudWatch log storage and metrics.
+* CloudFront data transfer.
+* S3 storage for frontend static files.
+
+Cost optimization methods:
+
+* Use DynamoDB on-demand capacity for unpredictable workloads.
+* Use Lambda instead of always-running EC2 instances.
+* Keep frontend static hosting on S3 and CloudFront.
+* Enable TTL on temporary data such as rooms, connections, and game state.
+* Monitor CloudWatch logs to avoid unnecessary log storage costs.
+* Avoid NAT Gateway and unnecessary VPC resources in the dev environment.
+
+---
+
+## 7. Risk Assessment
+
+### 7.1 Risk Matrix
+
+| Risk | Probability | Impact | Level |
+| --- | --- | --- | --- |
+| WebSocket disconnection during live quiz | Medium | High | High |
+| DynamoDB throttling during many simultaneous players | Medium | Medium | Medium |
+| Lambda timeout during broadcast to many connections | Medium | High | High |
+| Incorrect score calculation logic | Low | High | Medium |
+| Cognito configuration error blocks host login | Medium | Medium | Medium |
+| API Gateway route or authorizer misconfiguration | Medium | Medium | Medium |
+| CloudFront/S3 deployment issue causes frontend access error | Low | Medium | Low |
+| CloudWatch cost increases due to excessive logs | Medium | Low | Low |
+| Security risk from overly broad IAM permissions | Medium | High | High |
+
+### 7.2 Mitigation Strategies
+
+* Use DynamoDB TTL to automatically remove expired rooms, connections, and game states.
+* Clean up disconnected WebSocket clients when API Gateway returns stale connection errors.
+* Keep Lambda functions small and focused by separating quiz, room, WebSocket, scoring, and result logic.
+* Use EventBridge to separate real-time message handling from asynchronous score calculation.
+* Apply least privilege permissions in IAM policies.
+* Use Cognito JWT Authorizer for protected host routes.
+* Configure CloudWatch alarms for Lambda errors and DynamoDB throttling.
+* Test WebSocket flows carefully before live demo or production usage.
+* Use CloudFront with Origin Access Control to protect the S3 frontend bucket.
+* Keep dev and production environments separated using naming conventions such as `dev` and `prod`.
+
+### 7.3 Contingency Plans
+
+* If WebSocket communication fails, users can reconnect using the room PIN and player ID.
+* If DynamoDB throttling occurs, review access patterns and optimize indexes or switch to provisioned capacity with auto scaling.
+* If Lambda broadcast becomes slow, split broadcasting into smaller batches or use an asynchronous queue-based approach.
+* If score calculation fails, store submitted answers first and reprocess them later.
+* If Cognito login fails, temporarily test public API endpoints while fixing authorizer configuration.
+* If frontend deployment fails on CloudFront, access the latest S3 build internally for debugging.
+* If AWS cost increases unexpectedly, review Cost Explorer, reduce log retention, and remove unused resources.
+
+---
+
+## 8. Expected Outcomes
+
+At the end of the project, SyncQuiz is expected to deliver a working real-time quiz platform with the following outcomes:
+
+* Hosts can create and manage quizzes.
+* Hosts can create live quiz rooms with room PINs.
+* Players can join rooms without authentication.
+* Host and players can communicate in real time through WebSocket.
+* Players can submit answers instantly.
+* Scores are calculated automatically after each answer.
+* Leaderboard is updated and final results are saved.
+* Frontend is deployed securely through S3 and CloudFront.
+* System metrics and errors are monitored through CloudWatch.
+* Infrastructure cost remains low through serverless AWS services.
+
+### 8.1 Technical Improvements
+
+The project provides several technical improvements:
+
+* Improved scalability through serverless Lambda and DynamoDB.
+* Lower operational overhead because no server management is required.
+* Real-time communication using API Gateway WebSocket API.
+* Event-driven processing using EventBridge.
+* Better security with Cognito authentication and IAM role-based permissions.
+* Better frontend delivery using CloudFront CDN.
+* Improved observability with CloudWatch metrics, logs, alarms, and dashboards.
+* Better data lifecycle management using DynamoDB TTL.
+* Modular backend design that separates quiz, room, WebSocket, scoring, and result logic.
+
+### 8.2 Long-term Value
+
+SyncQuiz has strong long-term value because it can be expanded beyond the initial real-time quiz system. Future improvements may include:
+
+* Admin dashboard for managing quizzes and reports.
+* Support for multiple quiz modes such as practice mode, competition mode, and exam mode.
+* Analytics for player performance and question accuracy.
+* Team-based quiz mode.
+* Integration with school or training platforms.
+* Multi-language support.
+* Mobile-friendly interface.
+* Production deployment with custom domain, AWS WAF, and stricter security policies.
+* CI/CD pipeline for automated deployment.
+* Advanced leaderboard and achievement system.
+
+In the long term, SyncQuiz can become a reusable real-time learning and engagement platform for classrooms, workshops, online training, and internal company events.
