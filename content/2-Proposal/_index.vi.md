@@ -126,13 +126,13 @@ Quy trình triển khai kỹ thuật của SyncQuiz bao gồm các bước sau:
    * Sử dụng token JWT để bảo vệ các API dành cho quản trò.
 
 2. **Tạo các bảng DynamoDB**
-   * `webquiz-dev-users`: lưu thông tin người dùng.
-   * `webquiz-dev-quizzes`: lưu siêu dữ liệu của quiz.
-   * `webquiz-dev-questions`: lưu các câu hỏi của quiz.
-   * `webquiz-dev-rooms`: lưu thông tin phòng chơi đang kích hoạt.
-   * `webquiz-dev-connections`: lưu các kết nối WebSocket đang hoạt động.
-   * `webquiz-dev-game-state`: lưu trạng thái game trực tiếp, danh sách người chơi, câu trả lời và điểm số.
-   * `webquiz-dev-game-results`: lưu kết quả cuối cùng.
+   * webquiz-dev-users: lưu thông tin người dùng.
+   * webquiz-dev-quizzes: lưu siêu dữ liệu của quiz.
+   * webquiz-dev-questions: lưu các câu hỏi của quiz.
+   * webquiz-dev-rooms: lưu thông tin phòng chơi đang kích hoạt.
+   * webquiz-dev-connections: lưu các kết nối WebSocket đang hoạt động.
+   * webquiz-dev-game-state: lưu trạng thái game trực tiếp, danh sách người chơi, câu trả lời và điểm số.
+   * webquiz-dev-game-results: lưu kết quả cuối cùng.
 
 3. **Cấu hình IAM Role và Policies**
    * Tạo IAM execution role cho các hàm Lambda.
@@ -140,13 +140,13 @@ Quy trình triển khai kỹ thuật của SyncQuiz bao gồm các bước sau:
    * Thêm các policy tùy chỉnh cho phép truy cập DynamoDB, EventBridge và quyền quản lý kết nối WebSocket.
 
 4. **Phát triển các hàm Lambda**
-   * `webquiz-dev-quiz-crud`: Xử lý các thao tác với quiz và câu hỏi.
-   * `webquiz-dev-room-management`: Xử lý tạo phòng đấu và người chơi tham gia phòng.
-   * `webquiz-dev-ws-connect`: Lưu thông tin kết nối WebSocket mới thiết lập.
-   * `webquiz-dev-ws-disconnect`: Xóa thông tin kết nối khi client ngắt kết nối.
-   * `webquiz-dev-ws-message`: Xử lý và điều phối các tin nhắn trong game theo thời gian thực.
-   * `webquiz-dev-score-calculator`: Tính toán điểm số sau khi nhận câu trả lời từ người chơi.
-   * `webquiz-dev-game-results-saver`: Lưu kết quả chung cuộc của trò chơi.
+   * webquiz-dev-quiz-crud: Xử lý các thao tác với quiz và câu hỏi.
+   * webquiz-dev-room-management: Xử lý tạo phòng đấu và người chơi tham gia phòng.
+   * webquiz-dev-ws-connect: Lưu thông tin kết nối WebSocket mới thiết lập.
+   * webquiz-dev-ws-disconnect: Xóa thông tin kết nối khi client ngắt kết nối.
+   * webquiz-dev-ws-message: Xử lý và điều phối các tin nhắn trong game theo thời gian thực.
+   * webquiz-dev-score-calculator: Tính toán điểm số sau khi nhận câu trả lời từ người chơi.
+   * webquiz-dev-game-results-saver: Lưu kết quả chung cuộc của trò chơi.
 
 5. **Tạo API Gateway HTTP API**
    * Cấu hình các route cho việc quản lý quiz và phòng đấu.
@@ -155,14 +155,14 @@ Quy trình triển khai kỹ thuật của SyncQuiz bao gồm các bước sau:
    * Bật CORS để cho phép frontend giao tiếp với backend.
 
 6. **Tạo API Gateway WebSocket API**
-   * Cấu hình các route mặc định: `$connect`, `$disconnect`, và `$default`.
+   * Cấu hình các route mặc định: $connect, $disconnect, và $default.
    * Liên kết các route với các hàm Lambda xử lý tương ứng.
-   * Định nghĩa các action WebSocket như `START_GAME`, `NEXT_QUESTION`, `SUBMIT_ANSWER`, và `END_GAME`.
+   * Định nghĩa các action WebSocket như START_GAME, NEXT_QUESTION, SUBMIT_ANSWER, và END_GAME.
 
 7. **Cấu hình EventBridge**
    * Tạo một Event Bus tùy chỉnh.
-   * Tạo rule cho sự kiện `AnswerSubmitted` để kích hoạt hàm tính điểm.
-   * Tạo rule cho sự kiện `GameEnded` để kích hoạt hàm lưu kết quả chung cuộc.
+   * Tạo rule cho sự kiện AnswerSubmitted để kích hoạt hàm tính điểm.
+   * Tạo rule cho sự kiện GameEnded để kích hoạt hàm lưu kết quả chung cuộc.
 
 8. **Triển khai Frontend**
    * Tải các tệp build frontend lên Amazon S3.
@@ -178,7 +178,7 @@ Quy trình triển khai kỹ thuật của SyncQuiz bao gồm các bước sau:
 10. **Kiểm thử**
     * Kiểm thử tạo quiz thông qua HTTP API.
     * Kiểm thử tạo phòng đấu và người chơi tham gia.
-    * Kiểm thử kết nối WebSocket bằng công cụ như `wscat`.
+    * Kiểm thử kết nối WebSocket bằng công cụ như wscat.
     * Kiểm thử toàn bộ luồng gửi câu trả lời, cập nhật điểm, kết thúc game và hiển thị bảng xếp hạng.
 
 ---
