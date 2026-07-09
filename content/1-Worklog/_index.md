@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Worklog"
 date: 2026-04-20
 weight: 1
@@ -26,7 +26,7 @@ pre: " <b> 1. </b> "
 
 **Week 10:** [VPC Peering, Transit Gateway, and automation with AWS Lambda](1.10-week10/)
 
-**Week 11:** [Doing task M...](1.11-week11/)
+**Week 11:** [Application Deployment, CI/CD & Monitoring](1.11-week11/)
 
 **Week 12:** [Doing task N...](1.12-week12/)
 

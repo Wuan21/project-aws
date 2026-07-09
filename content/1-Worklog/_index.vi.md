@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Nhật ký công việc"
 date: 2026-04-20
 weight: 1
@@ -26,6 +26,6 @@ pre: " <b> 1. </b> "
 
 **Tuần 10:** [VPC Peering, Transit Gateway và Tự động hóa với AWS Lambda](1.10-week10/)
 
-**Tuần 11:** [Làm công việc M...](1.11-week11/)
+**Tuần 11:** [Triển khai Ứng dụng, CI/CD & Giám sát](1.11-week11/)
 
 **Tuần 12:** [Làm công việc N...](1.12-week12/)
