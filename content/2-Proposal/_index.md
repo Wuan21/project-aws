@@ -126,13 +126,13 @@ The technical implementation of SyncQuiz includes the following steps:
    * Use JWT tokens to protect host APIs.
 
 2. **Create DynamoDB Tables**
-   * `webquiz-dev-users` for user data.
-   * `webquiz-dev-quizzes` for quiz metadata.
-   * `webquiz-dev-questions` for quiz questions.
-   * `webquiz-dev-rooms` for live room information.
-   * `webquiz-dev-connections` for active WebSocket connections.
-   * `webquiz-dev-game-state` for live game state, players, answers, and scores.
-   * `webquiz-dev-game-results` for final results.
+   * webquiz-dev-users for user data.
+   * webquiz-dev-quizzes for quiz metadata.
+   * webquiz-dev-questions for quiz questions.
+   * webquiz-dev-rooms for live room information.
+   * webquiz-dev-connections for active WebSocket connections.
+   * webquiz-dev-game-state for live game state, players, answers, and scores.
+   * webquiz-dev-game-results for final results.
 
 3. **Configure IAM Role and Policies**
    * Create Lambda execution role.
@@ -140,13 +140,13 @@ The technical implementation of SyncQuiz includes the following steps:
    * Add custom policy for DynamoDB, EventBridge, and WebSocket connection management.
 
 4. **Develop Lambda Functions**
-   * `webquiz-dev-quiz-crud`: Handles quiz and question operations.
-   * `webquiz-dev-room-management`: Handles room creation and player joining.
-   * `webquiz-dev-ws-connect`: Stores WebSocket connection information.
-   * `webquiz-dev-ws-disconnect`: Removes disconnected clients.
-   * `webquiz-dev-ws-message`: Processes real-time game messages.
-   * `webquiz-dev-score-calculator`: Calculates score after answer submission.
-   * `webquiz-dev-game-results-saver`: Saves final game results.
+   * webquiz-dev-quiz-crud: Handles quiz and question operations.
+   * webquiz-dev-room-management: Handles room creation and player joining.
+   * webquiz-dev-ws-connect: Stores WebSocket connection information.
+   * webquiz-dev-ws-disconnect: Removes disconnected clients.
+   * webquiz-dev-ws-message: Processes real-time game messages.
+   * webquiz-dev-score-calculator: Calculates score after answer submission.
+   * webquiz-dev-game-results-saver: Saves final game results.
 
 5. **Create API Gateway HTTP API**
    * Configure routes for quiz and room operations.
