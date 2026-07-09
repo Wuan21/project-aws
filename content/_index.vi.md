@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Báo cáo thực tập"
 date: 2026-04-20
 weight: 1
@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 20/04/2026 đến ngày 13/07/2026
 
-![Ảnh đại diện của bạn](/images/avatar.jpg)
+![Ảnh đại diện của bạn](/project-aws/images/anhquan.jpg)
 
 
 

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Internship Report"
 date: 2026-04-20
 weight: 1
@@ -28,7 +28,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From April 20, 2026 to July 13, 2026
 
-![Your profile picture](public/images/anhquan.jpg)
+![Your profile picture](/project-aws/images/anhquan.jpg)
 
 ### Report Content
 
