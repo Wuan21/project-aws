@@ -6,6 +6,14 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
+{{% notice warning %}}
+⚠️ **Note:** The information below is for reference only. Please **do not copy verbatim** into your report, including this warning.
+{{% /notice %}}
+
+On this page, you should describe **what your worklog looks like**, **how many weeks** you completed the program in, and **what you did** during those weeks.
+
+Typically, and as a common standard, a worklog is completed over about 3 months (throughout the internship period), with weekly content as follows:
+
 
 **Week 1:** [Getting familiar with AWS and basic AWS services](1.1-week1/)
 
@@ -13,19 +21,19 @@ pre: " <b> 1. </b> "
 
 **Week 3:** [Managing EC2 (Linux/Windows) and Deploying Node.js application](1.3-week3/)
 
-**Week 4:** [Doing task C...](1.4-week4/)
+**Week 4:** [Deploying Amazon RDS and practicing Backup/Restore](1.4-week4/)
 
-**Week 5:** [Doing task D...](1.5-week5/)
+**Week 5:** [Auto Scaling Group, Application Load Balancer, and AWS Budgets](1.5-week5/)
 
-**Week 6:** [Doing task E...](1.6-week6/)
+**Week 6:** [Gamification & Leaderboard](1.6-week6/)
 
-**Week 7:** [Doing task G...](1.7-week7/)
+**Week 7:** [Integrating SNS for Notifications](1.7-week7/)
 
-**Week 8:** [Doing task H...](1.8-week8/)
+**Week 8:** [Setting up CloudWatch Alarms to send alerts (via SNS) to administrators when the API error rate exceeds the allowed threshold or when the SQS queue is congested](1.8-week8/)
 
-**Week 9:** [Doing task I...](1.9-week9/)
+**Week 9:** [Deploying an ECS Cluster, automating CI/CD, and configuring AWS Security Hub](1.9-week9/)
 
-**Week 10:** [Doing task L...](1.10-week10/)
+**Week 10:** [VPC Peering, Transit Gateway, and automation with AWS Lambda](1.10-week10/)
 
 **Week 11:** [Doing task M...](1.11-week11/)
 
