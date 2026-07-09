@@ -1,59 +1,37 @@
----
+﻿---
 title: "Worklog Tuần 9"
-date: 2024-01-01
+date: 2026-06-15
 weight: 1
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-
 ### Mục tiêu tuần 9:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Container hóa ứng dụng Node.js và triển khai trên Amazon ECS với AWS Fargate.
+* Tự động hóa pipeline triển khai bằng CodePipeline và chiến lược blue/green của CodeDeploy.
+* Bật và cấu hình AWS Security Hub để đánh giá trạng thái bảo mật cloud.
+* Khắc phục các phát hiện bảo mật nghiêm trọng từ CIS AWS Foundations Benchmark.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --------- | ------------ | --------------- | -------------- |
+| 2   | - Tìm hiểu Amazon ECS: cluster, task definition, service, Fargate launch type <br> - Tìm hiểu Amazon ECR: repository, image scanning, lifecycle policy <br> - **Thực hành:** Container hóa ứng dụng Node.js <br>&emsp; + Viết Dockerfile (base image node:18-alpine) <br>&emsp; + Build image cục bộ, test với docker run <br>&emsp; + Push image lên Amazon ECR repository | 15/06/2026 | 15/06/2026 | <https://docs.aws.amazon.com/ecs/> |
+| 3   | - **Thực hành:** Tạo ECS Cluster và Service trên Fargate <br>&emsp; + Tạo ECS Cluster (Fargate + Fargate Spot capacity) <br>&emsp; + Tạo Task Definition: container image từ ECR, 0.5 vCPU, 1 GB memory, env vars từ Secrets Manager <br>&emsp; + Tạo ECS Service: desired count 2, rolling update, gắn với ALB target group <br>&emsp; + Xác minh container healthy trong ALB và ECS console | 16/06/2026 | 16/06/2026 | <https://docs.aws.amazon.com/ecs/latest/developerguide/> |
+| 4   | - **Thực hành:** Xây dựng CI/CD pipeline với CodePipeline <br>&emsp; + Source: GitHub repository (kết nối CodeStar) <br>&emsp; + Build: CodeBuild project build Docker image, push lên ECR, tạo imagedefinitions.json <br>&emsp; + Deploy: CodeDeploy blue/green deployment đến ECS service <br>&emsp; + Test pipeline: push code commit → pipeline chạy → container mới tự động deploy | 17/06/2026 | 17/06/2026 | <https://docs.aws.amazon.com/codepipeline/latest/userguide/> |
+| 5   | - **Thực hành:** Bật AWS Security Hub <br>&emsp; + Bật Security Hub trong account và region <br>&emsp; + Bật các chuẩn: AWS Foundational Security Best Practices, CIS AWS Foundations Benchmark v1.4 <br>&emsp; + Xem dashboard phát hiện: Critical, High, Medium severity <br>&emsp; + Xác định và ưu tiên 5 phát hiện critical hàng đầu | 18/06/2026 | 18/06/2026 | <https://docs.aws.amazon.com/securityhub/latest/userguide/> |
+| 6   | - **Khắc phục phát hiện Security Hub:** <br>&emsp; + Bật MFA cho root account và tất cả IAM user <br>&emsp; + Bật CloudTrail toàn region với S3 log validation <br>&emsp; + Xóa rule Security Group quá rộng (0.0.0.0/0 trên SSH) <br>&emsp; + Bật S3 bucket versioning và block public access <br> - Chạy lại kiểm tra Security Hub và ghi lại điểm cải thiện <br> - Xem lại lịch sử thực thi CodePipeline | 19/06/2026 | 19/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 9:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Container hóa ứng dụng Node.js bằng Docker và push image lên ECR với quét lỗ hổng tự động.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Triển khai ECS Service trên Fargate với 2 task đang chạy, tích hợp ALB phân phối traffic.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Xây dựng và test CI/CD pipeline đầy đủ: GitHub → CodeBuild → ECR → CodeDeploy blue/green.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+* Bật AWS Security Hub với chuẩn CIS AWS Foundations và AWS Foundational Security Best Practices.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Xác định và khắc phục phát hiện critical: bật MFA, CloudTrail, loại bỏ Security Group quá rộng.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Điểm tuân thủ Security Hub cải thiện sau khi khắc phục phát hiện critical và high severity.

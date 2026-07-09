@@ -1,59 +1,37 @@
----
+﻿---
 title: "Worklog Tuần 8"
-date: 2024-01-01
+date: 2026-06-08
 weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-
 ### Mục tiêu tuần 8:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Giám sát sức khỏe ứng dụng và hạ tầng bằng Amazon CloudWatch.
+* Tạo CloudWatch Alarm cho tỷ lệ lỗi API và độ sâu hàng đợi SQS.
+* Gửi cảnh báo vận hành đến quản trị viên qua SNS khi vượt ngưỡng.
+* Sử dụng CloudWatch Dashboard và Log Insights để quan sát hệ thống.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --------- | ------------ | --------------- | -------------- |
+| 2   | - Tìm hiểu CloudWatch: Metrics, Namespace, Dimension, Statistics <br> - Tìm hiểu CloudWatch Alarms: loại ngưỡng (static, anomaly detection), evaluation period <br> - Tìm hiểu CloudWatch Logs: log group, log stream, metric filter, retention policy <br> - Xem lại các metric quan trọng: ALB 5XXCount, SQS ApproximateNumberOfMessagesNotVisible, Lambda Errors | 08/06/2026 | 08/06/2026 | <https://docs.aws.amazon.com/cloudwatch/> |
+| 3   | - **Thực hành:** Tạo CloudWatch Alarms <br>&emsp; + Alarm 1: ALB `HTTPCode_ELB_5XX_Count` > 10 trong 5 phút → trạng thái ALARM <br>&emsp; + Alarm 2: SQS `ApproximateNumberOfMessagesNotVisible` > 100 → ALARM <br>&emsp; + Alarm 3: Lambda `Errors` > 5 trong 1 phút → ALARM <br>&emsp; + Cấu hình SNS topic làm alarm action gửi email cảnh báo đến admin | 09/06/2026 | 09/06/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html> |
+| 4   | - **Thực hành:** Xây dựng CloudWatch Dashboard <br>&emsp; + Thêm widget: Request Count ALB, 5XX errors, Target Response Time <br>&emsp; + Thêm độ sâu hàng đợi SQS và tỷ lệ lỗi/invocation Lambda <br>&emsp; + Thêm CPU RDS và số kết nối database <br>&emsp; + Cấu hình auto-refresh 1 phút <br> - Tạo metric filter CloudWatch Logs cho từ khóa lỗi ứng dụng | 10/06/2026 | 10/06/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Dashboards.html> |
+| 5   | - **Thực hành:** Mô phỏng điều kiện kích hoạt alarm <br>&emsp; + Inject HTTP 500 error qua API để trigger alarm ALB 5XX <br>&emsp; + Tạm dừng Lambda consumer SQS để tin nhắn tích lũy <br>&emsp; + Xác minh email cảnh báo SNS nhận trong kỳ đánh giá alarm <br> - Dùng CloudWatch Log Insights truy vấn: `stats count(*) by errorType | sort count desc` | 11/06/2026 | 11/06/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html> |
+| 6   | - Cấu hình Composite Alarm kết hợp điều kiện lỗi API + độ sâu SQS <br> - Bật CloudWatch Contributor Insights trên ALB access log <br> - Bật Container Insights cho ECS (chuẩn bị tuần 9) <br> - Xem lại và tinh chỉnh ngưỡng alarm dựa trên metric baseline <br> - Tài liệu hóa runbook giám sát và cảnh báo | 12/06/2026 | 12/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 8:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Cấu hình CloudWatch Alarm cho tỷ lệ lỗi 5XX ALB, độ sâu hàng đợi SQS và tỷ lệ lỗi Lambda.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Nhận email cảnh báo SNS thành công khi ngưỡng alarm bị vi phạm trong các bài test mô phỏng.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Xây dựng CloudWatch Dashboard đa dịch vụ theo dõi sức khỏe ứng dụng thời gian thực.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+* Dùng CloudWatch Log Insights truy vấn log ứng dụng và xác định pattern lỗi hàng đầu.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Tạo Composite Alarm kết hợp nhiều điều kiện để giảm nhiễu cảnh báo.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Tài liệu hóa runbook xử lý sự cố khi alarm kích hoạt.

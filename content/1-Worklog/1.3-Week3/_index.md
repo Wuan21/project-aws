@@ -1,57 +1,37 @@
----
+﻿---
 title: "Week 3 Worklog"
-date: 2024-01-01
+date: 2026-05-04
 weight: 1
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 3 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Manage EC2 Linux and Windows instances effectively in the VPC.
+* Deploy a Node.js web application on an EC2 instance.
+* Understand AMI creation, Launch Templates, and Elastic IP management.
+* Configure Security Groups and access controls for web applications.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| 2   | - Study EC2 advanced features: AMI lifecycle, Launch Templates, Instance Metadata Service <br> - Review Windows EC2: RDP connection, key-pair password decryption <br> - Study Placement Groups (cluster, spread, partition) | 05/04/2026 | 05/04/2026 | <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/> |
+| 3   | - **Practice:** Launch and manage EC2 instances <br>&emsp; + Launch Amazon Linux 2 instance in public subnet <br>&emsp; + Launch Windows Server 2022 instance, retrieve password, connect via RDP <br>&emsp; + Compare instance management between Linux and Windows <br>&emsp; + Create custom AMI from configured Linux instance | 05/05/2026 | 05/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** Deploy Node.js application on Linux EC2 <br>&emsp; + Install Node.js (v18 LTS) via nvm <br>&emsp; + Clone sample Express.js application <br>&emsp; + Configure environment variables (DB host, port, secrets) <br>&emsp; + Install PM2 process manager and start app <br>&emsp; + Configure Security Group to allow HTTP port 3000 | 05/06/2026 | 05/06/2026 | <https://nodejs.org/en/docs> |
+| 5   | - Configure Nginx as a reverse proxy for Node.js app <br>&emsp; + Install and configure Nginx <br>&emsp; + Proxy HTTP port 80 to Node.js port 3000 <br>&emsp; + Configure Security Group: allow HTTP (80) and HTTPS (443) <br> - Set up PM2 to restart app on reboot <br> - Allocate Elastic IP and associate with instance | 05/07/2026 | 05/07/2026 | <https://www.nginx.com/resources/wiki/> |
+| 6   | - **Practice:** Create Launch Template for repeatable EC2 deployments <br>&emsp; + Configure instance type, AMI, subnet, Security Group, user data script <br>&emsp; + User data: auto-install Node.js and start app on boot <br> - Test application end-to-end via Elastic IP and Nginx <br> - Document deployment steps | 05/08/2026 | 05/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 3 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Successfully launched and managed both Linux (Amazon Linux 2) and Windows Server (2022) EC2 instances.
 
-* Successfully created and configured an AWS Free Tier account.
+* Connected to Linux via SSH and Windows via RDP after decrypting the administrator password.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Deployed a Node.js (Express.js) application on EC2 with PM2 as the process manager.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Configured Nginx as a reverse proxy to expose the application on port 80.
 
-* Used AWS CLI to perform basic operations such as:
+* Created a custom AMI and a Launch Template with user data for automated deployments.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Associated an Elastic IP to provide a stable endpoint for the web application.

@@ -1,57 +1,37 @@
----
+﻿---
 title: "Week 8 Worklog"
-date: 2024-01-01
+date: 2026-06-08
 weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 8 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Monitor application and infrastructure health using Amazon CloudWatch.
+* Create CloudWatch Alarms for API error rate and SQS queue depth thresholds.
+* Deliver operational alerts to administrators through SNS notifications.
+* Use CloudWatch Dashboards and Log Insights for observability.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| 2   | - Study CloudWatch fundamentals: Metrics, Namespaces, Dimensions, Statistics <br> - Study CloudWatch Alarms: threshold types (static, anomaly detection), evaluation periods <br> - Study CloudWatch Logs: log groups, log streams, metric filters, retention policies <br> - Review key metrics: ALB 5XXCount, SQS ApproximateNumberOfMessagesNotVisible, Lambda Errors | 06/08/2026 | 06/08/2026 | <https://docs.aws.amazon.com/cloudwatch/> |
+| 3   | - **Practice:** Create CloudWatch Alarms <br>&emsp; + Alarm 1: ALB `HTTPCode_ELB_5XX_Count` > 10 in 5 minutes → ALARM state <br>&emsp; + Alarm 2: SQS `ApproximateNumberOfMessagesNotVisible` > 100 → ALARM state <br>&emsp; + Alarm 3: Lambda `Errors` > 5 in 1 minute → ALARM state <br>&emsp; + Configure SNS topic as alarm action for email alerts to admin | 06/09/2026 | 06/09/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html> |
+| 4   | - **Practice:** Build CloudWatch Dashboard <br>&emsp; + Add widgets: ALB Request Count, 5XX errors, Target Response Time <br>&emsp; + Add SQS queue depth and Lambda invocation/error rate <br>&emsp; + Add RDS CPU utilization and DB connections <br>&emsp; + Configure auto-refresh interval (1 minute) <br> - Create CloudWatch Log Group metric filter for application error keywords | 06/10/2026 | 06/10/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Dashboards.html> |
+| 5   | - **Practice:** Simulate alarm conditions <br>&emsp; + Inject HTTP 500 errors via API to trigger ALB 5XX alarm <br>&emsp; + Pause SQS consumer Lambda to let messages accumulate <br>&emsp; + Verify SNS email alerts received within alarm evaluation period <br> - Use CloudWatch Log Insights to query: `stats count(*) by errorType | sort count desc` | 06/11/2026 | 06/11/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html> |
+| 6   | - Configure Composite Alarm combining API error + SQS depth conditions <br> - Set up CloudWatch Contributor Insights on ALB access logs <br> - Enable Container Insights for ECS (preparation for Week 9) <br> - Review and tune alarm thresholds based on baseline metrics <br> - Document monitoring and alerting runbook | 06/12/2026 | 06/12/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 8 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Configured CloudWatch Alarms for ALB 5XX error rate, SQS queue backlog, and Lambda error rate.
 
-* Successfully created and configured an AWS Free Tier account.
+* Successfully received SNS email alerts when alarm thresholds were breached during simulation tests.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Built a multi-service CloudWatch Dashboard for real-time visibility of application health.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Used CloudWatch Log Insights to query application logs and identify top error patterns.
 
-* Used AWS CLI to perform basic operations such as:
+* Created a Composite Alarm combining multiple conditions to reduce alert noise.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Documented an operational runbook for alarm response procedures.

@@ -1,12 +1,10 @@
----
+﻿---
 title: "Worklog"
-date: 2024-01-01
+date: 2026-04-20
 weight: 1
 chapter: false
 pre: " <b> 1. </b> "
 ---
-
-
 
 **Week 1:** [Getting familiar with AWS and basic AWS services](1.1-week1/)
 
@@ -31,3 +29,4 @@ pre: " <b> 1. </b> "
 **Week 11:** [Doing task M...](1.11-week11/)
 
 **Week 12:** [Doing task N...](1.12-week12/)
+

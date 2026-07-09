@@ -1,57 +1,37 @@
----
+﻿---
 title: "Week 2 Worklog"
-date: 2024-01-01
+date: 2026-04-27
 weight: 1
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-
 ### Week 2 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Understand VPC architecture concepts: CIDR, subnets, routing, and gateways.
+* Design and deploy a complete VPC with public and private subnets across multiple AZs.
+* Configure Security Groups, NACLs, Internet Gateway, and NAT Gateway.
+* Verify inter-subnet connectivity and internet access from instances.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| 2   | - Study VPC fundamentals: CIDR blocks, IPv4/IPv6 addressing <br> - Understand subnet types (public vs private), route tables, and availability zones <br> - Review VPC default vs custom VPC differences | 04/27/2026 | 04/27/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/> |
+| 3   | - **Practice:** Create a custom VPC (10.0.0.0/16) <br>&emsp; + Create 2 public subnets in different AZs (10.0.1.0/24, 10.0.2.0/24) <br>&emsp; + Create 2 private subnets in different AZs (10.0.3.0/24, 10.0.4.0/24) <br>&emsp; + Attach an Internet Gateway to the VPC <br>&emsp; + Configure public route tables to route 0.0.0.0/0 to IGW | 04/28/2026 | 04/28/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** Configure outbound internet for private subnets <br>&emsp; + Create a NAT Gateway in a public subnet with an Elastic IP <br>&emsp; + Update private route table to route 0.0.0.0/0 to NAT Gateway <br>&emsp; + Configure Security Groups: allow HTTP/HTTPS from ALB, SSH from bastion host <br>&emsp; + Configure Network ACLs for subnet-level protection | 04/29/2026 | 04/29/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html> |
+| 5   | - Deploy a bastion host (EC2) in the public subnet <br> - Launch an EC2 instance in the private subnet <br> - Verify SSH connectivity: local → bastion → private instance <br> - Test outbound internet access from private instance through NAT Gateway | 04/30/2026 | 04/30/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Review and finalize VPC architecture diagram <br> - **Practice:** Enable VPC Flow Logs to CloudWatch Logs <br>&emsp; + Create Flow Log for the VPC <br>&emsp; + Query flow logs to analyze traffic patterns <br> - Document the full VPC design | 05/01/2026 | 05/01/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html> |
 
 
 ### Week 2 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Designed and deployed a production-style VPC with public and private subnets across two Availability Zones.
 
-* Successfully created and configured an AWS Free Tier account.
+* Configured Internet Gateway and NAT Gateway for appropriate inbound and outbound internet access.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Secured resources using Security Groups (instance-level) and Network ACLs (subnet-level).
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Deployed a bastion host and successfully accessed a private EC2 instance via SSH jump.
 
-* Used AWS CLI to perform basic operations such as:
+* Enabled and queried VPC Flow Logs in CloudWatch to analyze network traffic.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Verified complete connectivity: public subnet to internet, private subnet via NAT, and internal subnets.

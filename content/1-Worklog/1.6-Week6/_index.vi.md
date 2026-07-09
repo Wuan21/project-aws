@@ -1,58 +1,37 @@
----
+﻿---
 title: "Worklog Tuần 6"
-date: 2024-01-01
+date: 2026-05-25
 weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-
 ### Mục tiêu tuần 6:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Thiết kế hệ thống gamification tương tác người dùng bằng serverless AWS.
+* Triển khai logic tính điểm với AWS Lambda và lưu trữ bảng xếp hạng bằng DynamoDB.
+* Expose chức năng bảng xếp hạng qua Amazon API Gateway.
+* Kiểm tra luồng tính điểm và xếp hạng end-to-end.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --------- | ------------ | --------------- | -------------- |
+| 2   | - Tìm hiểu DynamoDB: table, partition key, sort key, GSI, LSI <br> - Tìm hiểu Lambda: mô hình thực thi, trigger, biến môi trường, layer <br> - Thiết kế data model gamification: điểm người dùng, thành tích, thứ hạng bảng xếp hạng | 25/05/2026 | 25/05/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/> |
+| 3   | - **Thực hành:** Thiết lập bảng xếp hạng DynamoDB <br>&emsp; + Tạo bảng `leaderboard` (partition key: userId, sort key: timestamp) <br>&emsp; + Tạo GSI trên thuộc tính `score` cho truy vấn xếp hạng <br>&emsp; + Viết Lambda `submitScore`: xác thực input, ghi item vào DynamoDB <br>&emsp; + Test Lambda cục bộ bằng SAM CLI | 26/05/2026 | 26/05/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/> |
+| 4   | - **Thực hành:** Xây dựng Lambda truy vấn bảng xếp hạng <br>&emsp; + Viết Lambda `getLeaderboard`: truy vấn DynamoDB GSI theo điểm giảm dần <br>&emsp; + Thêm hỗ trợ phân trang (Limit + ExclusiveStartKey) <br>&emsp; + Tạo API Gateway REST API với resource `/score` (POST) và `/leaderboard` (GET) <br>&emsp; + Cấu hình Lambda proxy integration cho từng route | 27/05/2026 | 27/05/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/> |
+| 5   | - Tích hợp API Gateway vào frontend Node.js <br>&emsp; + Thêm xác thực API key cho API Gateway <br>&emsp; + Cập nhật cài đặt CORS cho phép origin frontend <br>&emsp; + Deploy API lên stage `prod` <br> - Test luồng đầy đủ: submit điểm → DynamoDB → truy vấn API bảng xếp hạng | 28/05/2026 | 28/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Thêm hệ thống thành tích: Lambda kiểm tra mốc (top 10) ghi vào bảng `achievements` <br> - Cấu hình DynamoDB Streams kích hoạt Lambda thành tích khi có điểm mới <br> - Load test: submit 100 điểm đồng thời, xác minh tính nhất quán DynamoDB và API <br> - Xem xét cold start Lambda và tối ưu bằng Provisioned Concurrency | 29/05/2026 | 29/05/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html> |
 
 
 ### Kết quả đạt được tuần 6:
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Thiết kế và triển khai hệ thống gamification serverless với Lambda, DynamoDB và API Gateway.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Tạo bảng DynamoDB với Global Secondary Index cho truy vấn bảng xếp hạng hiệu quả theo điểm số.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+* Phát triển và deploy Lambda function xử lý nộp điểm và truy vấn bảng xếp hạng.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Expose API bảng xếp hạng qua API Gateway với xác thực API key và cấu hình CORS.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+* Triển khai DynamoDB Streams kích hoạt kiểm tra thành tích khi có điểm mới.
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Load test với 100 submission đồng thời — toàn bộ bản ghi nhất quán.

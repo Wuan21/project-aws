@@ -1,59 +1,37 @@
----
+﻿---
 title: "Worklog Tuần 5"
-date: 2024-01-01
+date: 2026-05-18
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-
 ### Mục tiêu tuần 5:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Triển khai Application Load Balancer để phân phối traffic đến nhiều EC2 instance.
+* Cấu hình Auto Scaling Group với chính sách mở rộng động cho tầng ứng dụng.
+* Thiết lập AWS Budgets và Cost Explorer để theo dõi và kiểm soát chi phí cloud.
+* Xác minh high availability qua test lỗi instance và tự động thay thế.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --------- | ------------ | --------------- | -------------- |
+| 2   | - Tìm hiểu Elastic Load Balancing: so sánh ALB, NLB và CLB <br> - Tìm hiểu thành phần ALB: listener, rules, target group, health check <br> - Tìm hiểu Auto Scaling Group: desired/min/max capacity, chính sách scaling (target tracking, step scaling, scheduled) | 18/05/2026 | 18/05/2026 | <https://docs.aws.amazon.com/elasticloadbalancing/> |
+| 3   | - **Thực hành:** Tạo Application Load Balancer <br>&emsp; + Tạo Target Group (port 3000, HTTP health check trên /health) <br>&emsp; + Tạo ALB trong public subnet, cấu hình listener port 80 <br>&emsp; + Đăng ký EC2 instance vào target group <br>&emsp; + Kiểm tra traffic cân bằng qua ALB DNS name | 19/05/2026 | 19/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành:** Tạo Auto Scaling Group <br>&emsp; + Tạo Launch Template với user data triển khai app <br>&emsp; + Cấu hình ASG: min 2, desired 2, max 6 instance trên 2 AZ <br>&emsp; + Gắn ASG vào ALB Target Group <br>&emsp; + Thêm Target Tracking Scaling policy (ngưỡng CPU 60%) <br>&emsp; + Bật Scale-In protection cho instance mới | 20/05/2026 | 20/05/2026 | <https://docs.aws.amazon.com/autoscaling/ec2/userguide/> |
+| 5   | - **Thực hành:** AWS Budgets và Cost Management <br>&emsp; + Tạo cost budget theo tháng với cảnh báo email tại 80% và 100% <br>&emsp; + Tạo usage budget cho số giờ EC2 <br>&emsp; + Khám phá Cost Explorer: lọc theo service, tag, region <br>&emsp; + Bật Cost Allocation Tags theo dõi tài nguyên | 21/05/2026 | 21/05/2026 | <https://docs.aws.amazon.com/cost-management/> |
+| 6   | - **Kiểm tra tải và khả năng phục hồi:** <br>&emsp; + Dùng Apache Bench (ab) tạo tải để trigger scale-out <br>&emsp; + Quan sát activity log ASG: instance đang được khởi tạo <br>&emsp; + Xóa instance thủ công, xác minh ASG thay thế tự động <br>&emsp; + Xác minh ALB health check loại bỏ instance không khỏe <br> - Xem lại lịch sử scaling và CloudWatch metrics | 22/05/2026 | 22/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 5:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Triển khai Application Load Balancer với target group, health check và listener rule.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Tạo Auto Scaling Group với min/desired/max capacity trên 2 Availability Zone.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Cấu hình Target Tracking scaling dựa trên CPU — scale-out trigger thành công khi có tải cao.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+* Xác minh high availability: xóa instance và ASG tự động khởi tạo thay thế.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Thiết lập AWS Budgets với cảnh báo chi phí và usage để chủ động quản lý ngân sách.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Sử dụng Cost Explorer phân tích chi phí theo service và áp dụng cost allocation tag cho theo dõi chi tiết.
