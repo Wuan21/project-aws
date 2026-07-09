@@ -6,13 +6,6 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference only. Please **do not copy verbatim** into your report, including this warning.
-{{% /notice %}}
-
-On this page, you should describe **what your worklog looks like**, **how many weeks** you completed the program in, and **what you did** during those weeks.
-
-Typically, and as a common standard, a worklog is completed over about 3 months (throughout the internship period), with weekly content as follows:
 
 
 **Week 1:** [Getting familiar with AWS and basic AWS services](1.1-week1/)
