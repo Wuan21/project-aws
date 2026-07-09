@@ -1,4 +1,4 @@
-baseURL = "https://workshop-sample.fcjuni.com/"
+baseURL = "https://wuan21.github.io/project-aws/"
 relativeURLs = false
 canonifyURLs = false
 defaultContentLanguage = "en"

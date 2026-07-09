@@ -23,7 +23,14 @@ jobs:
           extended: true
 
       - name: Build website
-        run: hugo --minify
+        run: |
+          if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
+            SITE_URL="https://${{ github.repository_owner }}.github.io/"
+          else
+            SITE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          fi
+          echo "Using baseURL: $SITE_URL"
+          hugo --minify --baseURL "$SITE_URL"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
