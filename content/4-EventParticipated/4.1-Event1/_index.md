@@ -122,4 +122,4 @@ Attending the **“GenAI-powered App-DB Modernization”** workshop was extremel
 ![Event 5](/project-aws/images/events/event1-5.jpg)
 ![Event 6](/project-aws/images/events/event1-6.jpg)
 
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+>Participating in the “AWS Event (09/05/2026)” workshop not only provides professional expertise but also offers an opportunity to shift one’s mindset, learn efficient working methods, and—importantly—enhance communication and collaboration skills with colleagues and partners.

@@ -1,31 +1,40 @@
-﻿---
+---
 title: "Blog 1"
-date: 2026-04-20
+date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# AWS SYSTEMS MANAGER: THE "ALL-IN-ONE ASSISTANT" FOR MASTERING CLOUD AND HYBRID INFRASTRUCTURE
+AWS Systems Manager (SSM) is a centralized management service from AWS that enables the administration and operation of infrastructure across AWS, On-Premises, and Multi-Cloud environments through a unified user interface. The service simplifies resource management, automates operational tasks, shortens the time required to detect and resolve incidents, and enhances security and compliance visibility at scale.
+![Image 1](/images/blog1.1.png)
 
-# SESSION POLICIES IN AMAZON EKS POD IDENTITY
+Key Highlights of AWS Systems Manager
 
-Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.
+## 1. Centralized Resource Management (Resource Groups)
+Systems Manager allows you to group AWS resources using Tags, such as EC2, S3, RDS, VPC, and many other services. As a result, administrators can track and perform tasks across all resources belonging to the same application or environment from a single dashboard.
+![Image 2](/images/blog1.2.png)
 
-Key points to know:
+## 2. Operational Visibility and Monitoring (Insights)
+Systems Manager aggregates operational data from multiple services including Amazon CloudWatch, AWS CloudTrail, AWS Config, and AWS Trusted Advisor to display operational status, compliance levels, and system health onto a centralized dashboard. This drastically speeds up tracking and troubleshooting issues.
+![Image 3](/images/blog1.3.png)
+![Image 4](/images/blog1.4.png)
 
-* A session policy is an inline IAM policy specified when creating or updating a Pod Identity association.
-* Effective permissions = intersection between the IAM role permissions and the session policy → the session policy can only narrow permissions, not expand them.
-* Helps avoid over-permissioning when reusing a single IAM role for multiple workloads with different needs.
-* Supports both same-account and cross-account (via IAM role chaining).
-* Significantly reduces the number of IAM roles that need to be managed, helping avoid hitting IAM quota limits in large clusters.
-* Easily configured through the AWS Management Console, AWS CLI, or AWS SDK when creating an association between a Kubernetes ServiceAccount and an IAM role.
+## 3. Operational Task Automation (Automation)
+With Automation, users can build automated workflows (Runbooks) to perform repetitive tasks such as starting or stopping EC2 instances, updating configurations, backing up data, and other administrative routines. These workflows can be executed on a schedule or triggered automatically based on specific event patterns.
+![Image 5](/images/blog1.5.png)
 
-This feature is especially useful when you have many applications running on the same IAM role but need different permission restrictions (for example: one pod only reads a specific S3 bucket, another pod only calls certain APIs).
+## 4. Remote Command Execution (Run Command)
+Run Command enables you to securely and safely manage the configuration of your managed instances at scale without requiring interactive SSH or Remote Desktop logins. Administrators can execute scripts on hundreds or thousands of servers simultaneously while controlling access boundaries through IAM to reinforce security.
 
-...Image...
+## 5. Patch and Configuration Management
+Systems Manager provides powerful utilities to maintain infrastructure compliance:
 
-...Link...
+* **Patch Manager**: Automates the process of scanning and installing security patches across managed operating systems.
+* **Maintenance Windows**: Defines scheduled time slots to safely execute disruptive maintenance and patching tasks without impacting business uptime.
+* **State Manager**: Automates the process of keeping your managed instances in a defined state to ensure continuous structural configuration consistency.
 
-...Guide...
+## Summary
+AWS Systems Manager is a comprehensive infrastructure management platform that enables organizations to centrally administer servers and logical resources across hybrid cloud topologies. By leveraging features such as Resource Groups, Automation, Run Command, Patch Manager, State Manager, and operations dashboards, Systems Manager minimizes manual intervention, tightens operational security, standardizes configurations, and enhances system reliability at scale.
+
+Documentation Link: <https://aws.amazon.com/blogs/aws/aws-systems-manager/>

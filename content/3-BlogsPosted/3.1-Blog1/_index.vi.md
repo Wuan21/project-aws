@@ -1,31 +1,41 @@
-﻿---
+---
 title: "Blog 1"
-date: 2026-04-20
+date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# SESSION POLICIES TRONG AMAZON EKS POD IDENTITY
 
-Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
+# AWS SYSTEMS MANAGER: "TRỢ LÝ VẠN NĂNG" GIÚP BẠN LÀM CHỦ HẠ TẦNG CLOUD VÀ HYBRID
+AWS Systems Manager (SSM) là dịch vụ quản lý tập trung của AWS, cho phép quản trị và vận hành hạ tầng trên AWS, môi trường On-Premises và Multi-Cloud thông qua một giao diện thống nhất. Dịch vụ giúp đơn giản hóa việc quản lý tài nguyên, tự động hóa các tác vụ vận hành, rút ngắn thời gian phát hiện và xử lý sự cố, đồng thời nâng cao tính bảo mật và khả năng quản lý ở quy mô lớn
+![Ảnh 1](/images/blog1.1.png)
+Những điểm nổi bật của AWS Systems Manager
+## 1. Quản lý tài nguyên tập trung (Resource Groups)
+Systems Manager cho phép nhóm các tài nguyên AWS bằng Tags, chẳng hạn như EC2, S3, RDS, VPC và nhiều dịch vụ khác. Nhờ đó, người quản trị có thể theo dõi và thực hiện các tác vụ trên toàn bộ tài nguyên thuộc cùng một ứng dụng hoặc môi trường chỉ từ một giao diện duy nhất.
+![Ảnh 2](/images/blog1.2.png)
+## 2. Giám sát và tổng hợp thông tin vận hành (Insights)
 
-Các điểm chính cần nắm:
+Systems Manager tổng hợp dữ liệu từ nhiều dịch vụ như Amazon CloudWatch, AWS CloudTrail, AWS Config và AWS Trusted Advisor để hiển thị trạng thái vận hành, mức độ tuân thủ và tình trạng của hệ thống trên một Dashboard tập trung. Điều này giúp việc theo dõi và xử lý sự cố trở nên nhanh chóng hơn.
+![Ảnh 3](/images/blog1.3.png)
+![Ảnh 4](/images/blog1.4.png)
+## 3. Tự động hóa tác vụ (Automation)
 
-* Session policy là một IAM policy inline được chỉ định khi tạo hoặc cập nhật Pod Identity association.
-* Quyền hiệu quả = intersection (giao) giữa permissions của IAM role và session policy → session policy chỉ có thể thu hẹp, không thể mở rộng quyền.
-* Giúp tránh tình trạng over-permissioning khi reuse chung một IAM role cho nhiều workloads có nhu cầu khác nhau.
-* Hỗ trợ cả same-account và cross-account (qua IAM role chaining).
-* Giảm đáng kể số lượng IAM roles cần quản lý, tránh chạm giới hạn quota IAM trong cluster lớn.
-* Cấu hình dễ dàng qua AWS Management Console, AWS CLI hoặc AWS SDK khi tạo association giữa Kubernetes ServiceAccount và IAM role.
+Với Automation, người dùng có thể xây dựng các quy trình tự động (Runbook) để thực hiện các công việc như khởi động hoặc dừng EC2, cập nhật cấu hình, sao lưu dữ liệu và nhiều tác vụ quản trị khác. Các quy trình này có thể được chạy theo lịch hoặc kích hoạt tự động khi có sự kiện xảy ra.
+![Ảnh 5](/images/blog1.5.png)
+## 4. Thực thi lệnh từ xa (Run Command)
 
-Tính năng này đặc biệt hữu ích khi bạn có nhiều ứng dụng chạy trên cùng một IAM role nhưng cần giới hạn quyền khác nhau (ví dụ: một pod chỉ đọc S3 bucket cụ thể, pod khác chỉ gọi một số API nhất định).
+Run Command cho phép chạy lệnh trên nhiều máy chủ cùng lúc mà không cần đăng nhập SSH hoặc Remote Desktop. Quản trị viên có thể quản lý hàng trăm hoặc hàng nghìn máy chủ từ xa, đồng thời kiểm soát quyền truy cập thông qua IAM để tăng cường bảo mật.
 
-...Hình ảnh...
+## 5. Quản lý bản vá và cấu hình
 
-...Link...
+Systems Manager cung cấp các công cụ như:
 
-...Hướng dẫn...
+* **Patch Manager**: Tự động kiểm tra và cài đặt các bản vá bảo mật cho máy chủ.
+* **Maintenance Windows**: Lên lịch bảo trì hệ thống vào thời gian phù hợp.
+* **State Manager**: Duy trì cấu hình mong muốn trên các máy chủ và đảm bảo tính nhất quán trong toàn bộ hạ tầng.
+
+## Tổng Kết
+AWS Systems Manager là một nền tảng quản lý hạ tầng toàn diện, giúp doanh nghiệp quản lý tập trung các máy chủ và tài nguyên trên nhiều môi trường khác nhau. Với các tính năng như Resource Groups, Automation, Run Command, Patch Manager, State Manager và Dashboard giám sát, Systems Manager giúp giảm công việc thủ công, tăng cường bảo mật, chuẩn hóa cấu hình và nâng cao hiệu quả vận hành hệ thống ở quy mô lớn
+
+Link tài liệu: <https://aws.amazon.com/vi/blogs/aws/aws-systems-manager/>   
