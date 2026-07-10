@@ -200,41 +200,37 @@ The technical implementation of SyncQuiz includes the following steps:
 
 ## 6. Budget Estimation
 
-The project uses a serverless model, so most services are billed based on actual usage. This makes SyncQuiz suitable for development, student projects, small events, and low-to-medium traffic workloads.
+The operating cost of SyncQuiz is estimated based on a serverless architecture and static frontend hosting on AWS. The React frontend is deployed to Amazon S3 and delivered through Amazon CloudFront. The backend uses AWS Lambda, Amazon API Gateway, Amazon Cognito, Amazon DynamoDB, Amazon EventBridge, and Amazon CloudWatch.
 
-Estimated monthly cost for the development environment:
+The following table provides a monthly cost estimation for a development or workshop environment with low to moderate traffic.
 
-| Service | Estimated Monthly Cost |
-| --- | ---: |
-| AWS Lambda | $0 - $5 |
-| Amazon DynamoDB On-demand | $0 - $10 |
-| Amazon API Gateway HTTP/WebSocket | $1 - $5 |
-| Amazon CloudFront | $0 - $5 |
-| Amazon S3 | ~$0.50 |
-| Amazon EventBridge | $0 - $1 |
-| Amazon CloudWatch | $0 - $3 |
-| **Total Estimated Cost** | **~$2 - $30/month** |
+| No. | AWS Service | Configuration / Usage Assumption | Estimated Cost / Month |
+|---|---|---|---|
+| 1 | AWS Lambda | Around 1 million requests/month, 256MB memory, average execution time of 1 second | ~ $5.00 |
+| 2 | Amazon DynamoDB | On-demand mode for storing quizzes, game rooms, players, and results | ~ $10.00 |
+| 3 | Amazon API Gateway | HTTP API for backend services and WebSocket API for real-time quiz features | ~ $5.00 |
+| 4 | Amazon Cognito | User registration, login, authentication, and session management | ~ $0.00 - $5.00 |
+| 5 | Amazon S3 | Hosting static files of the production React frontend build | ~ $0.50 |
+| 6 | Amazon CloudFront | CDN distribution and caching for the static frontend website | ~ $5.00 |
+| 7 | Amazon EventBridge | Internal event routing and asynchronous workflow support | ~ $1.00 |
+| 8 | Amazon CloudWatch | Logs, metrics, dashboards, and system monitoring | ~ $3.00 |
+| Total | Estimated monthly cost | Development/workshop environment | ~ $29.50 - $34.50 |
 
 ### 6.1 Infrastructure Costs
 
-Main infrastructure cost factors include:
+With a serverless architecture, the infrastructure cost of SyncQuiz depends directly on the number of users, quizzes created, real-time game rooms, and API requests. In a development or workshop environment, the system can benefit from the AWS Free Tier for several services such as Lambda, S3, CloudFront, DynamoDB, and Cognito.
 
-* Number of HTTP API requests.
-* Number of WebSocket connections and messages.
-* Lambda execution count and duration.
-* DynamoDB read/write request volume.
-* CloudWatch log storage and metrics.
-* CloudFront data transfer.
-* S3 storage for frontend static files.
+To optimize infrastructure costs, the system applies the following approaches:
 
-Cost optimization methods:
+- Use AWS Lambda to avoid maintaining always-on servers.
+- Use DynamoDB On-demand mode to pay based on actual request usage.
+- Host the React frontend on Amazon S3 instead of using a dedicated web server.
+- Deliver static content through CloudFront to reduce direct requests to S3.
+- Monitor logs and metrics with CloudWatch while limiting log retention when needed.
+- Use CloudFront caching to reduce origin requests.
+- Configure AWS Budgets alerts to prevent unexpected cloud spending.
 
-* Use DynamoDB on-demand capacity for unpredictable workloads.
-* Use Lambda instead of always-running EC2 instances.
-* Keep frontend static hosting on S3 and CloudFront.
-* Enable TTL on temporary data such as rooms, connections, and game state.
-* Monitor CloudWatch logs to avoid unnecessary log storage costs.
-* Avoid NAT Gateway and unnecessary VPC resources in the dev environment.
+Overall, the initial operating cost of SyncQuiz remains relatively low because the system does not require a server running 24/7. As the number of users grows, the cost can scale according to actual usage.
 
 ---
 

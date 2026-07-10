@@ -200,41 +200,37 @@ Quy trình triển khai kỹ thuật của SyncQuiz bao gồm các bước sau:
 
 ## 6. Ước tính ngân sách
 
-Dự án sử dụng mô hình serverless, do đó hầu hết các dịch vụ được tính phí dựa trên lượng sử dụng thực tế. Điều này giúp SyncQuiz cực kỳ phù hợp cho môi trường phát triển, dự án sinh viên, sự kiện nhỏ và các khối lượng công việc có lưu lượng truy cập từ thấp đến trung bình.
+Chi phí vận hành của hệ thống SyncQuiz được ước tính dựa trên kiến trúc serverless và static hosting trên AWS. Hệ thống sử dụng React frontend được triển khai trên Amazon S3 và phân phối qua Amazon CloudFront. Backend sử dụng AWS Lambda, Amazon API Gateway, Amazon Cognito, Amazon DynamoDB, Amazon EventBridge và Amazon CloudWatch.
 
-Ước tính chi phí hàng tháng cho môi trường phát triển (development env):
+Bảng dưới đây là ước tính chi phí hàng tháng cho môi trường phát triển hoặc workshop với lưu lượng sử dụng ở mức nhỏ đến trung bình.
 
-| Dịch vụ | Chi phí ước tính hàng tháng |
-| --- | ---: |
-| AWS Lambda | $0 - $5 |
-| Amazon DynamoDB (On-demand) | $0 - $10 |
-| Amazon API Gateway (HTTP/WebSocket) | $1 - $5 |
-| Amazon CloudFront | $0 - $5 |
-| Amazon S3 | ~$0.50 |
-| Amazon EventBridge | $0 - $1 |
-| Amazon CloudWatch | $0 - $3 |
-| **Tổng chi phí ước tính** | **~$2 - $30/tháng** |
+| STT | Dịch vụ AWS | Cấu hình / Giả định sử dụng | Chi phí ước tính / tháng |
+|---|---|---|---|
+| 1 | AWS Lambda | Khoảng 1 triệu requests/tháng, bộ nhớ 256MB, thời gian chạy trung bình 1 giây | ~ $5.00 |
+| 2 | Amazon DynamoDB | Chế độ On-demand, lưu trữ dữ liệu quiz, phòng chơi, người chơi và kết quả | ~ $10.00 |
+| 3 | Amazon API Gateway | HTTP API cho backend và WebSocket API cho realtime quiz | ~ $5.00 |
+| 4 | Amazon Cognito | Quản lý đăng ký, đăng nhập, xác thực người dùng và session | ~ $0.00 - $5.00 |
+| 5 | Amazon S3 | Lưu trữ static files của React frontend sau khi build production | ~ $0.50 |
+| 6 | Amazon CloudFront | Phân phối website tĩnh qua CDN, cache nội dung frontend | ~ $5.00 |
+| 7 | Amazon EventBridge | Định tuyến sự kiện nội bộ, hỗ trợ xử lý bất đồng bộ | ~ $1.00 |
+| 8 | Amazon CloudWatch | Lưu trữ logs, metrics, dashboard và theo dõi lỗi hệ thống | ~ $3.00 |
+| Tổng | Ước tính chi phí hàng tháng | Môi trường development/workshop | ~ $29.50 - $34.50 |
 
 ### 6.1 Chi phí hạ tầng
 
-Các yếu tố chính cấu thành chi phí hạ tầng bao gồm:
+Với kiến trúc serverless, chi phí hạ tầng của SyncQuiz phụ thuộc trực tiếp vào số lượng người dùng, số lượng quiz được tạo, số phòng chơi realtime và số lượng request đến API. Trong môi trường phát triển hoặc workshop, hệ thống có thể tận dụng AWS Free Tier cho một số dịch vụ như Lambda, S3, CloudFront, DynamoDB và Cognito.
 
-* Số lượng request tới HTTP API.
-* Số lượng kết nối và tin nhắn truyền qua WebSocket API.
-* Số lần thực thi và thời gian chạy của các hàm Lambda.
-* Số lượng yêu cầu đọc/ghi (read/write requests) trên DynamoDB.
-* Dung lượng lưu trữ log và số liệu (metrics) trên CloudWatch.
-* Dung lượng truyền dữ liệu (data transfer) qua CloudFront.
-* Dung lượng lưu trữ các tệp tĩnh frontend trên S3.
+Để tối ưu chi phí, hệ thống áp dụng các hướng sau:
 
-Các phương pháp tối ưu hóa chi phí:
+- Sử dụng AWS Lambda để tránh chi phí duy trì server cố định.
+- Sử dụng DynamoDB On-demand để chỉ trả tiền theo lượng request thực tế.
+- Lưu frontend trên Amazon S3 thay vì sử dụng máy chủ web riêng.
+- Phân phối nội dung qua CloudFront để giảm tải truy cập trực tiếp vào S3.
+- Theo dõi logs và metrics trên CloudWatch, đồng thời giới hạn thời gian lưu log nếu cần.
+- Tận dụng cache của CloudFront để giảm số lượng request tới origin.
+- Thiết lập cảnh báo chi phí bằng AWS Budgets để tránh phát sinh chi phí ngoài dự kiến.
 
-* Sử dụng DynamoDB on-demand để tự động điều chỉnh theo tải thực tế.
-* Sử dụng Lambda thay vì duy trì các máy chủ EC2 luôn chạy.
-* Sử dụng bộ nhớ đệm CloudFront để phân phối frontend hiệu quả.
-* Thiết lập TTL (Time to Live) trên các dữ liệu tạm thời như phòng đấu, kết nối và trạng thái game để tự động dọn dẹp DynamoDB.
-* Điều chỉnh thời gian lưu giữ logs (retention policy) của CloudWatch để tránh chi phí lưu trữ log không cần thiết.
-* Tránh sử dụng NAT Gateway và các tài nguyên VPC không cần thiết trong môi trường dev.
+Nhìn chung, chi phí vận hành ban đầu của SyncQuiz tương đối thấp vì hệ thống không cần duy trì máy chủ 24/7. Khi số lượng người dùng tăng, chi phí có thể mở rộng theo mức sử dụng thực tế.
 
 ---
 
