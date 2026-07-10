@@ -5,30 +5,51 @@ weight: 8
 pre: " <b> 5.8. </b> "
 ---
 
-# Thiết lập API Gateway - HTTP API
+## Thiết lập Amazon API Gateway HTTP API
 
-Trong bước này, bạn sẽ cấu hình **Amazon API Gateway HTTP API** để định tuyến các request REST đến các hàm xử lý Lambda tương ứng ở backend. Chúng ta cũng sẽ bảo vệ các endpoint nhạy cảm bằng bộ xác thực Cognito JWT Authorizer.
+Amazon API Gateway HTTP API được sử dụng trong dự án SyncQuiz để xây dựng các API backend phục vụ frontend React. HTTP API có độ trễ thấp, chi phí tối ưu và phù hợp để kết nối với AWS Lambda cho các chức năng như quản lý quiz, tạo phòng, lấy thông tin người dùng và xử lý dữ liệu hệ thống.
 
----
+### Bước 1: Truy cập Amazon API Gateway
 
-### 1. Tạo HTTP API
+Mở AWS Management Console và truy cập dịch vụ API Gateway. Tại trang APIs, có thể xem danh sách các API đã tạo trong tài khoản AWS. Để tạo API mới, chọn Create API.
 
-1. Mở **[Amazon API Gateway console](https://console.aws.amazon.com/apigateway/)**.
-2. Nhấp chọn **Create API**.
-3. Tại phần **Choose an API type**, tìm **HTTP API** và chọn **Build**.
-4. **Step 1 - Create and configure integrations:**
-   * **API name:** Nhập webquiz-dev-http-api.
-   * **IP address type:** Chọn **IPv4**.
-   * *(Không thêm tích hợp integration nào ở bước này)*.
-   * Nhấn **Next**.
-5. **Step 2 - Configure routes:**
-   * Nhấn **Next** (chúng ta sẽ tự tạo routes sau).
-6. **Step 3 - Define stages:**
-   * **Stage name:** Nhập `dev`.
-   * Tick chọn ✅ **Auto-deploy**.
-   * Nhấn **Next**.
-7. **Step 4 - Review and create:**
-   * Nhấn **Create**.
+![Truy cập API Gateway](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api1.jpg)
+
+### Bước 2: Chọn loại HTTP API
+
+Ở trang Choose an API type, chọn HTTP API và bấm Build. HTTP API phù hợp cho các REST API đơn giản, có độ trễ thấp và dễ tích hợp với Lambda backend.
+
+![Chọn HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api2.jpg)
+
+### Bước 3: Cấu hình thông tin API
+
+Trong phần Configure API, nhập tên API là webquiz-dev-http-api. Ở phần IP address type, chọn IPv4. Ở bước này có thể chưa cần thêm integration ngay, vì integration và routes có thể cấu hình sau khi API được tạo.
+
+![Cấu hình HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api3.jpg)
+
+### Bước 4: Bỏ qua cấu hình Routes ban đầu
+
+Ở bước Configure routes, có thể bỏ qua việc tạo route ban đầu nếu chưa có Lambda integration cụ thể. Routes sẽ được thêm sau tùy theo chức năng backend như tạo quiz, lấy quiz, tạo phòng hoặc xử lý kết quả.
+
+![Cấu hình Routes](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api4.jpg)
+
+### Bước 5: Cấu hình Stage
+
+Ở bước Define stages, nhập stage name là dev và bật Auto-deploy. Stage dev được dùng cho môi trường phát triển. Khi Auto-deploy được bật, các thay đổi trong API sẽ được triển khai tự động lên stage này.
+
+![Cấu hình Stage dev](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api5.jpg)
+
+### Bước 6: Kiểm tra và tạo API
+
+Ở bước Review and create, kiểm tra lại thông tin API, Routes và Stages. Nếu thông tin đúng, chọn Create để tạo HTTP API.
+
+![Kiểm tra và tạo HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api6.jpg)
+
+### Bước 7: Kiểm tra HTTP API sau khi tạo
+
+Sau khi tạo thành công, API Gateway sẽ hiển thị trang Routes của API vừa tạo. Tại đây có thể tiếp tục tạo routes, cấu hình authorization, thêm integrations với Lambda và deploy API.
+
+![HTTP API được tạo thành công](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api7.jpg)
 
 ---
 
@@ -109,3 +130,16 @@ Liên kết các route đường dẫn của API, tích hợp Lambda và gắn q
    https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev
    ```
    *(Bạn sẽ cần dùng link REST endpoint này để cấu hình cho client frontend sau này).*
+
+## Kết quả đạt được
+
+Sau khi hoàn thành các bước trên:
+- HTTP API webquiz-dev-http-api đã được tạo thành công.
+- Stage dev đã được cấu hình với Auto-deploy.
+- API Gateway đã sẵn sàng để thêm routes và integrations.
+- Hệ thống có nền tảng để frontend React gọi backend thông qua HTTP API.
+- Các Lambda function có thể được tích hợp vào API Gateway ở các bước tiếp theo.
+
+## Vai trò trong dự án SyncQuiz
+
+Trong dự án SyncQuiz, HTTP API đóng vai trò là cổng giao tiếp giữa frontend React và backend serverless. Khi người dùng thao tác trên hệ thống, frontend sẽ gửi request đến API Gateway. API Gateway sau đó chuyển request đến Lambda function tương ứng để xử lý nghiệp vụ như tạo quiz, lấy danh sách quiz, tạo phòng chơi hoặc lưu kết quả.
