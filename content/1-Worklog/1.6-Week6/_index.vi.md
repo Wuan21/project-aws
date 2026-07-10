@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 6"
+title: "Tuần 6: Khởi tạo frontend React và cấu trúc dự án"
 date: 2026-05-25
 weight: 6
 chapter: false

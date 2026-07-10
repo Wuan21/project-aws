@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 12"
+title: "Tuần 12: Kiểm thử cuối, hoàn thiện tài liệu và chuẩn bị demo"
 date: 2026-07-06
 weight: 12
 chapter: false

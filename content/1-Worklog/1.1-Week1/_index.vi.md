@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 1"
+title: "Tuần 1: Định hướng thực tập và tạo tài khoản AWS"
 date: 2026-04-20
 weight: 1
 chapter: false

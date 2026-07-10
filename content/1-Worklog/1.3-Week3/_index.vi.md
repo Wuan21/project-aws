@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 3"
+title: "Tuần 3: Tìm hiểu Cognito, API Gateway và WebSocket API"
 date: 2026-05-04
 weight: 3
 chapter: false

@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 4"
+title: "Tuần 4: Thực hành CloudWatch, SQS và SNS"
 date: 2026-05-11
 weight: 4
 chapter: false

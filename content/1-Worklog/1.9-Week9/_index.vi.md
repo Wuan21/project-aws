@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 9"
+title: "Tuần 9: Gameplay real-time, Leaderboard và Game Results"
 date: 2026-06-15
 weight: 9
 chapter: false

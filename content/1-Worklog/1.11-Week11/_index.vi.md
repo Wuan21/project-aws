@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 11"
+title: "Tuần 11: User testing, sửa lỗi UI/UX và chuẩn bị tài liệu"
 date: 2026-06-29
 weight: 11
 chapter: false

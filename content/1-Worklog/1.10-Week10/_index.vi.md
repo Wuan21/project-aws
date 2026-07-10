@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 10"
+title: "Tuần 10: Deploy S3, CloudFront và giám sát hệ thống"
 date: 2026-06-22
 weight: 10
 chapter: false

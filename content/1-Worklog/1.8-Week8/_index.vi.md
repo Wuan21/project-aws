@@ -1,5 +1,5 @@
 ---
-title: "Worklog Tuần 8"
+title: "Tuần 8: Host View, Player View và Waiting Room real-time"
 date: 2026-06-08
 weight: 8
 chapter: false
