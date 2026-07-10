@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Worklog Tuần 9"
 date: 2026-06-15
 weight: 9
@@ -7,31 +7,31 @@ pre: " <b> 1.9. </b> "
 ---
 ### Mục tiêu tuần 9:
 
-* Container hóa ứng dụng Node.js và triển khai trên Amazon ECS với AWS Fargate.
-* Tự động hóa pipeline triển khai bằng CodePipeline và chiến lược blue/green của CodeDeploy.
-* Bật và cấu hình AWS Security Hub để đánh giá trạng thái bảo mật cloud.
-* Khắc phục các phát hiện bảo mật nghiêm trọng từ CIS AWS Foundations Benchmark.
+* Phát triển trang gameplay của Host với chức năng điều khiển câu hỏi.
+* Phát triển trang gameplay của Player với chức năng nộp câu trả lời.
+* Tích hợp bảng xếp hạng thời gian thực và cập nhật điểm trong gameplay.
+* Xây dựng trang Kết quả Game và kiểm thử toàn bộ luồng game.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2   | - Tìm hiểu Amazon ECS: cluster, task definition, service, Fargate launch type <br> - Tìm hiểu Amazon ECR: repository, image scanning, lifecycle policy <br> - **Thực hành:** Container hóa ứng dụng Node.js <br>&emsp; + Viết Dockerfile (base image node:18-alpine) <br>&emsp; + Build image cục bộ, test với docker run <br>&emsp; + Push image lên Amazon ECR repository | 15/06/2026 | 15/06/2026 | <https://docs.aws.amazon.com/ecs/> |
-| 3   | - **Thực hành:** Tạo ECS Cluster và Service trên Fargate <br>&emsp; + Tạo ECS Cluster (Fargate + Fargate Spot capacity) <br>&emsp; + Tạo Task Definition: container image từ ECR, 0.5 vCPU, 1 GB memory, env vars từ Secrets Manager <br>&emsp; + Tạo ECS Service: desired count 2, rolling update, gắn với ALB target group <br>&emsp; + Xác minh container healthy trong ALB và ECS console | 16/06/2026 | 16/06/2026 | <https://docs.aws.amazon.com/ecs/latest/developerguide/> |
-| 4   | - **Thực hành:** Xây dựng CI/CD pipeline với CodePipeline <br>&emsp; + Source: GitHub repository (kết nối CodeStar) <br>&emsp; + Build: CodeBuild project build Docker image, push lên ECR, tạo imagedefinitions.json <br>&emsp; + Deploy: CodeDeploy blue/green deployment đến ECS service <br>&emsp; + Test pipeline: push code commit → pipeline chạy → container mới tự động deploy | 17/06/2026 | 17/06/2026 | <https://docs.aws.amazon.com/codepipeline/latest/userguide/> |
-| 5   | - **Thực hành:** Bật AWS Security Hub <br>&emsp; + Bật Security Hub trong account và region <br>&emsp; + Bật các chuẩn: AWS Foundational Security Best Practices, CIS AWS Foundations Benchmark v1.4 <br>&emsp; + Xem dashboard phát hiện: Critical, High, Medium severity <br>&emsp; + Xác định và ưu tiên 5 phát hiện critical hàng đầu | 18/06/2026 | 18/06/2026 | <https://docs.aws.amazon.com/securityhub/latest/userguide/> |
-| 6   | - **Khắc phục phát hiện Security Hub:** <br>&emsp; + Bật MFA cho root account và tất cả IAM user <br>&emsp; + Bật CloudTrail toàn region với S3 log validation <br>&emsp; + Xóa rule Security Group quá rộng (0.0.0.0/0 trên SSH) <br>&emsp; + Bật S3 bucket versioning và block public access <br> - Chạy lại kiểm tra Security Hub và ghi lại điểm cải thiện <br> - Xem lại lịch sử thực thi CodePipeline | 19/06/2026 | 19/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Thiết kế state machine gameplay: waiting → in-progress → question → answer → leaderboard → ended <br> - Lập kế hoạch các loại WebSocket message cho gameplay: startGame, showQuestion, submitAnswer, showLeaderboard, endGame <br> - Thiết kế wireframe trang gameplay cho Host và Player | 15/06/2026 | 15/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Thực hành:** Phát triển trang gameplay Host <br>&emsp; + Hiển thị số câu hỏi hiện tại, nội dung câu hỏi và các đáp án <br>&emsp; + Hiển thị đồng hồ đếm ngược cho mỗi câu hỏi <br>&emsp; + Triển khai nút Next Question: gửi action WebSocket để chuyển câu tiếp theo <br>&emsp; + Hiển thị tiến độ nộp câu trả lời (số người chơi đã trả lời) <br>&emsp; + Xử lý action End Game và chuyển sang trang kết quả | 16/06/2026 | 16/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Thực hành:** Phát triển trang gameplay Player <br>&emsp; + Hiển thị câu hỏi và các đáp án nhận qua WebSocket <br>&emsp; + Triển khai chọn đáp án: highlight đáp án được chọn, vô hiệu hóa chọn lại sau khi nộp <br>&emsp; + Gửi đáp án đã chọn lên backend qua WebSocket khi chọn <br>&emsp; + Hiển thị phản hồi sau khi nộp câu trả lời (chờ câu tiếp theo) <br>&emsp; + Xử lý chuyển đổi trạng thái game: câu hỏi → chờ → câu tiếp theo → game kết thúc | 17/06/2026 | 17/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Thực hành:** Tích hợp bảng xếp hạng thời gian thực <br>&emsp; + Hiển thị bảng xếp hạng giữa các câu hỏi: hạng, tên người chơi, điểm hiện tại <br>&emsp; + Cập nhật điểm thời gian thực khi backend broadcast sự kiện cập nhật điểm <br>&emsp; + Thêm animation thay đổi hạng trên bảng xếp hạng <br>&emsp; + Xử lý logic hiển thị khi có người chơi điểm bằng nhau | 18/06/2026 | 18/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Thực hành:** Phát triển trang Kết quả Game <br>&emsp; + Hiển thị bảng xếp hạng chung cuộc: top 3 và danh sách đầy đủ người chơi với điểm cuối <br>&emsp; + Cung cấp tùy chọn quay về Dashboard hoặc bắt đầu game mới <br>&emsp; + Kiểm thử toàn bộ luồng game: tạo phòng → người chơi tham gia → bắt đầu game → trả lời → bảng xếp hạng → kết quả <br>&emsp; + Sửa các vấn đề phát hiện trong kiểm thử end-to-end | 19/06/2026 | 19/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 9:
 
-* Container hóa ứng dụng Node.js bằng Docker và push image lên ECR với quét lỗ hổng tự động.
+* Phát triển trang gameplay Host với điều khiển câu hỏi đầy đủ, đồng hồ đếm ngược và theo dõi tiến độ trả lời.
 
-* Triển khai ECS Service trên Fargate với 2 task đang chạy, tích hợp ALB phân phối traffic.
+* Phát triển trang gameplay Player với chọn đáp án, phản hồi thời gian thực và chuyển đổi trạng thái mượt mà.
 
-* Xây dựng và test CI/CD pipeline đầy đủ: GitHub → CodeBuild → ECR → CodeDeploy blue/green.
+* Tích hợp bảng xếp hạng thời gian thực cập nhật điểm động sau mỗi câu hỏi qua WebSocket event.
 
-* Bật AWS Security Hub với chuẩn CIS AWS Foundations và AWS Foundational Security Best Practices.
+* Xây dựng trang Kết quả Game hiển thị bảng xếp hạng đầy đủ và điểm cuối cho tất cả người chơi.
 
-* Xác định và khắc phục phát hiện critical: bật MFA, CloudTrail, loại bỏ Security Group quá rộng.
+* Hoàn thành kiểm thử end-to-end toàn bộ luồng game từ tạo phòng đến hiển thị kết quả cuối.
 
-* Điểm tuân thủ Security Hub cải thiện sau khi khắc phục phát hiện critical và high severity.
+* Trải nghiệm gameplay cốt lõi của SyncQuiz hoạt động đầy đủ trên frontend.

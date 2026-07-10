@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 9 Worklog"
 date: 2026-06-15
 weight: 9
@@ -7,31 +7,31 @@ pre: " <b> 1.9. </b> "
 ---
 ### Week 9 Objectives:
 
-* Containerize the Node.js application and deploy using Amazon ECS with AWS Fargate.
-* Automate deployment pipeline with AWS CodePipeline and CodeDeploy blue/green strategy.
-* Enable and configure AWS Security Hub to assess cloud security posture.
-* Remediate critical security findings from CIS AWS Foundations Benchmark.
+* Develop the Host gameplay page with question control functionality.
+* Develop the Player gameplay page with answer submission.
+* Integrate a real-time leaderboard and score updates during gameplay.
+* Build the final Game Results page and test the complete game flow.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Study Amazon ECS: clusters, task definitions, services, Fargate launch type <br> - Study Amazon ECR: repositories, image scanning, lifecycle policies <br> - **Practice:** Containerize Node.js app <br>&emsp; + Write Dockerfile (node:18-alpine base image) <br>&emsp; + Build image locally, test with docker run <br>&emsp; + Push image to Amazon ECR repository | 06/15/2026 | 06/15/2026 | <https://docs.aws.amazon.com/ecs/> |
-| 3   | - **Practice:** Create ECS Cluster and Service on Fargate <br>&emsp; + Create ECS Cluster (Fargate + Fargate Spot capacity) <br>&emsp; + Create Task Definition: container image from ECR, 0.5 vCPU, 1 GB memory, env vars from Secrets Manager <br>&emsp; + Create ECS Service: desired count 2, rolling update deployment, attach to ALB target group <br>&emsp; + Verify containers healthy in ALB and ECS console | 06/16/2026 | 06/16/2026 | <https://docs.aws.amazon.com/ecs/latest/developerguide/> |
-| 4   | - **Practice:** Build CI/CD pipeline with CodePipeline <br>&emsp; + Source: GitHub repository (CodeStar connection) <br>&emsp; + Build: CodeBuild project builds Docker image, pushes to ECR, generates imagedefinitions.json <br>&emsp; + Deploy: CodeDeploy blue/green deployment to ECS service <br>&emsp; + Test pipeline: push code commit → pipeline runs → new containers deployed automatically | 06/17/2026 | 06/17/2026 | <https://docs.aws.amazon.com/codepipeline/latest/userguide/> |
-| 5   | - **Practice:** Enable AWS Security Hub <br>&emsp; + Enable Security Hub in the AWS account and region <br>&emsp; + Enable standards: AWS Foundational Security Best Practices, CIS AWS Foundations Benchmark v1.4 <br>&emsp; + Review findings dashboard: Critical, High, Medium severity findings <br>&emsp; + Identify and prioritize top 5 critical findings | 06/18/2026 | 06/18/2026 | <https://docs.aws.amazon.com/securityhub/latest/userguide/> |
-| 6   | - **Remediate Security Hub findings:** <br>&emsp; + Enable MFA on root account and all IAM users <br>&emsp; + Enable CloudTrail in all regions with S3 log validation <br>&emsp; + Remove overly permissive Security Group rules (0.0.0.0/0 on SSH) <br>&emsp; + Enable S3 bucket versioning and block public access <br> - Re-run Security Hub checks and document score improvement <br> - Review CodePipeline execution history | 06/19/2026 | 06/19/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Design gameplay state machine: waiting → in-progress → question → answer → leaderboard → ended <br> - Plan WebSocket message types for gameplay: startGame, showQuestion, submitAnswer, showLeaderboard, endGame <br> - Design Host and Player gameplay page wireframes | 06/15/2026 | 06/15/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Practice:** Develop Host gameplay page <br>&emsp; + Display current question number, question text, and answer options <br>&emsp; + Show countdown timer for each question <br>&emsp; + Implement Next Question button: sends WebSocket action to advance the game <br>&emsp; + Display answer submission progress (number of players who have answered) <br>&emsp; + Handle End Game action and transition to results page | 06/16/2026 | 06/16/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** Develop Player gameplay page <br>&emsp; + Display question and answer options received via WebSocket <br>&emsp; + Implement answer selection: highlight selected answer, disable re-selection after submission <br>&emsp; + Send selected answer to backend via WebSocket on selection <br>&emsp; + Display feedback after answer submission (waiting for next question) <br>&emsp; + Handle game state transitions: question → waiting → next question → game ended | 06/17/2026 | 06/17/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Practice:** Integrate real-time leaderboard <br>&emsp; + Display leaderboard between questions: rank, player name, and current score <br>&emsp; + Update scores in real time when backend broadcasts score update event <br>&emsp; + Animate leaderboard rank changes for better user experience <br>&emsp; + Handle tie-breaking display logic | 06/18/2026 | 06/18/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Practice:** Develop Game Results page <br>&emsp; + Display final rankings: top 3 podium and full player list with final scores <br>&emsp; + Provide option to return to Dashboard or start a new game <br>&emsp; + Test the complete game flow: room creation → player join → game start → answer questions → leaderboard → results <br>&emsp; + Fix any issues found during end-to-end testing | 06/19/2026 | 06/19/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 9 Achievements:
 
-* Containerized the Node.js application using Docker and pushed the image to Amazon ECR with vulnerability scanning.
+* Developed the Host gameplay page with full question control, countdown timer, and answer progress tracking.
 
-* Deployed ECS Service on Fargate with 2 running tasks, integrated with ALB for traffic distribution.
+* Developed the Player gameplay page with answer selection, real-time feedback, and smooth state transitions.
 
-* Built and tested a full CI/CD pipeline: GitHub → CodeBuild → ECR → CodeDeploy blue/green to ECS.
+* Integrated a real-time leaderboard that updates scores dynamically after each question via WebSocket events.
 
-* Enabled AWS Security Hub with CIS AWS Foundations and AWS Foundational Security Best Practices standards.
+* Built the final Game Results page displaying the full ranking and final scores for all players.
 
-* Identified and remediated top critical findings: MFA enforcement, CloudTrail, overly permissive Security Groups.
+* Completed end-to-end testing of the full game flow from room creation to final results display.
 
-* Security Hub compliance score improved after remediation of critical and high severity findings.
+* The core SyncQuiz gameplay experience is fully functional on the frontend.

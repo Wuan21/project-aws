@@ -8,30 +8,31 @@ pre: " <b> 1.11. </b> "
 
 ### Week 11 Objectives:
 
-* Deploy the Next.js frontend (host and player interfaces) on AWS Amplify and set up Git-based automated CI/CD.
-* Integrate Amazon Cognito User Pool for secure host authentication (teachers/quiz creators) and player session tracking.
-* Deploy and automate the CI/CD pipeline for the backend WebSocket API (API Gateway WebSocket) and Lambda handlers processing real-time events (Join Room, Submit Answer, Get Leaderboard) using GitHub Actions.
-* Set up a real-time monitoring system using CloudWatch Dashboards to track concurrent WebSocket connections, message traffic, and Lambda execution metrics.
+* Conduct user testing and responsive testing in the production environment.
+* Identify and resolve UI/UX bugs and frontend logic issues.
+* Improve component stability and overall user experience.
+* Prepare the User Guide and demo script for final presentation.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
-| --- | --- | --- | --- | --- |
-| 2 | - Learn and configure AWS Amplify Hosting for the Next.js frontend of SyncQuizz <br> - Integrate with GitHub repository to enable automatic build-on-commit to the `main` branch <br> - Customize the `amplify.yml` build configuration to optimize dependencies installation, application building, and cache parameters | 06/29/2026 | 06/29/2026 | <https://docs.aws.amazon.com/amplify/> |
-| 3 | - Configure Amazon Cognito User Pool and Client to integrate login/register authentication for Host accounts <br> - Design CI/CD workflow using GitHub Actions (integrating SAM or Serverless Framework) to package and deploy serverless backend resources <br> - Configure secure AWS credentials in GitHub Secrets | 06/30/2026 | 06/30/2026 | <https://docs.aws.amazon.com/cognito/> |
-| 4 | - Execute the full deployment pipeline for SyncQuizz: Next.js frontend on Amplify and API Gateway WebSocket/REST API backend resources <br> - Map environment variables (WebSocket URL, Cognito Client ID) to the frontend application <br> - Configure CORS rules on API Gateway to accept frontend origins | 07/01/2026 | 07/01/2026 | <https://docs.github.com/en/actions/> |
-| 5 | - Build a unified CloudWatch Dashboard to monitor SyncQuizz operations: track concurrent WebSocket connections (`ConnectCount`), message throughput, and resource usage <br> - Measure Lambda execution metrics (invocations, errors, and duration) for connection handlers <br> - Configure CloudWatch Metrics for DynamoDB tables to track capacity performance during concurrent user submissions | 07/02/2026 | 07/02/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/> |
-| 6 | - Conduct end-to-end integration tests: simulate host creating a lobby, players joining via WebSockets, answering questions, and updating leaderboard rankings in real-time <br> - Perform light load testing (simulating 50-100 concurrent clients) and observe system metrics on the dashboard <br> - Finalize architecture diagrams, WebSocket data flow schemes, and operational runbooks | 07/03/2026 | 07/03/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| 2   | - Plan testing scope: features, devices, browsers, and user roles (Host, Player) <br> - Prepare test cases covering: signup, login, quiz creation, room creation, joining room, gameplay, leaderboard, and results <br> - Set up testing devices: desktop, tablet, and mobile | 06/29/2026 | 06/29/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Production testing:** Host user flow <br>&emsp; + Test signup → login → quiz creation → room creation → game start → question control → game end <br>&emsp; + Verify Host can control game flow without errors <br>&emsp; + Test responsive behavior on desktop and tablet <br>&emsp; + Document all bugs and unexpected behaviors found during testing | 06/30/2026 | 06/30/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Production testing:** Player user flow <br>&emsp; + Test join room → waiting room → gameplay → answer submission → leaderboard → results <br>&emsp; + Test with multiple simultaneous Player sessions <br>&emsp; + Test responsive behavior on mobile devices <br>&emsp; + Test WebSocket reconnection behavior when connection drops mid-game | 07/01/2026 | 07/01/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Bug fixing and UX improvement:** <br>&emsp; + Fix UI misalignment and layout issues on smaller screens <br>&emsp; + Fix frontend logic bugs: answer submission edge cases, timer sync issues <br>&emsp; + Improve error messages for better user guidance <br>&emsp; + Improve loading states and transitions between game phases <br>&emsp; + Verify all fixes in production environment after deployment | 07/02/2026 | 07/02/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Documentation preparation:** <br>&emsp; + Write User Guide: describe how to sign up, create a quiz, host a game, and join as a player <br>&emsp; + Add screenshots to User Guide for each major step <br>&emsp; + Prepare demo script: define the flow and talking points for stakeholder presentation <br>&emsp; + Review documentation for clarity, accuracy, and completeness | 07/03/2026 | 07/03/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 11 Achievements:
 
-* Successfully deployed the Next.js frontend on AWS Amplify with a Git-triggered automated CI/CD pipeline from GitHub.
+* Conducted comprehensive user testing in the production environment covering Host and Player user flows.
 
-* Integrated Amazon Cognito User Pool for secure host authentication and reliable session identification of participants.
+* Tested responsive behavior on desktop, tablet, and mobile devices — issues were identified and resolved.
 
-* Configured a GitHub Actions workflow to automate the deployment of backend WebSocket APIs, Lambda functions, and DynamoDB tables.
+* Fixed UI/UX bugs including layout misalignment, error message inconsistency, and loading state gaps.
 
-* Designed a comprehensive CloudWatch Dashboard monitoring concurrent WebSockets connections, Lambda performance, and database write capacity in real-time.
+* Fixed frontend logic issues related to answer submission edge cases and timer synchronization.
 
-* Validated real-time quiz synchronization between the Host dashboard and player devices with minimal latency under simulated load.
+* Improved component stability and user experience across all major game phases.
 
+* Completed the User Guide with screenshots and prepared the demo script for the final presentation.

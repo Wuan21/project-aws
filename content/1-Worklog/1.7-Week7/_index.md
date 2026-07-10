@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 7 Worklog"
 date: 2026-06-01
 weight: 7
@@ -7,31 +7,31 @@ pre: " <b> 1.7. </b> "
 ---
 ### Week 7 Objectives:
 
-* Understand Amazon SNS and SQS messaging and notification services.
-* Integrate SNS to send real-time notifications on application events.
-* Build a reliable fanout notification pattern using SNS and SQS.
-* Test notification delivery across multiple subscription types.
+* Develop Login and Signup pages integrated with Amazon Cognito.
+* Build the user Dashboard and quiz management interface.
+* Ensure secure session management using Cognito tokens.
+* Test the complete authentication flow end-to-end.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Study Amazon SNS: topics, subscriptions (email, SMS, HTTP/S, Lambda, SQS), message filtering <br> - Study Amazon SQS: standard queues vs FIFO queues, visibility timeout, dead-letter queues <br> - Study SNS + SQS fanout pattern for decoupled message delivery | 06/01/2026 | 06/01/2026 | <https://docs.aws.amazon.com/sns/latest/dg/> |
-| 3   | - **Practice:** Create SNS topic and subscriptions <br>&emsp; + Create SNS Standard topic `AppNotifications` <br>&emsp; + Add email subscription and confirm via inbox <br>&emsp; + Add SMS subscription (E.164 phone number) <br>&emsp; + Publish test message and verify delivery to all subscribers <br>&emsp; + Configure message filter policies per subscription | 06/02/2026 | 06/02/2026 | <https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html> |
-| 4   | - **Practice:** Integrate SNS into application <br>&emsp; + Add AWS SDK v3 SNS client to Node.js app <br>&emsp; + Publish SNS message on events: new high score, user achievement unlocked <br>&emsp; + Include structured message attributes (userId, eventType, score) <br>&emsp; + Write Lambda subscriber that processes SNS events and logs to CloudWatch | 06/03/2026 | 06/03/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - **Practice:** Build SQS buffer for async processing <br>&emsp; + Create SQS Standard queue `ScoreQueue` and subscribe to SNS topic <br>&emsp; + Create SQS Dead Letter Queue for failed messages (maxReceiveCount: 3) <br>&emsp; + Configure Lambda to poll SQS queue (event source mapping) <br>&emsp; + Test: publish SNS → SQS delivers to Lambda → Lambda processes and logs | 06/04/2026 | 06/04/2026 | <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/> |
-| 6   | - Test failure scenarios: <br>&emsp; + Simulate Lambda processing failure → message moves to DLQ after 3 retries <br>&emsp; + Test SQS visibility timeout with slow consumer <br>&emsp; + Verify DLQ message inspection and re-drive policy <br> - Benchmark SNS delivery latency (email, SMS, Lambda) <br> - Document notification architecture | 06/05/2026 | 06/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Study Amazon Cognito SDK integration with React <br> - Review Cognito hosted UI vs custom UI approach <br> - Plan authentication flow: signup, login, token storage, logout, session persistence | 06/01/2026 | 06/01/2026 | <https://docs.amplify.aws/react/build-a-backend/auth/> |
+| 3   | - **Practice:** Develop Login and Signup pages <br>&emsp; + Create Signup form: email, password, confirm password fields <br>&emsp; + Integrate Cognito SDK: signUp, confirmSignUp (OTP verification) <br>&emsp; + Create Login form: email and password fields <br>&emsp; + Integrate Cognito SDK: signIn, handle auth tokens <br>&emsp; + Store JWT tokens securely (localStorage / httpOnly cookie strategy) | 06/02/2026 | 06/02/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Practice:** Session management and route protection <br>&emsp; + Implement automatic token refresh using Cognito SDK <br>&emsp; + Handle session expiry and redirect to Login <br>&emsp; + Implement logout: clear tokens and redirect <br>&emsp; + Protect all authenticated routes using global auth state <br>&emsp; + Test login persistence across browser refresh | 06/03/2026 | 06/03/2026 | <https://docs.aws.amazon.com/cognito/latest/developerguide/> |
+| 5   | - **Practice:** Develop Dashboard interface <br>&emsp; + Display authenticated user profile information (email, username) <br>&emsp; + Display quiz history: list of quizzes created by the user <br>&emsp; + Add navigation to quiz creation and game room creation <br>&emsp; + Implement responsive layout for the Dashboard page | 06/04/2026 | 06/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Practice:** Develop quiz management interface <br>&emsp; + Create form for creating a new quiz: title, description, category <br>&emsp; + Create form for adding questions: question text, answer options, correct answer, time limit <br>&emsp; + Implement quiz list view with edit and delete actions <br>&emsp; + Connect quiz management forms to HTTP API endpoints <br>&emsp; + Test end-to-end: create quiz → add questions → view on Dashboard | 06/05/2026 | 06/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 7 Achievements:
 
-* Created and configured SNS topic with email, SMS, and SQS subscription types.
+* Developed fully functional Login and Signup pages with Cognito SDK integration.
 
-* Successfully delivered notifications via SNS on application events (new high score, achievement unlocked).
+* Implemented secure session management: JWT tokens are stored and refreshed automatically via Cognito.
 
-* Implemented message filter policies to route specific event types to targeted subscribers.
+* Session persistence works correctly across browser refresh; expired sessions redirect users to the Login page.
 
-* Built an SQS Standard queue as SNS fanout buffer, with Dead Letter Queue for error handling.
+* Built the user Dashboard displaying profile information and the quiz list.
 
-* Configured Lambda event source mapping to process SQS messages asynchronously.
+* Developed the quiz management interface allowing users to create, edit, and delete quizzes with questions.
 
-* Tested DLQ behavior: messages correctly moved after 3 failed processing attempts.
+* Authentication flow and page redirection were tested successfully end-to-end.

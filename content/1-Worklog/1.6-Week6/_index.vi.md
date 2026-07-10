@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Worklog Tuần 6"
 date: 2026-05-25
 weight: 6
@@ -7,31 +7,31 @@ pre: " <b> 1.6. </b> "
 ---
 ### Mục tiêu tuần 6:
 
-* Thiết kế hệ thống gamification tương tác người dùng bằng serverless AWS.
-* Triển khai logic tính điểm với AWS Lambda và lưu trữ bảng xếp hạng bằng DynamoDB.
-* Expose chức năng bảng xếp hạng qua Amazon API Gateway.
-* Kiểm tra luồng tính điểm và xếp hạng end-to-end.
+* Khởi tạo boilerplate dự án React frontend cho SyncQuiz.
+* Cấu hình hệ thống routing và quản lý state cho ứng dụng.
+* Tạo các component UI tái sử dụng để hỗ trợ phát triển tính năng về sau.
+* Chuẩn hóa cấu trúc dự án để đảm bảo khả năng mở rộng và bảo trì.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2   | - Tìm hiểu DynamoDB: table, partition key, sort key, GSI, LSI <br> - Tìm hiểu Lambda: mô hình thực thi, trigger, biến môi trường, layer <br> - Thiết kế data model gamification: điểm người dùng, thành tích, thứ hạng bảng xếp hạng | 25/05/2026 | 25/05/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/> |
-| 3   | - **Thực hành:** Thiết lập bảng xếp hạng DynamoDB <br>&emsp; + Tạo bảng `leaderboard` (partition key: userId, sort key: timestamp) <br>&emsp; + Tạo GSI trên thuộc tính `score` cho truy vấn xếp hạng <br>&emsp; + Viết Lambda `submitScore`: xác thực input, ghi item vào DynamoDB <br>&emsp; + Test Lambda cục bộ bằng SAM CLI | 26/05/2026 | 26/05/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/> |
-| 4   | - **Thực hành:** Xây dựng Lambda truy vấn bảng xếp hạng <br>&emsp; + Viết Lambda `getLeaderboard`: truy vấn DynamoDB GSI theo điểm giảm dần <br>&emsp; + Thêm hỗ trợ phân trang (Limit + ExclusiveStartKey) <br>&emsp; + Tạo API Gateway REST API với resource `/score` (POST) và `/leaderboard` (GET) <br>&emsp; + Cấu hình Lambda proxy integration cho từng route | 27/05/2026 | 27/05/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/> |
-| 5   | - Tích hợp API Gateway vào frontend Node.js <br>&emsp; + Thêm xác thực API key cho API Gateway <br>&emsp; + Cập nhật cài đặt CORS cho phép origin frontend <br>&emsp; + Deploy API lên stage `prod` <br> - Test luồng đầy đủ: submit điểm → DynamoDB → truy vấn API bảng xếp hạng | 28/05/2026 | 28/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Thêm hệ thống thành tích: Lambda kiểm tra mốc (top 10) ghi vào bảng `achievements` <br> - Cấu hình DynamoDB Streams kích hoạt Lambda thành tích khi có điểm mới <br> - Load test: submit 100 điểm đồng thời, xác minh tính nhất quán DynamoDB và API <br> - Xem xét cold start Lambda và tối ưu bằng Provisioned Concurrency | 29/05/2026 | 29/05/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html> |
+| 2   | - Nghiên cứu các thực hành tốt nhất khi thiết lập dự án React <br> - Khởi tạo dự án React frontend bằng Create React App hoặc Vite <br> - Cấu hình ESLint, Prettier và các tiêu chuẩn code | 25/05/2026 | 25/05/2026 | <https://vitejs.dev/guide/> |
+| 3   | - **Thực hành:** Cấu hình hệ thống routing <br>&emsp; + Cài đặt và thiết lập React Router v6 <br>&emsp; + Định nghĩa cấu trúc route: Home, Login, Signup, Dashboard, Quiz Management, Game Room <br>&emsp; + Triển khai protected routes cho người dùng đã xác thực <br>&emsp; + Thiết lập navigation guard dựa trên trạng thái xác thực | 26/05/2026 | 26/05/2026 | <https://reactrouter.com/en/main> |
+| 4   | - **Thực hành:** Thiết lập quản lý state <br>&emsp; + Đánh giá và lựa chọn giải pháp quản lý state (Redux Toolkit / Zustand / Context API) <br>&emsp; + Triển khai global auth state: thông tin người dùng, token, trạng thái đăng nhập <br>&emsp; + Triển khai UI state: loading indicator, modal, thông báo lỗi <br>&emsp; + Viết unit test cho state reducer hoặc context provider | 27/05/2026 | 27/05/2026 | <https://redux-toolkit.js.org/> |
+| 5   | - **Thực hành:** Xây dựng component base tái sử dụng <br>&emsp; + Tạo component Header với navigation và thông tin người dùng <br>&emsp; + Tạo component Footer <br>&emsp; + Tạo Layout wrapper component cho cấu trúc trang nhất quán <br>&emsp; + Tạo Loading spinner và Error Boundary component <br>&emsp; + Áp dụng CSS/Tailwind cơ bản để đảm bảo giao diện thống nhất | 28/05/2026 | 28/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Chuẩn hóa cấu trúc thư mục: components/, pages/, hooks/, store/, services/, utils/ <br> - Xác minh dự án chạy đúng trong môi trường phát triển cục bộ <br> - Thiết lập biến môi trường (.env) cho API endpoint và cấu hình <br> - Ghi lại tài liệu về cấu trúc dự án và hướng dẫn sử dụng component | 29/05/2026 | 29/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 6:
 
-* Thiết kế và triển khai hệ thống gamification serverless với Lambda, DynamoDB và API Gateway.
+* Khởi tạo thành công dự án React frontend với Vite, ESLint và Prettier.
 
-* Tạo bảng DynamoDB với Global Secondary Index cho truy vấn bảng xếp hạng hiệu quả theo điểm số.
+* Cấu hình React Router v6 với cấu trúc route đầy đủ, bao gồm protected routes cho các trang yêu cầu xác thực.
 
-* Phát triển và deploy Lambda function xử lý nộp điểm và truy vấn bảng xếp hạng.
+* Triển khai quản lý state toàn cục cho xác thực và UI state.
 
-* Expose API bảng xếp hạng qua API Gateway với xác thực API key và cấu hình CORS.
+* Xây dựng các component base tái sử dụng: Header, Footer, Layout, Loading và Error Boundary.
 
-* Triển khai DynamoDB Streams kích hoạt kiểm tra thành tích khi có điểm mới.
+* Thiết lập cấu trúc thư mục chuẩn hóa để hỗ trợ phát triển có khả năng mở rộng trong các tuần tiếp theo.
 
-* Load test với 100 submission đồng thời — toàn bộ bản ghi nhất quán.
+* Dự án chạy đúng trong môi trường phát triển cục bộ với cấu hình biến môi trường sẵn sàng.

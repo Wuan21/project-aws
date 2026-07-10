@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 6 Worklog"
 date: 2026-05-25
 weight: 6
@@ -7,31 +7,31 @@ pre: " <b> 1.6. </b> "
 ---
 ### Week 6 Objectives:
 
-* Design a gamification system for user engagement using AWS serverless services.
-* Implement scoring logic with AWS Lambda and store leaderboard data in DynamoDB.
-* Expose leaderboard functionality via Amazon API Gateway.
-* Test end-to-end scoring and ranking flow.
+* Initialize the React frontend project boilerplate for SyncQuiz.
+* Configure the routing system and state management for the application.
+* Create reusable UI components to support future feature development.
+* Standardize the project structure for scalability and maintainability.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Study Amazon DynamoDB: tables, partition keys, sort keys, GSI, LSI <br> - Study AWS Lambda: execution model, triggers, environment variables, layers <br> - Design gamification data model: user scores, achievements, leaderboard ranking | 05/25/2026 | 05/25/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/> |
-| 3   | - **Practice:** Set up DynamoDB leaderboard <br>&emsp; + Create DynamoDB table `leaderboard` (partition key: userId, sort key: timestamp) <br>&emsp; + Create GSI on `score` attribute for ranked queries <br>&emsp; + Write Lambda function `submitScore`: validates input, writes item to DynamoDB <br>&emsp; + Test Lambda locally using SAM CLI | 05/26/2026 | 05/26/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/> |
-| 4   | - **Practice:** Build leaderboard query Lambda <br>&emsp; + Write Lambda function `getLeaderboard`: queries DynamoDB GSI ordered by score desc <br>&emsp; + Add pagination support (Limit + ExclusiveStartKey) <br>&emsp; + Create API Gateway REST API with resources `/score` (POST) and `/leaderboard` (GET) <br>&emsp; + Configure Lambda proxy integration for each route | 05/27/2026 | 05/27/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/> |
-| 5   | - Integrate API Gateway with Node.js frontend <br>&emsp; + Add API key authentication to API Gateway <br>&emsp; + Update CORS settings to allow frontend origin <br>&emsp; + Deploy API to `prod` stage <br> - Test full flow: submit score → DynamoDB → query leaderboard API | 05/28/2026 | 05/28/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Add achievement system: Lambda checks milestones (e.g., top 10) and writes to `achievements` table <br> - Configure DynamoDB Streams to trigger achievement Lambda on new score entry <br> - Load test: submit 100 concurrent scores, verify DynamoDB and API consistency <br> - Review Lambda cold start times and optimize with Provisioned Concurrency | 05/29/2026 | 05/29/2026 | <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html> |
+| 2   | - Research React project setup best practices <br> - Initialize React frontend project using Create React App or Vite <br> - Configure ESLint, Prettier, and project-level coding standards | 05/25/2026 | 05/25/2026 | <https://vitejs.dev/guide/> |
+| 3   | - **Practice:** Configure routing system <br>&emsp; + Install and set up React Router v6 <br>&emsp; + Define route structure: Home, Login, Signup, Dashboard, Quiz Management, Game Room <br>&emsp; + Implement protected routes for authenticated users <br>&emsp; + Set up navigation guards based on authentication state | 05/26/2026 | 05/26/2026 | <https://reactrouter.com/en/main> |
+| 4   | - **Practice:** Set up state management <br>&emsp; + Evaluate and select state management approach (Redux Toolkit / Zustand / Context API) <br>&emsp; + Implement global auth state: current user, token, login status <br>&emsp; + Implement UI state: loading indicators, modal visibility, error messages <br>&emsp; + Write unit tests for state reducers or context providers | 05/27/2026 | 05/27/2026 | <https://redux-toolkit.js.org/> |
+| 5   | - **Practice:** Build reusable base components <br>&emsp; + Create Header component with navigation links and user info <br>&emsp; + Create Footer component <br>&emsp; + Create Layout wrapper component for consistent page structure <br>&emsp; + Create Loading spinner and error boundary components <br>&emsp; + Apply basic CSS/Tailwind styling for consistency | 05/28/2026 | 05/28/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Standardize folder structure: components/, pages/, hooks/, store/, services/, utils/ <br> - Verify the project runs correctly in local development environment <br> - Set up environment variables (.env) for API endpoints and configuration <br> - Document the project structure and component usage guidelines | 05/29/2026 | 05/29/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 6 Achievements:
 
-* Designed and implemented a serverless gamification system using Lambda, DynamoDB, and API Gateway.
+* Successfully initialized the React frontend project with Vite, ESLint, and Prettier configuration.
 
-* Created DynamoDB table with Global Secondary Index for efficient leaderboard queries by score.
+* Configured React Router v6 with a complete route structure, including protected routes for authenticated pages.
 
-* Developed and deployed Lambda functions for score submission and leaderboard retrieval.
+* Implemented global state management for authentication and UI states using the selected approach.
 
-* Exposed leaderboard APIs via API Gateway with API key authentication and CORS configuration.
+* Built reusable base components: Header, Footer, Layout, Loading, and Error Boundary.
 
-* Implemented DynamoDB Streams to trigger achievement checks on new score entries.
+* Established a standardized folder structure to support scalable development in the following weeks.
 
-* Load tested the system with 100 concurrent score submissions — all records consistent.
+* The project runs correctly in the local development environment with environment variable configuration in place.

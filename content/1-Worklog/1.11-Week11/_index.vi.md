@@ -8,32 +8,31 @@ pre: " <b> 1.11. </b> "
 
 ### Mục tiêu tuần 11:
 
-* Triển khai ứng dụng frontend Next.js (giao diện quản trò và người chơi) lên AWS Amplify và cấu hình CI/CD tự động dựa trên Git.
-* Tích hợp Amazon Cognito User Pool để xác thực tài khoản quản trò (host/giáo viên) và quản lý phiên kết nối của người chơi.
-* Triển khai và tự động hóa pipeline CI/CD cho backend WebSocket API (API Gateway WebSocket) và các Lambda handler xử lý sự kiện thời gian thực (Join Room, Submit Answer, Get Leaderboard) bằng GitHub Actions.
-* Thiết lập hệ thống giám sát thời gian thực bằng CloudWatch Dashboards để theo dõi số lượng kết nối WebSocket đồng thời, độ trễ và tỷ lệ lỗi của các hàm Lambda.
+* Thực hiện kiểm thử người dùng và kiểm thử responsive trong môi trường production.
+* Xác định và sửa các lỗi UI/UX và vấn đề logic frontend.
+* Cải thiện độ ổn định của component và trải nghiệm người dùng tổng thể.
+* Chuẩn bị Hướng dẫn sử dụng và kịch bản demo cho bài thuyết trình cuối.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2 | - Tìm hiểu và cấu hình AWS Amplify Hosting cho ứng dụng Next.js của SyncQuizz <br> - Tích hợp với repository GitHub để tự động kích hoạt build khi push commit mới lên nhánh `main` <br> - Tùy chỉnh tệp cấu hình build `amplify.yml` để tối ưu cài đặt dependencies, build ứng dụng và lưu cache | 29/06/2026 | 29/06/2026 | <https://docs.aws.amazon.com/amplify/> |
-| 3 | - Thiết lập Amazon Cognito User Pool và Client để tích hợp xác thực đăng nhập/đăng ký cho tài khoản Quản trò (Host/Teacher) <br> - Thiết kế workflow CI/CD sử dụng GitHub Actions (kết hợp Serverless Framework hoặc AWS SAM) để đóng gói và triển khai backend Serverless <br> - Cấu hình AWS credentials bảo mật trong GitHub Secrets | 30/06/2026 | 30/06/2026 | <https://docs.aws.amazon.com/cognito/> |
-| 4 | - Thực hành chạy pipeline deploy toàn bộ hệ thống SyncQuizz: Frontend Next.js trên Amplify và API Gateway WebSocket/REST API backend <br> - Liên kết các biến môi trường (WebSocket URL, Cognito User Pool ID) vào ứng dụng Frontend <br> - Cấu hình CORS trên REST API và API Gateway để chấp nhận domain của frontend | 01/07/2026 | 01/07/2026 | <https://docs.github.com/en/actions/> |
-| 5 | - Xây dựng CloudWatch Dashboard giám sát hoạt động của SyncQuizz: theo dõi số kết nối WebSocket đồng thời (`ConnectCount`), số lượng tin nhắn, và tài nguyên sử dụng <br> - Đo lường các chỉ số của Lambda handler: tần suất gọi hàm (Invocations), tỷ lệ lỗi (Errors) và thời gian thực thi (Duration) <br> - Cấu hình CloudWatch Metrics cho DynamoDB tables để kiểm tra năng lực đáp ứng khi người chơi gửi đáp án đồng thời | 02/07/2026 | 02/07/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/> |
-| 6 | - Tiến hành kiểm thử tích hợp toàn trình (end-to-end): giả lập Host tạo phòng đấu, người chơi kết nối WebSocket, trả lời câu hỏi và cập nhật bảng xếp hạng thời gian thực <br> - Chạy thử nghiệm chịu tải nhẹ (giả lập 50-100 client kết nối đồng thời) và quan sát hiệu năng hệ thống trên CloudWatch Dashboard <br> - Hoàn thiện tài liệu kiến trúc, sơ đồ luồng dữ liệu WebSocket và hướng dẫn vận hành | 03/07/2026 | 03/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Lập kế hoạch phạm vi kiểm thử: tính năng, thiết bị, trình duyệt và vai trò người dùng (Host, Player) <br> - Chuẩn bị test case: đăng ký, đăng nhập, tạo quiz, tạo phòng, tham gia phòng, gameplay, bảng xếp hạng và kết quả <br> - Chuẩn bị thiết bị kiểm thử: máy tính, tablet và điện thoại | 29/06/2026 | 29/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Kiểm thử production:** Luồng người dùng Host <br>&emsp; + Kiểm thử đăng ký → đăng nhập → tạo quiz → tạo phòng → bắt đầu game → điều khiển câu hỏi → kết thúc game <br>&emsp; + Xác minh Host có thể điều khiển luồng game không có lỗi <br>&emsp; + Kiểm thử responsive trên máy tính và tablet <br>&emsp; + Ghi lại tất cả lỗi và hành vi bất thường phát hiện trong kiểm thử | 30/06/2026 | 30/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **Kiểm thử production:** Luồng người dùng Player <br>&emsp; + Kiểm thử tham gia phòng → waiting room → gameplay → nộp câu trả lời → bảng xếp hạng → kết quả <br>&emsp; + Kiểm thử với nhiều phiên Player đồng thời <br>&emsp; + Kiểm thử responsive trên thiết bị di động <br>&emsp; + Kiểm thử hành vi kết nối lại WebSocket khi mất kết nối giữa game | 01/07/2026 | 01/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - **Sửa lỗi và cải thiện UX:** <br>&emsp; + Sửa lỗi căn chỉnh UI và layout trên màn hình nhỏ <br>&emsp; + Sửa lỗi logic frontend: các trường hợp biên của nộp câu trả lời, vấn đề đồng bộ timer <br>&emsp; + Cải thiện thông báo lỗi để hướng dẫn người dùng tốt hơn <br>&emsp; + Cải thiện trạng thái loading và chuyển đổi giữa các giai đoạn game <br>&emsp; + Xác minh tất cả bản sửa lỗi trong môi trường production sau khi deploy | 02/07/2026 | 02/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Chuẩn bị tài liệu:** <br>&emsp; + Viết Hướng dẫn sử dụng: mô tả cách đăng ký, tạo quiz, host game và tham gia với vai trò Player <br>&emsp; + Thêm ảnh chụp màn hình vào Hướng dẫn cho từng bước chính <br>&emsp; + Chuẩn bị kịch bản demo: xác định luồng và các điểm trình bày cho stakeholder <br>&emsp; + Rà soát tài liệu về độ rõ ràng, chính xác và đầy đủ | 03/07/2026 | 03/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 11:
 
-* Triển khai thành công Frontend Next.js của SyncQuizz lên AWS Amplify với luồng CI/CD tự động kích hoạt từ GitHub mỗi khi cập nhật code.
+* Thực hiện kiểm thử người dùng toàn diện trong môi trường production bao phủ luồng Host và Player.
 
-* Tích hợp Amazon Cognito giúp xác thực và quản lý tài khoản Quản trò an toàn, hỗ trợ quản lý phiên kết nối của người chơi một cách tin cậy.
+* Kiểm thử responsive trên máy tính, tablet và điện thoại — các vấn đề được xác định và sửa chữa.
 
-* Tự động hóa quy trình deploy hạ tầng backend (API Gateway WebSocket, Lambda, DynamoDB) thông qua GitHub Actions pipeline nhanh chóng và nhất quán.
+* Sửa các lỗi UI/UX bao gồm lỗi căn chỉnh layout, không nhất quán thông báo lỗi và thiếu trạng thái loading.
 
-* Thiết kế bảng điều khiển CloudWatch Dashboard trực quan, cho phép theo dõi thời gian thực số lượng người chơi đang kết nối WebSocket, hiệu năng của Lambda và trạng thái cơ sở dữ liệu.
+* Sửa lỗi logic frontend liên quan đến các trường hợp biên của nộp câu trả lời và đồng bộ timer.
 
-* Chạy thử nghiệm thành công kịch bản game thực tế, dữ liệu câu hỏi và câu trả lời đồng bộ tức thời giữa màn hình của Host và thiết bị của người chơi với độ trễ cực thấp.
+* Cải thiện độ ổn định component và trải nghiệm người dùng trên tất cả giai đoạn game chính.
 
-
-
+* Hoàn thành Hướng dẫn sử dụng kèm ảnh chụp màn hình và chuẩn bị kịch bản demo cho bài thuyết trình cuối.

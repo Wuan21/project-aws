@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 10 Worklog"
 date: 2026-06-22
 weight: 10
@@ -8,41 +8,33 @@ pre: " <b> 1.10. </b> "
 
 ### Week 10 Objectives:
 
-* Connect multiple VPCs using VPC Peering and AWS Transit Gateway.
-* Understand routing and security implications for multi-VPC architectures.
-* Automate operational tasks using AWS Lambda and Amazon EventBridge.
-* Build event-driven workflows for scheduled and reactive automation.
+* Build and optimize the production frontend bundle.
+* Deploy the frontend to Amazon S3 with CloudFront distribution.
+* Configure Origin Access Control and bucket policy for secure delivery.
+* Set up a CloudWatch Dashboard for system monitoring.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Study VPC Peering: how it works, routing requirements, limitations (no transitive routing) <br> - Study AWS Transit Gateway: attachments, route tables, centralized routing hub <br> - Compare VPC Peering vs Transit Gateway: scale, cost, use cases | 06/22/2026 | 06/22/2026 | <https://docs.aws.amazon.com/vpc/latest/peering/> |
-| 3   | - **Practice:** VPC Peering <br>&emsp; + Create a second VPC (10.1.0.0/16) with private subnets <br>&emsp; + Create VPC Peering connection between VPC-A and VPC-B <br>&emsp; + Accept peering request and update route tables in both VPCs <br>&emsp; + Launch EC2 instances in each VPC and test ping/SSH across peering <br>&emsp; + Verify security group allows traffic from the peered VPC CIDR | 06/23/2026 | 06/23/2026 | <https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html> |
-| 4   | - **Practice:** AWS Transit Gateway <br>&emsp; + Create Transit Gateway with ECMP and DNS support enabled <br>&emsp; + Attach VPC-A and VPC-B to Transit Gateway <br>&emsp; + Create a third VPC (10.2.0.0/16) and attach to TGW <br>&emsp; + Configure TGW route table to route traffic between all 3 VPCs <br>&emsp; + Test full mesh connectivity: VPC-A ↔ VPC-B ↔ VPC-C via TGW | 06/24/2026 | 06/24/2026 | <https://docs.aws.amazon.com/vpc/latest/tgw/> |
-| 5   | - **Practice:** Lambda automation with EventBridge <br>&emsp; + Write Lambda `StopDevInstances`: queries EC2 by tag (Env=dev), stops all instances <br>&emsp; + Write Lambda `StartDevInstances`: starts tagged dev instances <br>&emsp; + Create EventBridge Scheduled Rules: Stop at 20:00, Start at 08:00 weekdays <br>&emsp; + Grant Lambda role: ec2:StopInstances, ec2:StartInstances, ec2:DescribeInstances (scoped by tag) | 06/25/2026 | 06/25/2026 | <https://docs.aws.amazon.com/eventbridge/latest/userguide/> |
-| 6   | - **Practice:** Reactive Lambda automation <br>&emsp; + Write Lambda `CleanOldSnapshots`: deletes EBS snapshots older than 30 days <br>&emsp; + Trigger via EventBridge scheduled rule (weekly) <br>&emsp; + Write Lambda `NotifyOnBudgetAlert`: triggered by SNS from AWS Budgets alarm, sends formatted Slack webhook <br> - Review IAM least-privilege policies for all Lambda roles <br> - Document the full automation architecture | 06/26/2026 | 06/26/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Review production build requirements for the React frontend <br> - Study Amazon S3 static website hosting configuration <br> - Study Amazon CloudFront: distributions, origins, behaviors, caching, HTTPS, and error pages | 06/22/2026 | 06/22/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html> |
+| 3   | - **Practice:** Build and optimize the production bundle <br>&emsp; + Run production build (npm run build / vite build) <br>&emsp; + Analyze bundle size and identify large dependencies <br>&emsp; + Apply code splitting and lazy loading for route-based chunks <br>&emsp; + Minify JavaScript and CSS, enable gzip/brotli compression settings <br>&emsp; + Verify build output: index.html, assets/, correct file structure | 06/23/2026 | 06/23/2026 | <https://vitejs.dev/guide/build.html> |
+| 4   | - **Practice:** Deploy frontend to Amazon S3 <br>&emsp; + Create S3 bucket with the project naming convention <br>&emsp; + Disable public access block (to allow CloudFront access via OAC) <br>&emsp; + Upload production build files to S3 bucket <br>&emsp; + Verify files are correctly uploaded and accessible internally | 06/24/2026 | 06/24/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/> |
+| 5   | - **Practice:** Configure CloudFront Distribution <br>&emsp; + Create CloudFront distribution with S3 origin <br>&emsp; + Configure Origin Access Control (OAC) and update S3 bucket policy <br>&emsp; + Set default root object to index.html <br>&emsp; + Configure custom error response: 403/404 → /index.html (for SPA routing) <br>&emsp; + Enable HTTPS and configure cache behaviors | 06/25/2026 | 06/25/2026 | <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/> |
+| 6   | - **Practice:** Set up CloudWatch Dashboard <br>&emsp; + Create CloudWatch Dashboard for SyncQuiz monitoring <br>&emsp; + Add widgets: Lambda invocations and errors, API Gateway request count and latency, DynamoDB read/write capacity <br>&emsp; + Add CloudFront metrics: request count, error rate, cache hit ratio <br>&emsp; + Test the deployed website through CloudFront domain name <br>&emsp; + Verify SPA routing works correctly (no 404 on page refresh) | 06/26/2026 | 06/26/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/> |
 
 
 ### Week 10 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Built and optimized the React production bundle with code splitting and lazy loading applied.
 
-### Week 10 Achievements:
+* Successfully deployed the production frontend to Amazon S3.
 
-* Established VPC Peering between two VPCs with proper route table updates and security group rules.
+* Configured Amazon CloudFront Distribution with the S3 origin and Origin Access Control for secure delivery.
 
-* Configured Transit Gateway and connected three VPCs, enabling full mesh connectivity.
+* Updated the S3 bucket policy to restrict direct public access, allowing only CloudFront to serve content.
 
-* Automated EC2 start/stop scheduling for dev instances using Lambda and EventBridge — estimated cost saving from reduced idle hours.
+* Configured custom error responses for SPA routing support — no 404 errors on page refresh.
 
-* Automated EBS snapshot cleanup: Lambda deletes snapshots older than 30 days on a weekly schedule.
+* Created a CloudWatch Dashboard with key widgets for Lambda, API Gateway, DynamoDB, and CloudFront metrics.
 
-* Implemented budget alert Lambda that sends formatted Slack webhook notifications when cost thresholds are breached.
-
-* Applied least-privilege IAM policies to all Lambda execution roles, scoped by resource tags.
-
+* The deployed website was tested through CloudFront and confirmed to be fully functional.

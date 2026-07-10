@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 12 Worklog"
 date: 2026-07-06
 weight: 12
@@ -8,47 +8,33 @@ pre: " <b> 1.12. </b> "
 
 ### Week 12 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Perform final system testing across all key features in the production environment.
+* Review and validate AWS infrastructure components.
+* Finalize all technical and user documentation.
+* Prepare the final presentation, demo, and identify future improvement opportunities.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 07/06/2026 | 07/06/2026      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 07/07/2026 | 07/07/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 07/08/2026 | 07/08/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 07/09/2026 | 07/09/2026      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 07/10/2026 | 07/10/2026      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | ---- | ---------- | --------------- | ------------------ |
+| 2   | - Plan final testing checklist covering all core features <br> - Re-test authentication: signup, OTP verification, login, session persistence, and logout <br> - Re-test quiz management: create quiz, add questions, edit quiz, delete quiz <br> - Re-test room management: create room, join room with PIN, room state transitions | 07/06/2026 | 07/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Final system testing:** Real-time gameplay <br>&emsp; + Test complete game flow with multiple simultaneous Player sessions <br>&emsp; + Test WebSocket behavior with 5+ concurrent players: message delivery, latency, and ordering <br>&emsp; + Test answer submission, score update, and leaderboard accuracy under concurrent load <br>&emsp; + Verify final results page displays correct rankings and scores | 07/07/2026 | 07/07/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - **AWS infrastructure review:** <br>&emsp; + Verify CloudFront distribution: caching behavior, HTTPS, SPA routing, and response headers <br>&emsp; + Verify S3 bucket: OAC policy, no public access, correct static file structure <br>&emsp; + Review Cognito User Pool: token expiry, MFA settings if applicable <br>&emsp; + Review CloudWatch Dashboard: check metrics are populating correctly for all monitored services | 07/08/2026 | 07/08/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/> |
+| 5   | - **Documentation finalization:** <br>&emsp; + Review and finalize technical documentation: system architecture, API design, data models, IAM policies <br>&emsp; + Review and finalize user documentation: User Guide, FAQ section <br>&emsp; + Update Worklog entries for all 12 weeks <br>&emsp; + Prepare final presentation slides: problem statement, architecture, demo flow, key learnings | 07/09/2026 | 07/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - **Final preparation and project reflection:** <br>&emsp; + Rehearse the final demo end-to-end in the production environment <br>&emsp; + Identify and document remaining system limitations <br>&emsp; + Propose future improvements: advanced analytics, enhanced leaderboard, additional game modes, CI/CD pipeline <br>&emsp; + Finalize self-evaluation and internship reflection <br>&emsp; + Submit final internship report and all required documents | 07/10/2026 | 07/10/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 12 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Completed final system testing in the production environment — all core features including authentication, quiz management, room management, and real-time gameplay functioned correctly.
 
-* Successfully created and configured an AWS Free Tier account.
+* Tested WebSocket behavior with multiple simultaneous players — message delivery, score updates, and leaderboard accuracy were verified under concurrent load.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Reviewed and confirmed AWS infrastructure components: CloudFront, S3, Cognito, and CloudWatch are all correctly configured and operational.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Finalized all technical documentation including system architecture, API design, data models, and IAM policies.
 
-* Used AWS CLI to perform basic operations such as:
+* Finalized the User Guide and prepared the complete final presentation slides.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+* Identified remaining system limitations and proposed future improvements including advanced analytics, an improved leaderboard, additional game modes, and a CI/CD pipeline for automated deployment.
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
-
+* The SyncQuiz internship project was successfully completed and all required documents were submitted.
