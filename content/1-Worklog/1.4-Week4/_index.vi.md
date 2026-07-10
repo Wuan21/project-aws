@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Worklog Tuần 4"
 date: 2026-05-11
 weight: 4
@@ -7,31 +7,31 @@ pre: " <b> 1.4. </b> "
 ---
 ### Mục tiêu tuần 4:
 
-* Hiểu dịch vụ Amazon RDS và các tính năng nổi bật.
-* Triển khai Amazon RDS MySQL trong private subnet.
-* Kết nối ứng dụng Node.js với RDS và xác minh hoạt động database.
-* Thực hành backup tự động, manual snapshot và point-in-time restore.
+* Tìm hiểu về Amazon CloudWatch để giám sát log, metrics và trạng thái hệ thống.
+* Tìm hiểu về Amazon SQS và cơ chế hàng đợi tin nhắn.
+* Tìm hiểu về Amazon SNS và mô hình publish/subscribe.
+* So sánh vai trò của SQS và SNS trong kiến trúc hệ thống phân tán.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2   | - Tìm hiểu Amazon RDS: các engine hỗ trợ (MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, Aurora) <br> - Tìm hiểu các tùy chọn triển khai: Single-AZ, Multi-AZ, Read Replica <br> - Tìm hiểu giá RDS: loại instance, storage (gp3, io1), data transfer <br> - Tìm hiểu Parameter Group và Option Group | 11/05/2026 | 11/05/2026 | <https://docs.aws.amazon.com/rds/latest/userguide/> |
-| 3   | - **Thực hành:** Tạo RDS MySQL 8.0 <br>&emsp; + Tạo DB Subnet Group (private subnet trên 2 AZ) <br>&emsp; + Tạo RDS với Multi-AZ, storage gp3 <br>&emsp; + Cấu hình Security Group: cho phép MySQL port 3306 từ Security Group của EC2 <br>&emsp; + Bật automated backup (7 ngày lưu trữ) và maintenance window | 12/05/2026 | 12/05/2026 | <https://docs.aws.amazon.com/rds/latest/userguide/USER_CreateDBInstance.html> |
-| 4   | - **Thực hành:** Kết nối ứng dụng với RDS <br>&emsp; + SSH vào EC2, cài MySQL client <br>&emsp; + Kết nối đến RDS endpoint, tạo database và bảng <br>&emsp; + Cập nhật biến môi trường Node.js (DB_HOST, DB_NAME, DB_USER, DB_PASS) <br>&emsp; + Test thao tác CRUD từ app đến RDS <br> - Bật RDS Enhanced Monitoring và Performance Insights | 13/05/2026 | 13/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu chiến lược backup và khôi phục RDS <br> - **Thực hành:** Backup và Restore <br>&emsp; + Tạo manual DB snapshot <br>&emsp; + Chỉnh sửa dữ liệu để mô phỏng thay đổi <br>&emsp; + Khôi phục RDS từ snapshot sang instance mới <br>&emsp; + Kiểm tra tính nhất quán dữ liệu sau khi restore | 14/05/2026 | 14/05/2026 | <https://docs.aws.amazon.com/rds/latest/userguide/USER_RestoreFromSnapshot.html> |
-| 6   | - **Thực hành:** Test failover RDS Multi-AZ <br>&emsp; + Kích hoạt manual failover qua console <br>&emsp; + Đo thời gian failover (DNS propagation) <br>&emsp; + Xác minh ứng dụng tự kết nối lại <br> - Tạo Read Replica ở AZ khác <br> - Xem lại chi phí và tối ưu cài đặt storage autoscaling | 15/05/2026 | 15/05/2026 | <https://docs.aws.amazon.com/rds/latest/userguide/Concepts.MultiAZ.html> |
+| 2   | - Nghiên cứu Amazon CloudWatch: tổng quan và tính năng cốt lõi <br>&emsp; + CloudWatch Logs: xem và lọc log stream từ Lambda và các dịch vụ khác <br>&emsp; + CloudWatch Metrics: giám sát metric dịch vụ như Lambda invocations, errors và duration <br>&emsp; + CloudWatch Alarms: đặt cảnh báo dựa trên ngưỡng để thông báo tự động | 11/05/2026 | 11/05/2026 | <https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/> |
+| 3   | - **Thực hành:** Xem Lambda logs và tạo CloudWatch Dashboard <br>&emsp; + Trigger Lambda function và xem log thực thi trong CloudWatch Logs <br>&emsp; + Khám phá Log Group và Log Stream của Lambda function <br>&emsp; + Tạo CloudWatch Dashboard cơ bản với widget cho Lambda metrics <br>&emsp; + Thêm alarm cho số lần lỗi Lambda | 12/05/2026 | 12/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Nghiên cứu Amazon SQS và cơ chế hàng đợi tin nhắn <br>&emsp; + SQS Standard Queue so với FIFO Queue: khác biệt về thứ tự và đảm bảo phân phối <br>&emsp; + Visibility timeout: ngăn xử lý trùng lặp message đang trong xử lý <br>&emsp; + Dead Letter Queue (DLQ): xử lý message thất bại sau số lần thử tối đa <br>&emsp; + Long polling: giảm API call trống khi hàng đợi rảnh | 13/05/2026 | 13/05/2026 | <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/> |
+| 5   | - **Thực hành:** Tạo SQS queue và kiểm thử gửi/nhận message <br>&emsp; + Tạo SQS Standard Queue <br>&emsp; + Gửi message bằng AWS Console và AWS CLI <br>&emsp; + Nhận và xóa message thủ công <br>&emsp; + Tạo Dead Letter Queue và cấu hình redrive policy (maxReceiveCount: 3) | 14/05/2026 | 14/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Nghiên cứu Amazon SNS và mô hình publish/subscribe <br>&emsp; + Topic và subscription: email, SMS, HTTP/S, Lambda và SQS <br>&emsp; + Message filter policy: định tuyến message đến subscriber cụ thể <br> - **Thực hành:** Tạo topic và gửi thông báo qua SNS <br>&emsp; + Tạo SNS Standard Topic <br>&emsp; + Thêm email subscription và xác nhận <br>&emsp; + Publish test message và xác minh phân phối <br> - So sánh SQS và SNS: mục đích, mô hình phân phối và vai trò trong hệ thống phân tán | 15/05/2026 | 15/05/2026 | <https://docs.aws.amazon.com/sns/latest/dg/> |
 
 
 ### Kết quả đạt được tuần 4:
 
-* Hiểu Amazon RDS: các engine, Multi-AZ, Read Replica và automated backup.
+* Tìm hiểu Amazon CloudWatch và hiểu cách giám sát log và metrics cho các dịch vụ AWS như Lambda qua CloudWatch Logs và CloudWatch Metrics.
 
-* Triển khai RDS MySQL 8.0 trong private subnet với Multi-AZ đảm bảo high availability.
+* Thực hành thành công xem Lambda execution log trong CloudWatch và tạo CloudWatch Dashboard cơ bản với alarm giám sát lỗi Lambda.
 
-* Bảo mật truy cập database bằng Security Group chỉ cho phép từ application tier EC2.
+* Nghiên cứu Amazon SQS và hiểu Standard Queue so với FIFO Queue, visibility timeout, Dead Letter Queue và long polling.
 
-* Kết nối ứng dụng Node.js với RDS, xác minh đầy đủ các thao tác CRUD.
+* Thực hành tạo SQS queue, gửi và nhận message bằng AWS Console và CLI, cấu hình Dead Letter Queue với redrive policy.
 
-* Tạo manual snapshot, restore database và xác minh tính toàn vẹn dữ liệu.
+* Tìm hiểu Amazon SNS và mô hình publish/subscribe, thực hành tạo SNS topic với email subscription và xác minh phân phối thông báo.
 
-* Trigger và đo thời gian failover Multi-AZ, xác nhận ứng dụng tự kết nối lại.
+* So sánh SQS và SNS, hiểu vai trò phù hợp của từng dịch vụ trong xử lý message bất đồng bộ và phân phối thông báo trong kiến trúc hệ thống phân tán.

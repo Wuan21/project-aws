@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 3 Worklog"
 date: 2026-05-04
 weight: 3
@@ -7,31 +7,29 @@ pre: " <b> 1.3. </b> "
 ---
 ### Week 3 Objectives:
 
-* Manage EC2 Linux and Windows instances effectively in the VPC.
-* Deploy a Node.js web application on an EC2 instance.
-* Understand AMI creation, Launch Templates, and Elastic IP management.
-* Configure Security Groups and access controls for web applications.
+* Learn about Amazon Cognito and its role in user authentication.
+* Learn about Amazon API Gateway and how to build REST APIs on AWS.
+* Learn about API Gateway WebSocket API for real-time communication.
+* Analyze how Cognito, API Gateway, and WebSocket API apply to the SyncQuiz project.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Study EC2 advanced features: AMI lifecycle, Launch Templates, Instance Metadata Service <br> - Review Windows EC2: RDP connection, key-pair password decryption <br> - Study Placement Groups (cluster, spread, partition) | 05/04/2026 | 05/04/2026 | <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/> |
-| 3   | - **Practice:** Launch and manage EC2 instances <br>&emsp; + Launch Amazon Linux 2 instance in public subnet <br>&emsp; + Launch Windows Server 2022 instance, retrieve password, connect via RDP <br>&emsp; + Compare instance management between Linux and Windows <br>&emsp; + Create custom AMI from configured Linux instance | 05/05/2026 | 05/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice:** Deploy Node.js application on Linux EC2 <br>&emsp; + Install Node.js (v18 LTS) via nvm <br>&emsp; + Clone sample Express.js application <br>&emsp; + Configure environment variables (DB host, port, secrets) <br>&emsp; + Install PM2 process manager and start app <br>&emsp; + Configure Security Group to allow HTTP port 3000 | 05/06/2026 | 05/06/2026 | <https://nodejs.org/en/docs> |
-| 5   | - Configure Nginx as a reverse proxy for Node.js app <br>&emsp; + Install and configure Nginx <br>&emsp; + Proxy HTTP port 80 to Node.js port 3000 <br>&emsp; + Configure Security Group: allow HTTP (80) and HTTPS (443) <br> - Set up PM2 to restart app on reboot <br> - Allocate Elastic IP and associate with instance | 05/07/2026 | 05/07/2026 | <https://www.nginx.com/resources/wiki/> |
-| 6   | - **Practice:** Create Launch Template for repeatable EC2 deployments <br>&emsp; + Configure instance type, AMI, subnet, Security Group, user data script <br>&emsp; + User data: auto-install Node.js and start app on boot <br> - Test application end-to-end via Elastic IP and Nginx <br> - Document deployment steps | 05/08/2026 | 05/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Study Amazon Cognito: overview, purpose, and key components <br>&emsp; + User Pools: user registration, login, and identity management <br>&emsp; + App Clients: application-level access configuration <br>&emsp; + JWT tokens: ID token, access token, and refresh token <br> - Understand the Cognito signup and login flow | 05/04/2026 | 05/04/2026 | <https://docs.aws.amazon.com/cognito/latest/developerguide/> |
+| 3   | - Study Amazon API Gateway: overview and how to build REST APIs on AWS <br>&emsp; + Resources and routes, HTTP methods, and request/response mapping <br>&emsp; + Lambda proxy integration: connecting API Gateway to Lambda functions <br>&emsp; + Authorizers: using Cognito JWT Authorizer to protect API routes <br>&emsp; + CORS configuration for frontend communication | 05/05/2026 | 05/05/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/> |
+| 4   | - **Practice:** Connect API Gateway with AWS Lambda <br>&emsp; + Create a REST API in API Gateway <br>&emsp; + Create routes and integrate with Lambda functions <br>&emsp; + Add Cognito JWT Authorizer to protect a protected route <br>&emsp; + Test using Postman or API Gateway console | 05/06/2026 | 05/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Study API Gateway WebSocket API for real-time applications <br>&emsp; + Understand the WebSocket connection lifecycle: $connect, $disconnect, $default routes <br>&emsp; + Learn how clients connect, send messages, and receive broadcast messages <br>&emsp; + Study how Lambda handles WebSocket messages and manages connection IDs | 05/07/2026 | 05/07/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html> |
+| 6   | - Analyze how Cognito, API Gateway, and WebSocket API can be applied to the SyncQuiz project <br>&emsp; + Cognito: authenticate hosts and manage user sessions <br>&emsp; + REST API: quiz CRUD, room creation, and player joining operations <br>&emsp; + WebSocket API: real-time game communication, player lists, and live leaderboards <br> - Take design notes for the SyncQuiz backend architecture | 05/08/2026 | 05/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 3 Achievements:
 
-* Successfully launched and managed both Linux (Amazon Linux 2) and Windows Server (2022) EC2 instances.
+* Learned Amazon Cognito and understood User Pools, App Clients, and the JWT token-based authentication flow.
 
-* Connected to Linux via SSH and Windows via RDP after decrypting the administrator password.
+* Studied Amazon API Gateway and understood how to build REST APIs with Lambda integration and Cognito JWT Authorizer.
 
-* Deployed a Node.js (Express.js) application on EC2 with PM2 as the process manager.
+* Successfully practiced connecting API Gateway with a Lambda function and tested a protected route using Cognito.
 
-* Configured Nginx as a reverse proxy to expose the application on port 80.
+* Learned about API Gateway WebSocket API and understood the connection lifecycle, message routing, and how Lambda handles real-time messages.
 
-* Created a custom AMI and a Launch Template with user data for automated deployments.
-
-* Associated an Elastic IP to provide a stable endpoint for the web application.
+* Analyzed how Cognito, API Gateway REST API, and WebSocket API can be applied to the SyncQuiz project: Cognito for user authentication, REST API for quiz and room management, and WebSocket API for real-time gameplay communication and live leaderboards.

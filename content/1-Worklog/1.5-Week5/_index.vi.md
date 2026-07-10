@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Worklog Tuần 5"
 date: 2026-05-18
 weight: 5
@@ -7,31 +7,31 @@ pre: " <b> 1.5. </b> "
 ---
 ### Mục tiêu tuần 5:
 
-* Triển khai Application Load Balancer để phân phối traffic đến nhiều EC2 instance.
-* Cấu hình Auto Scaling Group với chính sách mở rộng động cho tầng ứng dụng.
-* Thiết lập AWS Budgets và Cost Explorer để theo dõi và kiểm soát chi phí cloud.
-* Xác minh high availability qua test lỗi instance và tự động thay thế.
+* Thực hành kết hợp các dịch vụ AWS đã học trong các tuần trước.
+* Đánh giá cách tích hợp các dịch vụ AWS trong kiến trúc SyncQuiz.
+* Thử nghiệm WebSocket API cho các tính năng giao tiếp thời gian thực.
+* Chuẩn bị ý tưởng kiến trúc ban đầu cho hệ thống quiz thời gian thực SyncQuiz.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2   | - Tìm hiểu Elastic Load Balancing: so sánh ALB, NLB và CLB <br> - Tìm hiểu thành phần ALB: listener, rules, target group, health check <br> - Tìm hiểu Auto Scaling Group: desired/min/max capacity, chính sách scaling (target tracking, step scaling, scheduled) | 18/05/2026 | 18/05/2026 | <https://docs.aws.amazon.com/elasticloadbalancing/> |
-| 3   | - **Thực hành:** Tạo Application Load Balancer <br>&emsp; + Tạo Target Group (port 3000, HTTP health check trên /health) <br>&emsp; + Tạo ALB trong public subnet, cấu hình listener port 80 <br>&emsp; + Đăng ký EC2 instance vào target group <br>&emsp; + Kiểm tra traffic cân bằng qua ALB DNS name | 19/05/2026 | 19/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành:** Tạo Auto Scaling Group <br>&emsp; + Tạo Launch Template với user data triển khai app <br>&emsp; + Cấu hình ASG: min 2, desired 2, max 6 instance trên 2 AZ <br>&emsp; + Gắn ASG vào ALB Target Group <br>&emsp; + Thêm Target Tracking Scaling policy (ngưỡng CPU 60%) <br>&emsp; + Bật Scale-In protection cho instance mới | 20/05/2026 | 20/05/2026 | <https://docs.aws.amazon.com/autoscaling/ec2/userguide/> |
-| 5   | - **Thực hành:** AWS Budgets và Cost Management <br>&emsp; + Tạo cost budget theo tháng với cảnh báo email tại 80% và 100% <br>&emsp; + Tạo usage budget cho số giờ EC2 <br>&emsp; + Khám phá Cost Explorer: lọc theo service, tag, region <br>&emsp; + Bật Cost Allocation Tags theo dõi tài nguyên | 21/05/2026 | 21/05/2026 | <https://docs.aws.amazon.com/cost-management/> |
-| 6   | - **Kiểm tra tải và khả năng phục hồi:** <br>&emsp; + Dùng Apache Bench (ab) tạo tải để trigger scale-out <br>&emsp; + Quan sát activity log ASG: instance đang được khởi tạo <br>&emsp; + Xóa instance thủ công, xác minh ASG thay thế tự động <br>&emsp; + Xác minh ALB health check loại bỏ instance không khỏe <br> - Xem lại lịch sử scaling và CloudWatch metrics | 22/05/2026 | 22/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Ôn tập và củng cố kiến thức tất cả dịch vụ AWS đã học từ Tuần 1 đến Tuần 4 <br> - Xây dựng luồng backend serverless cơ bản bằng Lambda và API Gateway <br>&emsp; + Tạo nhiều Lambda function cho các nghiệp vụ khác nhau <br>&emsp; + Tạo API Gateway route và tích hợp từng route với Lambda function tương ứng <br>&emsp; + Kiểm thử end-to-end: gửi HTTP request → API Gateway → Lambda → trả về response | 18/05/2026 | 18/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Cấu hình Cognito để quản lý xác thực người dùng <br>&emsp; + Tạo Cognito User Pool với đăng nhập bằng email <br>&emsp; + Tạo App Client và cấu hình cài đặt token <br>&emsp; + Kiểm thử luồng đăng ký và đăng nhập bằng Cognito console <br>&emsp; + Kiểm thử cách dịch vụ frontend/backend dùng Cognito token để gọi API được bảo vệ | 19/05/2026 | 19/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Thử nghiệm WebSocket API cho tính năng thời gian thực <br>&emsp; + Tạo WebSocket API trong API Gateway với $connect, $disconnect và $default route <br>&emsp; + Tạo Lambda function xử lý từng WebSocket route <br>&emsp; + Kiểm thử kết nối WebSocket bằng công cụ WebSocket client <br>&emsp; + Gửi message và xác minh Lambda nhận và phản hồi WebSocket event | 20/05/2026 | 20/05/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html> |
+| 5   | - Giám sát log và lỗi bằng CloudWatch <br>&emsp; + Xem CloudWatch Logs cho Lambda function được gọi trong kiểm thử tích hợp <br>&emsp; + Xác định và giải quyết lỗi phát hiện trong kiểm thử <br>&emsp; + Xem CloudWatch Metrics cho số request API Gateway và tỷ lệ lỗi Lambda <br>&emsp; + Thêm câu lệnh log vào Lambda để cải thiện khả năng quan sát | 21/05/2026 | 21/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Đánh giá cách kết hợp dịch vụ AWS trong kiến trúc SyncQuiz <br>&emsp; + Ánh xạ từng tính năng SyncQuiz với dịch vụ AWS phù hợp <br>&emsp; + Phác thảo sơ đồ kiến trúc high-level ban đầu cho SyncQuiz <br>&emsp; + Xác định các câu hỏi kỹ thuật và thách thức cần giải quyết trong giai đoạn dự án <br>&emsp; + Chuẩn bị ý tưởng kiến trúc ban đầu và trình bày dưới dạng SyncQuiz Project Proposal | 22/05/2026 | 22/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 5:
 
-* Triển khai Application Load Balancer với target group, health check và listener rule.
+* Thực hành tích hợp các dịch vụ AWS đã học trong các tuần trước để hiểu rõ hơn cách chúng hoạt động trong hệ thống thực tế.
 
-* Tạo Auto Scaling Group với min/desired/max capacity trên 2 Availability Zone.
+* Xây dựng luồng backend serverless cơ bản bằng Lambda và API Gateway, kiểm thử thành công định tuyến HTTP request đến Lambda function.
 
-* Cấu hình Target Tracking scaling dựa trên CPU — scale-out trigger thành công khi có tải cao.
+* Cấu hình Cognito User Pool và App Client, kiểm thử luồng đăng ký và đăng nhập, xác minh cách Cognito token bảo vệ API route.
 
-* Xác minh high availability: xóa instance và ASG tự động khởi tạo thay thế.
+* Thử nghiệm API Gateway WebSocket API, tạo kết nối WebSocket hoạt động và xác minh Lambda xử lý đúng WebSocket message.
 
-* Thiết lập AWS Budgets với cảnh báo chi phí và usage để chủ động quản lý ngân sách.
+* Giám sát hành vi Lambda và API Gateway bằng CloudWatch Logs và CloudWatch Metrics, xác định và giải quyết lỗi trong kiểm thử tích hợp.
 
-* Sử dụng Cost Explorer phân tích chi phí theo service và áp dụng cost allocation tag cho theo dõi chi tiết.
+* Đánh giá cách áp dụng Cognito, API Gateway, Lambda, WebSocket API và CloudWatch vào dự án SyncQuiz, và chuẩn bị ý tưởng kiến trúc ban đầu cho hệ thống quiz thời gian thực.

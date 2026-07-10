@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 1 Worklog"
 date: 2026-04-20
 weight: 1
@@ -7,31 +7,31 @@ pre: " <b> 1.1. </b> "
 ---
 ### Week 1 Objectives:
 
-* Get acquainted with FCAJ members and internship unit regulations.
-* Understand what AWS is and explore its major service categories.
-* Create an AWS Free Tier account and configure AWS CLI.
-* Practice launching and managing basic EC2 instances.
+* Complete the internship orientation and understand the program structure.
+* Create and verify an AWS account for learning and hands-on practice.
+* Become familiar with the AWS Management Console and its navigation.
+* Prepare the learning environment and tools for the following weeks.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Get acquainted with FCAJ members <br> - Read and note internship rules and regulations <br> - Overview of AWS: history, global infrastructure, Shared Responsibility Model | 04/20/2026 | 04/20/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3   | - Study AWS service categories in depth: <br>&emsp; + Compute: EC2, Lambda, ECS <br>&emsp; + Storage: S3, EBS, EFS, Glacier <br>&emsp; + Networking: VPC, CloudFront, Route 53 <br>&emsp; + Database: RDS, DynamoDB, ElastiCache <br>&emsp; + Security: IAM, KMS, CloudTrail | 04/21/2026 | 04/21/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Explore the AWS Management Console <br> - **Practice:** <br>&emsp; + Install & configure AWS CLI v2 <br>&emsp; + Configure credentials (Access Key, Secret Key, Region, Output format) <br>&emsp; + Run CLI commands: list regions, describe instances, list S3 buckets | 04/22/2026 | 04/22/2026 | <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html> |
-| 5   | - Study EC2 fundamentals: <br>&emsp; + Instance types and families (t3, m5, c5, r5) <br>&emsp; + Amazon Machine Images (AMI) – public, community, private <br>&emsp; + EBS volumes (gp3, io1, st1) and snapshots <br>&emsp; + Key pairs and SSH connection methods <br>&emsp; + Elastic IP and public IP lifecycle | 04/23/2026 | 04/23/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch Amazon Linux 2 EC2 instance (t3.micro) <br>&emsp; + Configure Security Group (allow SSH port 22) <br>&emsp; + Connect to instance via SSH using key pair <br>&emsp; + Attach and mount an EBS volume <br>&emsp; + Allocate and associate an Elastic IP address | 04/24/2026 | 04/24/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Attend the internship orientation session <br> - Learn about office rules, working regulations, and internship requirements <br> - Understand the goals and structure of the First Cloud AI Journey program | 04/20/2026 | 04/20/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - Create an AWS account for learning and hands-on practice <br> - Verify access to the AWS Management Console <br> - Explore the account settings, billing dashboard, and service quotas | 04/21/2026 | 04/21/2026 | <https://aws.amazon.com/free/> |
+| 4   | - Become familiar with the AWS Management Console interface <br> - Study the AWS global infrastructure: Regions, Availability Zones, and Edge Locations <br> - Learn the AWS Shared Responsibility Model for cloud security | 04/22/2026 | 04/22/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Study the major AWS service categories: Compute, Storage, Networking, Database, and Security <br> - Understand which services are relevant to the SyncQuiz project <br> - Take notes on services to be practiced in the following weeks | 04/23/2026 | 04/23/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6   | - Prepare the learning environment: install AWS CLI, configure editor and tools <br> - Organize study notes and documentation templates for the internship report <br> - Review the weekly plan and set learning goals for Week 2 | 04/24/2026 | 04/24/2026 | <https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html> |
 
 
 ### Week 1 Achievements:
 
-* Understood AWS's purpose, global infrastructure (Regions, Availability Zones, Edge Locations), and the Shared Responsibility Model.
+* Completed the internship orientation and understood the office regulations and working process of the First Cloud AI Journey program.
 
-* Learned the major AWS service categories: Compute, Storage, Networking, Database, and Security.
+* Created and verified the AWS account, gaining access to the AWS Management Console and the Free Tier services.
 
-* Successfully created and configured an AWS Free Tier account.
+* Became familiar with the AWS Console interface, account settings, and basic navigation across major service categories.
 
-* Installed AWS CLI v2 and configured Access Key, Secret Key, default Region, and output format.
+* Studied the AWS global infrastructure and the Shared Responsibility Model, establishing a foundation for cloud learning.
 
-* Performed CLI operations: listed regions, described EC2 instances, listed S3 buckets, and managed key pairs.
+* Prepared the local development environment and organized documentation tools for the internship report.
 
-* Launched an Amazon Linux 2 EC2 instance, connected via SSH, attached an EBS volume, and associated an Elastic IP.
+* The AWS account was fully set up and ready for hands-on practice starting from Week 2.

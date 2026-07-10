@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Worklog Tuần 3"
 date: 2026-05-04
 weight: 3
@@ -7,31 +7,29 @@ pre: " <b> 1.3. </b> "
 ---
 ### Mục tiêu tuần 3:
 
-* Quản lý EC2 Linux và Windows instance hiệu quả trong VPC.
-* Triển khai ứng dụng web Node.js trên EC2 instance.
-* Hiểu về tạo AMI, Launch Template và quản lý Elastic IP.
-* Cấu hình Security Group và kiểm soát truy cập cho ứng dụng web.
+* Tìm hiểu về Amazon Cognito và vai trò trong xác thực người dùng.
+* Tìm hiểu về Amazon API Gateway và cách xây dựng REST API trên AWS.
+* Tìm hiểu về API Gateway WebSocket API cho giao tiếp thời gian thực.
+* Phân tích cách áp dụng Cognito, API Gateway và WebSocket API vào dự án SyncQuiz.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --------- | ------------ | --------------- | -------------- |
-| 2   | - Tìm hiểu nâng cao về EC2: AMI lifecycle, Launch Template, Instance Metadata Service <br> - Ôn tập EC2 Windows: kết nối RDP, giải mã mật khẩu admin bằng key pair <br> - Tìm hiểu Placement Group (cluster, spread, partition) | 04/05/2026 | 04/05/2026 | <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/> |
-| 3   | - **Thực hành:** Khởi tạo và quản lý EC2 nhiều loại <br>&emsp; + Khởi tạo Amazon Linux 2 trong public subnet <br>&emsp; + Khởi tạo Windows Server 2022, lấy mật khẩu, kết nối RDP <br>&emsp; + So sánh quản lý instance giữa Linux và Windows <br>&emsp; + Tạo AMI tùy chỉnh từ instance Linux đã cấu hình | 05/05/2026 | 05/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Thực hành:** Triển khai ứng dụng Node.js trên EC2 Linux <br>&emsp; + Cài Node.js (v18 LTS) qua nvm <br>&emsp; + Clone ứng dụng Express.js mẫu <br>&emsp; + Cấu hình biến môi trường (DB host, port, secrets) <br>&emsp; + Cài PM2 process manager và khởi động app <br>&emsp; + Cấu hình Security Group cho phép HTTP port 3000 | 06/05/2026 | 06/05/2026 | <https://nodejs.org/en/docs> |
-| 5   | - Cấu hình Nginx làm reverse proxy cho Node.js: <br>&emsp; + Cài đặt và cấu hình Nginx <br>&emsp; + Proxy HTTP port 80 đến Node.js port 3000 <br>&emsp; + Cấu hình Security Group: cho phép HTTP (80) và HTTPS (443) <br> - Cấu hình PM2 tự khởi động lại app khi reboot <br> - Cấp phát Elastic IP và gắn vào instance | 07/05/2026 | 07/05/2026 | <https://www.nginx.com/resources/wiki/> |
-| 6   | - **Thực hành:** Tạo Launch Template cho triển khai EC2 lặp lại <br>&emsp; + Cấu hình instance type, AMI, subnet, Security Group, user data script <br>&emsp; + User data: tự động cài Node.js và khởi động app khi boot <br> - Test ứng dụng end-to-end qua Elastic IP và Nginx <br> - Ghi lại tài liệu các bước triển khai | 08/05/2026 | 08/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Nghiên cứu Amazon Cognito: tổng quan, mục đích và các thành phần chính <br>&emsp; + User Pool: đăng ký, đăng nhập người dùng và quản lý danh tính <br>&emsp; + App Client: cấu hình quyền truy cập cấp ứng dụng <br>&emsp; + JWT token: ID token, access token và refresh token <br> - Hiểu luồng đăng ký và đăng nhập Cognito | 04/05/2026 | 04/05/2026 | <https://docs.aws.amazon.com/cognito/latest/developerguide/> |
+| 3   | - Nghiên cứu Amazon API Gateway: tổng quan và cách xây dựng REST API trên AWS <br>&emsp; + Resource và route, HTTP method, mapping request/response <br>&emsp; + Lambda proxy integration: kết nối API Gateway với Lambda function <br>&emsp; + Authorizer: dùng Cognito JWT Authorizer để bảo vệ route API <br>&emsp; + Cấu hình CORS cho giao tiếp với frontend | 05/05/2026 | 05/05/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/> |
+| 4   | - **Thực hành:** Kết nối API Gateway với AWS Lambda <br>&emsp; + Tạo REST API trong API Gateway <br>&emsp; + Tạo route và tích hợp với Lambda function <br>&emsp; + Thêm Cognito JWT Authorizer để bảo vệ route nhạy cảm <br>&emsp; + Kiểm thử bằng Postman hoặc API Gateway console | 06/05/2026 | 06/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5   | - Nghiên cứu API Gateway WebSocket API cho ứng dụng thời gian thực <br>&emsp; + Hiểu vòng đời kết nối WebSocket: $connect, $disconnect, $default route <br>&emsp; + Tìm hiểu cách client kết nối, gửi message và nhận broadcast message <br>&emsp; + Nghiên cứu cách Lambda xử lý WebSocket message và quản lý connection ID | 07/05/2026 | 07/05/2026 | <https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api.html> |
+| 6   | - Phân tích cách áp dụng Cognito, API Gateway và WebSocket API vào dự án SyncQuiz <br>&emsp; + Cognito: xác thực host và quản lý session người dùng <br>&emsp; + REST API: CRUD quiz, tạo phòng và thao tác người chơi tham gia <br>&emsp; + WebSocket API: giao tiếp game thời gian thực, danh sách người chơi và bảng xếp hạng trực tiếp <br> - Ghi chú thiết kế cho kiến trúc backend SyncQuiz | 08/05/2026 | 08/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Kết quả đạt được tuần 3:
 
-* Khởi tạo và quản lý thành công EC2 Linux (Amazon Linux 2) và Windows Server (2022).
+* Tìm hiểu Amazon Cognito và hiểu User Pool, App Client và luồng xác thực dựa trên JWT token.
 
-* Kết nối Linux qua SSH và Windows qua RDP sau khi giải mã mật khẩu administrator.
+* Nghiên cứu Amazon API Gateway và hiểu cách xây dựng REST API tích hợp Lambda và Cognito JWT Authorizer.
 
-* Triển khai ứng dụng Node.js (Express.js) trên EC2 với PM2 làm process manager.
+* Thực hành thành công kết nối API Gateway với Lambda function và kiểm thử route được bảo vệ bằng Cognito.
 
-* Cấu hình Nginx làm reverse proxy, expose ứng dụng qua port 80.
+* Tìm hiểu API Gateway WebSocket API và hiểu vòng đời kết nối, định tuyến message và cách Lambda xử lý message thời gian thực.
 
-* Tạo AMI tùy chỉnh và Launch Template với user data để tự động hóa triển khai.
-
-* Gắn Elastic IP để đảm bảo endpoint ổn định cho ứng dụng web.
+* Phân tích cách áp dụng Cognito, REST API và WebSocket API vào dự án SyncQuiz: Cognito để xác thực người dùng, REST API để quản lý quiz và phòng chơi, WebSocket API để giao tiếp gameplay thời gian thực và bảng xếp hạng trực tiếp.

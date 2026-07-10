@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Week 2 Worklog"
 date: 2026-04-27
 weight: 2
@@ -7,31 +7,31 @@ pre: " <b> 1.2. </b> "
 ---
 ### Week 2 Objectives:
 
-* Understand VPC architecture concepts: CIDR, subnets, routing, and gateways.
-* Design and deploy a complete VPC with public and private subnets across multiple AZs.
-* Configure Security Groups, NACLs, Internet Gateway, and NAT Gateway.
-* Verify inter-subnet connectivity and internet access from instances.
+* Learn the overview of Amazon EC2 and its role as a virtual server in the cloud.
+* Learn about Amazon VPC and its core networking components.
+* Learn about AWS Lambda and the serverless computing model.
+* Compare EC2 and Lambda across different use cases.
 
 ### Tasks to be carried out this week:
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | ---- | ---------- | --------------- | ------------------ |
-| 2   | - Study VPC fundamentals: CIDR blocks, IPv4/IPv6 addressing <br> - Understand subnet types (public vs private), route tables, and availability zones <br> - Review VPC default vs custom VPC differences | 04/27/2026 | 04/27/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/> |
-| 3   | - **Practice:** Create a custom VPC (10.0.0.0/16) <br>&emsp; + Create 2 public subnets in different AZs (10.0.1.0/24, 10.0.2.0/24) <br>&emsp; + Create 2 private subnets in different AZs (10.0.3.0/24, 10.0.4.0/24) <br>&emsp; + Attach an Internet Gateway to the VPC <br>&emsp; + Configure public route tables to route 0.0.0.0/0 to IGW | 04/28/2026 | 04/28/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - **Practice:** Configure outbound internet for private subnets <br>&emsp; + Create a NAT Gateway in a public subnet with an Elastic IP <br>&emsp; + Update private route table to route 0.0.0.0/0 to NAT Gateway <br>&emsp; + Configure Security Groups: allow HTTP/HTTPS from ALB, SSH from bastion host <br>&emsp; + Configure Network ACLs for subnet-level protection | 04/29/2026 | 04/29/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html> |
-| 5   | - Deploy a bastion host (EC2) in the public subnet <br> - Launch an EC2 instance in the private subnet <br> - Verify SSH connectivity: local → bastion → private instance <br> - Test outbound internet access from private instance through NAT Gateway | 04/30/2026 | 04/30/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - Review and finalize VPC architecture diagram <br> - **Practice:** Enable VPC Flow Logs to CloudWatch Logs <br>&emsp; + Create Flow Log for the VPC <br>&emsp; + Query flow logs to analyze traffic patterns <br> - Document the full VPC design | 05/01/2026 | 05/01/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html> |
+| 2   | - Study Amazon EC2: concept, purpose, and role as a virtual server in the cloud <br> - Learn EC2 instance types and families (t3, m5, c5, r5) <br> - Understand Amazon Machine Images (AMI) and how they are used to launch instances | 04/27/2026 | 04/27/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3   | - **Practice:** Create and configure a basic EC2 instance <br>&emsp; + Launch an Amazon Linux 2 instance (t3.micro) <br>&emsp; + Configure Security Group to allow SSH access <br>&emsp; + Connect to the instance via SSH using a key pair <br>&emsp; + Explore instance settings: instance type, storage, networking, and tags | 04/28/2026 | 04/28/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4   | - Study Amazon VPC and its core components: <br>&emsp; + Subnets: public and private subnets <br>&emsp; + Route Tables: routing traffic within and outside the VPC <br>&emsp; + Internet Gateway: enabling internet access for public subnets <br>&emsp; + Security Groups and Network ACLs: controlling inbound and outbound traffic | 04/29/2026 | 04/29/2026 | <https://docs.aws.amazon.com/vpc/latest/userguide/> |
+| 5   | - Understand how VPC helps isolate and manage networking resources in AWS <br> - Study AWS Lambda: concept, execution model, triggers, and the serverless computing model <br> - Learn how Lambda differs from EC2 in terms of infrastructure management and billing | 04/30/2026 | 04/30/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/> |
+| 6   | - **Practice:** Create a simple Lambda function <br>&emsp; + Create a Lambda function using the Python or Node.js runtime <br>&emsp; + Write a basic handler that returns a response <br>&emsp; + Test the function using the Lambda console test event <br>&emsp; + Compare EC2 and Lambda: use cases, cost model, and management overhead | 05/01/2026 | 05/01/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
 
 ### Week 2 Achievements:
 
-* Designed and deployed a production-style VPC with public and private subnets across two Availability Zones.
+* Gained a solid understanding of Amazon EC2 as a virtual server service, including instance types, AMIs, and key configuration options.
 
-* Configured Internet Gateway and NAT Gateway for appropriate inbound and outbound internet access.
+* Successfully created and configured a basic EC2 instance, connected via SSH, and explored its networking and storage settings.
 
-* Secured resources using Security Groups (instance-level) and Network ACLs (subnet-level).
+* Learned about Amazon VPC and its core components: subnets, route tables, internet gateways, and security groups, understanding how they isolate and manage cloud networking.
 
-* Deployed a bastion host and successfully accessed a private EC2 instance via SSH jump.
+* Studied AWS Lambda and the serverless computing model, learning how Lambda eliminates the need to manage server infrastructure.
 
-* Enabled and queried VPC Flow Logs in CloudWatch to analyze network traffic.
+* Created a simple Lambda function and tested it in the AWS Console.
 
-* Verified complete connectivity: public subnet to internet, private subnet via NAT, and internal subnets.
+* Compared EC2 and Lambda, understanding the appropriate use cases for each compute service.
