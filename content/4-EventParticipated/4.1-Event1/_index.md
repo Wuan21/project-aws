@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Event 1"
 date: 2026-04-20
 weight: 1
@@ -6,32 +6,26 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
-
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# Summary Report: “AWS Event (09/05/2026)”
 
 ### Event Objectives
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- Share practical insights on learning effectively and applying AI (especially prompt engineering) in real work.
+- Discuss essential skills for freshers in the AI era, and introduce a working method/framework (BMAD).
+- Experience a prompt-optimization demo and join an interactive discussion with attendees.
 
 ### Speakers
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- Long: “How to Get Addicted to Learning Like You’re Addicted to Social Media”
+- Thinh: “Automated Prompt Engineering”
+- Khang: “Why Haven’t You Started Working Yet?” & “AI-Ready Fresher”
+- Thu: “BMAD” overview (benefits & how to use)
 
 ### Key Highlights
 
 #### Identifying the drawbacks of legacy application architecture
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+The event included 4 talk segments in order: Long → Thinh → Khang → Thu.
 
 #### Transitioning to modern application architecture – Microservices
 
@@ -121,7 +115,11 @@ Attending the **“GenAI-powered App-DB Modernization”** workshop was extremel
 - AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
 
 #### Some event photos
-*Add your event photos here*  
+![Event 1](/project-aws/images/events/event1-1.jpg)
+![Event 2](/project-aws/images/events/event1-2.jpg)
+![Event 3](/project-aws/images/events/event1-3.jpg)
+![Event 4](/project-aws/images/events/event1-4.jpg)
+![Event 5](/project-aws/images/events/event1-5.jpg)
+![Event 6](/project-aws/images/events/event1-6.jpg)
 
 > Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
-
