@@ -1,9 +1,11 @@
 ---
-title: "Tuần 10: Deploy S3, CloudFront và giám sát hệ thống"
+title: "Tuần 10"
 date: 2026-06-22
 weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
+menuTitle: "Tuần 10"
+linkTitle: "Tuần 10"
 ---
 
 ### Mục tiêu tuần 10:

@@ -1,9 +1,11 @@
 ---
-title: "Tuần 3: Tìm hiểu Cognito, API Gateway và WebSocket API"
+title: "Tuần 3"
 date: 2026-05-04
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
+menuTitle: "Tuần 3"
+linkTitle: "Tuần 3"
 ---
 ### Mục tiêu tuần 3:
 

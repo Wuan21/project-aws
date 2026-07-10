@@ -1,9 +1,11 @@
 ---
-title: "Tuần 8: Host View, Player View và Waiting Room real-time"
+title: "Tuần 8"
 date: 2026-06-08
 weight: 8
 chapter: false
 pre: " <b> 1.8. </b> "
+menuTitle: "Tuần 8"
+linkTitle: "Tuần 8"
 ---
 ### Mục tiêu tuần 8:
 

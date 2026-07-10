@@ -1,9 +1,11 @@
 ---
-title: "Tuần 2: Tìm hiểu EC2, VPC và AWS Lambda"
+title: "Tuần 2"
 date: 2026-04-27
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
+menuTitle: "Tuần 2"
+linkTitle: "Tuần 2"
 ---
 ### Mục tiêu tuần 2:
 

@@ -1,9 +1,11 @@
 ---
-title: "Tuần 9: Gameplay real-time, Leaderboard và Game Results"
+title: "Tuần 9"
 date: 2026-06-15
 weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
+menuTitle: "Tuần 9"
+linkTitle: "Tuần 9"
 ---
 ### Mục tiêu tuần 9:
 

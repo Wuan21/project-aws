@@ -1,9 +1,11 @@
 ---
-title: "Tuần 4: Thực hành CloudWatch, SQS và SNS"
+title: "Tuần 4"
 date: 2026-05-11
 weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
+menuTitle: "Tuần 4"
+linkTitle: "Tuần 4"
 ---
 ### Mục tiêu tuần 4:
 

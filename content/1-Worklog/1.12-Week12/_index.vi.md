@@ -1,9 +1,11 @@
 ---
-title: "Tuần 12: Kiểm thử cuối, hoàn thiện tài liệu và chuẩn bị demo"
+title: "Tuần 12"
 date: 2026-07-06
 weight: 12
 chapter: false
 pre: " <b> 1.12. </b> "
+menuTitle: "Tuần 12"
+linkTitle: "Tuần 12"
 ---
 
 ### Mục tiêu tuần 12:

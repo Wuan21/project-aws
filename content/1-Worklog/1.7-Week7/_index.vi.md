@@ -1,9 +1,11 @@
 ---
-title: "Tuần 7: Xác thực người dùng, Dashboard và quản lý Quiz"
+title: "Tuần 7"
 date: 2026-06-01
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
+menuTitle: "Tuần 7"
+linkTitle: "Tuần 7"
 ---
 ### Mục tiêu tuần 7:
 

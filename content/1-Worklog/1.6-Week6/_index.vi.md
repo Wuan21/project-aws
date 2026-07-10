@@ -1,9 +1,11 @@
 ---
-title: "Tuần 6: Khởi tạo frontend React và cấu trúc dự án"
+title: "Tuần 6"
 date: 2026-05-25
 weight: 6
 chapter: false
 pre: " <b> 1.6. </b> "
+menuTitle: "Tuần 6"
+linkTitle: "Tuần 6"
 ---
 ### Mục tiêu tuần 6:
 

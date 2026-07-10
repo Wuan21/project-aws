@@ -1,9 +1,11 @@
 ---
-title: "Tuần 1: Định hướng thực tập và tạo tài khoản AWS"
+title: "Tuần 1"
 date: 2026-04-20
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
+menuTitle: "Tuần 1"
+linkTitle: "Tuần 1"
 ---
 ### Mục tiêu tuần 1:
 

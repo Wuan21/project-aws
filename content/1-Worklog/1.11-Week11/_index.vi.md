@@ -1,9 +1,11 @@
 ---
-title: "Tuần 11: User testing, sửa lỗi UI/UX và chuẩn bị tài liệu"
+title: "Tuần 11"
 date: 2026-06-29
 weight: 11
 chapter: false
 pre: " <b> 1.11. </b> "
+menuTitle: "Tuần 11"
+linkTitle: "Tuần 11"
 ---
 
 ### Mục tiêu tuần 11:

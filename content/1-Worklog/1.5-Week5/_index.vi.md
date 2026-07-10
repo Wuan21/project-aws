@@ -1,9 +1,11 @@
 ---
-title: "Tuần 5: Hands-on tổng hợp dịch vụ AWS cho SyncQuiz"
+title: "Tuần 5"
 date: 2026-05-18
 weight: 5
 chapter: false
 pre: " <b> 1.5. </b> "
+menuTitle: "Tuần 5"
+linkTitle: "Tuần 5"
 ---
 ### Mục tiêu tuần 5:
 
