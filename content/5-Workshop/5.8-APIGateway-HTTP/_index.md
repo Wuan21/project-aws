@@ -57,13 +57,21 @@ After successful creation, API Gateway will display the Routes page of the newly
 
 To allow frontend requests from different domains or local hosts:
 
-1. Inside your HTTP API detail menu on the left, select **CORS**.
-2. Click **Configure** and add the following settings:
+1. Inside your HTTP API detail menu on the left, select **CORS** and click **Configure**.
+
+![Access and configure CORS](/project-aws/images/workshop/5.8-apigateway/cors1.jpg)
+
+2. Add the following CORS settings:
    * **Access-Control-Allow-Origin:** Enter `*`.
    * **Access-Control-Allow-Headers:** Enter `Content-Type, Authorization`.
    * **Access-Control-Allow-Methods:** Enter `GET, POST, PUT, DELETE, OPTIONS`.
    * **Access-Control-Max-Age:** Enter `300`.
-   * Click **Save**.
+
+![Enter CORS configuration settings](/project-aws/images/workshop/5.8-apigateway/cors2.jpg)
+
+3. Click **Save** to complete the configuration.
+
+![CORS configuration saved successfully](/project-aws/images/workshop/5.8-apigateway/cors3.jpg)
 
 ---
 

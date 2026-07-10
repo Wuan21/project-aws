@@ -57,13 +57,21 @@ Sau khi tạo thành công, API Gateway sẽ hiển thị trang Routes của API
 
 Để cho phép frontend gọi các request API từ các domain khác hoặc từ localhost:
 
-1. Trong menu bên trái của API vừa tạo, chọn **CORS**.
-2. Nhấp chọn **Configure** và nhập các thông số sau:
+1. Trong menu bên trái của API vừa tạo, chọn **CORS** và nhấp chọn **Configure**.
+
+![Truy cập và cấu hình CORS](/project-aws/images/workshop/5.8-apigateway/cors1.jpg)
+
+2. Nhập các thông số cấu hình CORS như sau:
    * **Access-Control-Allow-Origin:** Nhập `*`.
    * **Access-Control-Allow-Headers:** Nhập `Content-Type, Authorization`.
    * **Access-Control-Allow-Methods:** Nhập `GET, POST, PUT, DELETE, OPTIONS`.
    * **Access-Control-Max-Age:** Nhập `300`.
-   * Nhấp chọn **Save**.
+
+![Nhập thông số cấu hình CORS](/project-aws/images/workshop/5.8-apigateway/cors2.jpg)
+
+3. Nhấp chọn **Save** để hoàn tất cấu hình.
+
+![Lưu cấu hình CORS thành công](/project-aws/images/workshop/5.8-apigateway/cors3.jpg)
 
 ---
 
