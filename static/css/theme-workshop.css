@@ -226,3 +226,24 @@ div.notices.info p {
   border-top: 30px solid #fd9827;
   background: #fff2db;
 }
+
+/* ============================================================
+   Inline code: remove yellow background, border, and copy icon.
+   Only multi-line code blocks (pre > code) keep copy button.
+   ============================================================ */
+
+/* Strip yellow background/border from inline <code> (not inside <pre>) */
+:not(pre) > code {
+  background: transparent !important;
+  border: none !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  padding: 0 !important;
+  white-space: normal !important;
+  border-radius: 0 !important;
+}
+
+/* Hide the copy-to-clipboard button injected after inline <code> elements */
+:not(pre) > code + .copy-to-clipboard {
+  display: none !important;
+}

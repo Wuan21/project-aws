@@ -155,14 +155,14 @@ The technical implementation of SyncQuiz includes the following steps:
    * Enable CORS for frontend communication.
 
 6. **Create API Gateway WebSocket API**
-   * Configure `$connect`, `$disconnect`, and `$default` routes.
+   * Configure $connect, $disconnect, and $default routes.
    * Connect routes to corresponding Lambda functions.
-   * Use WebSocket actions such as `START_GAME`, `NEXT_QUESTION`, `SUBMIT_ANSWER`, and `END_GAME`.
+   * Use WebSocket actions such as START_GAME, NEXT_QUESTION, SUBMIT_ANSWER, and END_GAME.
 
 7. **Configure EventBridge**
    * Create custom event bus.
-   * Create rule for `AnswerSubmitted` event to trigger score calculation.
-   * Create rule for `GameEnded` event to trigger final result saving.
+   * Create rule for AnswerSubmitted event to trigger score calculation.
+   * Create rule for GameEnded event to trigger final result saving.
 
 8. **Deploy Frontend**
    * Upload frontend build files to Amazon S3.
@@ -178,7 +178,7 @@ The technical implementation of SyncQuiz includes the following steps:
 10. **Testing**
     * Test quiz creation using HTTP API.
     * Test room creation and joining.
-    * Test WebSocket connection using tools such as `wscat`.
+    * Test WebSocket connection using tools such as wscat.
     * Test answer submission, score update, game ending, and leaderboard display.
 
 ---
@@ -265,7 +265,7 @@ Cost optimization methods:
 * Configure CloudWatch alarms for Lambda errors and DynamoDB throttling.
 * Test WebSocket flows carefully before live demo or production usage.
 * Use CloudFront with Origin Access Control to protect the S3 frontend bucket.
-* Keep dev and production environments separated using naming conventions such as `dev` and `prod`.
+* Keep dev and production environments separated using naming conventions such as dev and prod.
 
 ### 7.3 Contingency Plans
 
