@@ -159,6 +159,6 @@ Execute the game state flow:
 ### 7. Verify Game Results in Database
 
 Open the **[Amazon DynamoDB console](https://console.aws.amazon.com/dynamodb/)**:
-1. Select the **`webquiz-dev-game-results`** table.
+1. Select the **webquiz-dev-game-results** table.
 2. Click **Explore table items**.
 3. Verify that a record exists representing Alice's nickname, score, total correct answers, and final ranking.

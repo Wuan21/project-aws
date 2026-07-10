@@ -16,7 +16,7 @@ Trong bước này, bạn sẽ cấu hình lưu trữ trang web tĩnh cho ứng 
 1. Mở **[Amazon S3 console](https://console.aws.amazon.com/s3/)**.
 2. Trên menu trái chọn **General purpose buckets**, nhấp chọn **Create bucket**.
 3. Điền biểu mẫu thiết lập:
-   * **Bucket name:** Nhập `webquiz-dev-frontend-YOUR_ACCOUNT_ID` (Thay `YOUR_ACCOUNT_ID` bằng AWS Account ID của bạn).
+   * **Bucket name:** Nhập webquiz-dev-frontend-YOUR_ACCOUNT_ID (Thay `YOUR_ACCOUNT_ID` bằng AWS Account ID của bạn).
    * **Object Ownership:** Chọn **ACLs disabled / Bucket owner enforced** (mặc định).
    * **Block Public Access settings for this bucket:** Đảm bảo tick chọn ✅ **Block all public access** (Chặn toàn bộ truy cập công cộng).
    * **Bucket Versioning:** Chọn **Enable**.
@@ -29,7 +29,7 @@ Trong bước này, bạn sẽ cấu hình lưu trữ trang web tĩnh cho ứng 
 1. Mở **[Amazon CloudFront console](https://console.aws.amazon.com/cloudfront/)**.
 2. Nhấp chọn **Create distribution**.
 3. **Step 1 - Origin:**
-   * **Origin domain:** Chọn S3 bucket vừa tạo ở bước trên (`webquiz-dev-frontend-YOUR_ACCOUNT_ID.s3.amazonaws.com`).
+   * **Origin domain:** Chọn S3 bucket vừa tạo ở bước trên (webquiz-dev-frontend-YOUR_ACCOUNT_ID.s3.amazonaws.com).
    * **Origin access:** Chọn **Origin access control settings (recommended)**.
    * Nhấp chọn **Create control setting**:
      * Giữ nguyên cấu hình tên mặc định và đảm bảo chọn **Sign requests (recommended)**.
@@ -46,7 +46,7 @@ Trong bước này, bạn sẽ cấu hình lưu trữ trang web tĩnh cho ứng 
 
 ### 3. Cấu hình S3 Bucket Policy
 
-1. Quay lại trang chi tiết S3 bucket `webquiz-dev-frontend-YOUR_ACCOUNT_ID` trong S3 console.
+1. Quay lại trang chi tiết S3 bucket webquiz-dev-frontend-YOUR_ACCOUNT_ID trong S3 console.
 2. Chọn tab **Permissions**.
 3. Kéo xuống mục **Bucket policy** và nhấp chọn **Edit**.
 4. Dán đoạn mã phân quyền do CloudFront sinh ra (cho phép CloudFront truy cập đọc đối tượng tĩnh):

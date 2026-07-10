@@ -159,6 +159,6 @@ Thực hiện gửi các tin nhắn điều phối trận đấu trên terminal:
 ### 7. Xác minh Kết quả trong Cơ sở dữ liệu
 
 Truy cập **[Amazon DynamoDB console](https://console.aws.amazon.com/dynamodb/)**:
-1. Chọn bảng **`webquiz-dev-game-results`**.
+1. Chọn bảng **webquiz-dev-game-results**.
 2. Nhấp chọn **Explore table items**.
 3. Xác nhận sự hiện diện của bản ghi lưu trữ điểm số, thứ hạng và số câu trả lời đúng của Alice.

@@ -22,10 +22,10 @@ First, create the IAM role that all Lambda functions will use to interact secure
    * **Service or use case:** Select **Lambda** from the dropdown.
    * Click **Next**.
 4. **Step 2 - Add permissions:**
-   * Search for and select the managed policy **`AWSLambdaBasicExecutionRole`** (this allows Lambdas to write execution logs to CloudWatch).
+   * Search for and select the managed policy **AWSLambdaBasicExecutionRole** (this allows Lambdas to write execution logs to CloudWatch).
    * Click **Next**.
 5. **Step 3 - Name, review, and create:**
-   * **Role name:** Enter `webquiz-dev-lambda-role`.
+   * **Role name:** Enter webquiz-dev-lambda-role.
    * Click **Create role**.
 
 ---
@@ -34,7 +34,7 @@ First, create the IAM role that all Lambda functions will use to interact secure
 
 Now, grant this role permission to access your specific DynamoDB tables, write events to EventBridge, and manage WebSocket connections.
 
-1. Find and click on the newly created role `webquiz-dev-lambda-role`.
+1. Find and click on the newly created role webquiz-dev-lambda-role.
 2. Under the **Permissions** tab, click **Add permissions** → Select **Create inline policy**.
 3. Select the **JSON** tab and paste the following policy:
    ```json
@@ -79,7 +79,7 @@ Now, grant this role permission to access your specific DynamoDB tables, write e
    }
    ```
 4. Click **Next**.
-5. **Policy name:** Enter `webquiz-dev-lambda-policy`.
+5. **Policy name:** Enter webquiz-dev-lambda-policy.
 6. Click **Create policy**.
 
 ---
@@ -91,7 +91,7 @@ Create the EventBridge bus that will route live gameplay events (like answer sub
 1. Open the **[Amazon EventBridge console](https://console.aws.amazon.com/events/)**.
 2. Select **Event buses** on the left menu, then click **Create event bus**.
 3. In the creation wizard:
-   * **Name:** Enter `webquiz-dev-game-events`.
+   * **Name:** Enter webquiz-dev-game-events.
    * **Encryption:** Select **Use AWS owned key** (default).
    * Keep other settings blank/default.
    * Click **Create**.

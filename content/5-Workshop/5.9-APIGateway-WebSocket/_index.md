@@ -17,7 +17,7 @@ In this step, you will configure **Amazon API Gateway WebSocket API** to enable 
 2. Click **Create API**.
 3. Under **Choose an API type**, find **WebSocket API** and click **Build**.
 4. Configure API details:
-   * **API name:** Enter `webquiz-dev-websocket-api`.
+   * **API name:** Enter webquiz-dev-websocket-api.
    * **Route selection expression:** Enter `$request.body.action` (this configuration extracts the action name from incoming JSON payloads to route messages).
    * Click **Next**.
 
@@ -42,13 +42,13 @@ Connect each route path to its respective Lambda handler function:
 1. Map the integrations:
    * For the **`$connect`** route:
      * **Integration type:** Select **Lambda**.
-     * **Lambda function:** Select `webquiz-dev-ws-connect`.
+     * **Lambda function:** Select webquiz-dev-ws-connect.
    * For the **`$disconnect`** route:
      * **Integration type:** Select **Lambda**.
-     * **Lambda function:** Select `webquiz-dev-ws-disconnect`.
+     * **Lambda function:** Select webquiz-dev-ws-disconnect.
    * For the **`$default`** route:
      * **Integration type:** Select **Lambda**.
-     * **Lambda function:** Select `webquiz-dev-ws-message`.
+     * **Lambda function:** Select webquiz-dev-ws-message.
 2. Click **Next**.
 
 ---
@@ -85,12 +85,12 @@ Go to the **Stages** tab on the left and select stage **`dev`**. Record the two 
 Now that the WebSocket API is deployed, you must update the environment variables for your Lambda functions to allow them to broadcast messages.
 
 1. Open the **AWS Lambda console**.
-2. Update the **`webquiz-dev-ws-message`** function:
+2. Update the **webquiz-dev-ws-message** function:
    * Open the function details → **Configuration** tab → **Environment variables**.
    * Click **Edit** and set:
      * `WEBSOCKET_ENDPOINT` = `https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev` (the **Connections URL** with `https://` prefix, **not** `wss://`).
    * Click **Save**.
-3. Update the **`webquiz-dev-score-calculator`** function:
+3. Update the **webquiz-dev-score-calculator** function:
    * Open the function details → **Configuration** tab → **Environment variables**.
    * Click **Edit** and set:
      * `WEBSOCKET_ENDPOINT` = `https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev`

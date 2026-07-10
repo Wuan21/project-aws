@@ -17,7 +17,7 @@ In this step, you will configure **Amazon Cognito** to manage user registration,
    * **Application type:** Select **Single-page application (SPA)**.
    * Click **Next**.
 4. **Step 2 - Name your application:**
-   * **Application name:** Enter `webquiz-dev-web-client`.
+   * **Application name:** Enter webquiz-dev-web-client.
    * Click **Next**.
 5. **Step 3 - Configure options:**
    * **Options for sign-in identifiers:** Check ✅ **Email**.
@@ -51,7 +51,7 @@ Once the User Pool is created, you must configure security policies:
    * **Cognito-assisted verification:** Check ✅ **Enabled**.
    * **Verification method:** Select **Send email message**.
 3. Select the **App clients** tab:
-   * Click on the client named `webquiz-dev-web-client`.
+   * Click on the client named webquiz-dev-web-client.
    * Verify **Client secret** is set to **No client secret** (since it is a public SPA client).
    * Verify **Authentication flows** has:
      * ✅ `ALLOW_USER_SRP_AUTH`

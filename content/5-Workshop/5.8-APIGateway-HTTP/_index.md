@@ -17,7 +17,7 @@ In this step, you will configure **Amazon API Gateway HTTP API** to route REST r
 2. Click **Create API**.
 3. Under **Choose an API type**, find **HTTP API** and click **Build**.
 4. **Step 1 - Create and configure integrations:**
-   * **API name:** Enter `webquiz-dev-http-api`.
+   * **API name:** Enter webquiz-dev-http-api.
    * **IP address type:** Select **IPv4**.
    * *(Do not add integrations at this step)*.
    * Click **Next**.
@@ -52,7 +52,7 @@ To allow frontend requests from different domains or local hosts:
 2. Under the **Manage authorizers** tab, click **Create**.
 3. Configure the Authorizer:
    * **Authorizer type:** Select **JWT**.
-   * **Name:** Enter `CognitoAuthorizer`.
+   * **Name:** Enter CognitoAuthorizer.
    * **Identity source:** Enter `$request.header.Authorization`.
    * **Issuer URL:** Enter `https://cognito-idp.us-east-1.amazonaws.com/YOUR_USER_POOL_ID` (replace `YOUR_USER_POOL_ID` with the actual User Pool ID from Step 3).
    * **Audience:** Enter the **App Client ID** (copied from Step 3).
@@ -68,12 +68,12 @@ Connect the HTTP API Gateway to the backend Lambda functions:
 2. Click **Create** for two integrations:
    * **Integration 1 (Quiz CRUD):**
      * **Integration target:** Select **Lambda function**.
-     * **Lambda function:** Select `webquiz-dev-quiz-crud`.
+     * **Lambda function:** Select webquiz-dev-quiz-crud.
      * Click **Create**.
    * **Integration 2 (Room Management):**
      * Click **Create**.
      * **Integration target:** Select **Lambda function**.
-     * **Lambda function:** Select `webquiz-dev-room-management`.
+     * **Lambda function:** Select webquiz-dev-room-management.
      * Click **Create**.
 
 ---
@@ -87,16 +87,16 @@ Now, map the API paths, attach their integrations, and configure authorization:
 
 | Route Route | Method | Path | Integration Target | Authorizer Type |
 | :--- | :--- | :--- | :--- | :--- |
-| **Route 1** | `ANY` | `/quizzes` | `webquiz-dev-quiz-crud` | `CognitoAuthorizer` |
-| **Route 2** | `ANY` | `/quizzes/{proxy+}` | `webquiz-dev-quiz-crud` | `CognitoAuthorizer` |
-| **Route 3** | `POST` | `/rooms` | `webquiz-dev-room-management` | `CognitoAuthorizer` |
-| **Route 4** | `GET` | `/rooms/{pin}` | `webquiz-dev-room-management` | **None** (Public) |
-| **Route 5** | `POST` | `/rooms/{pin}/join` | `webquiz-dev-room-management` | **None** (Public) |
+| **Route 1** | `ANY` | `/quizzes` | webquiz-dev-quiz-crud | CognitoAuthorizer |
+| **Route 2** | `ANY` | `/quizzes/{proxy+}` | webquiz-dev-quiz-crud | CognitoAuthorizer |
+| **Route 3** | `POST` | `/rooms` | webquiz-dev-room-management | CognitoAuthorizer |
+| **Route 4** | `GET` | `/rooms/{pin}` | webquiz-dev-room-management | **None** (Public) |
+| **Route 5** | `POST` | `/rooms/{pin}/join` | webquiz-dev-room-management | **None** (Public) |
 
 *How to configure a route:*
 1. Click **Create** and enter the **Method** and **Path**.
 2. Click on the route you just created → Click **Attach integration** and select the correct target function.
-3. Click **Attach authorizer** (if applicable) and select `CognitoAuthorizer`.
+3. Click **Attach authorizer** (if applicable) and select CognitoAuthorizer.
 
 ---
 

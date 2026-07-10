@@ -17,7 +17,7 @@ Trong bước này, bạn sẽ cấu hình **Amazon API Gateway HTTP API** để
 2. Nhấp chọn **Create API**.
 3. Tại phần **Choose an API type**, tìm **HTTP API** và chọn **Build**.
 4. **Step 1 - Create and configure integrations:**
-   * **API name:** Nhập `webquiz-dev-http-api`.
+   * **API name:** Nhập webquiz-dev-http-api.
    * **IP address type:** Chọn **IPv4**.
    * *(Không thêm tích hợp integration nào ở bước này)*.
    * Nhấn **Next**.
@@ -52,7 +52,7 @@ Trong bước này, bạn sẽ cấu hình **Amazon API Gateway HTTP API** để
 2. Chọn tab **Manage authorizers**, nhấp chọn **Create**.
 3. Thiết lập thông số Authorizer:
    * **Authorizer type:** Chọn **JWT**.
-   * **Name:** Nhập `CognitoAuthorizer`.
+   * **Name:** Nhập CognitoAuthorizer.
    * **Identity source:** Nhập `$request.header.Authorization`.
    * **Issuer URL:** Nhập `https://cognito-idp.us-east-1.amazonaws.com/YOUR_USER_POOL_ID` (Thay thế `YOUR_USER_POOL_ID` bằng User Pool ID thực tế đã lưu ở phần Cognito).
    * **Audience:** Nhập **App Client ID** đã lưu ở phần Cognito.
@@ -68,12 +68,12 @@ Kết nối API Gateway với các hàm Lambda xử lý nghiệp vụ backend:
 2. Nhấp chọn **Create** cho 2 integration sau:
    * **Integration 1 (Quiz CRUD):**
      * **Integration target:** Chọn **Lambda function**.
-     * **Lambda function:** Chọn `webquiz-dev-quiz-crud`.
+     * **Lambda function:** Chọn webquiz-dev-quiz-crud.
      * Nhấp chọn **Create**.
    * **Integration 2 (Room Management):**
      * Nhấp chọn **Create**.
      * **Integration target:** Chọn **Lambda function**.
-     * **Lambda function:** Chọn `webquiz-dev-room-management`.
+     * **Lambda function:** Chọn webquiz-dev-room-management.
      * Nhấp chọn **Create**.
 
 ---
@@ -87,16 +87,16 @@ Liên kết các route đường dẫn của API, tích hợp Lambda và gắn q
 
 | STT | Phương thức (Method) | Đường dẫn (Path) | Tích hợp Target (Integration) | Bộ xác thực (Authorizer) |
 | :--- | :--- | :--- | :--- | :--- |
-| **Route 1** | `ANY` | `/quizzes` | `webquiz-dev-quiz-crud` | `CognitoAuthorizer` |
-| **Route 2** | `ANY` | `/quizzes/{proxy+}` | `webquiz-dev-quiz-crud` | `CognitoAuthorizer` |
-| **Route 3** | `POST` | `/rooms` | `webquiz-dev-room-management` | `CognitoAuthorizer` |
-| **Route 4** | `GET` | `/rooms/{pin}` | `webquiz-dev-room-management` | **None** (Công khai) |
-| **Route 5** | `POST` | `/rooms/{pin}/join` | `webquiz-dev-room-management` | **None** (Công khai) |
+| **Route 1** | `ANY` | `/quizzes` | webquiz-dev-quiz-crud | CognitoAuthorizer |
+| **Route 2** | `ANY` | `/quizzes/{proxy+}` | webquiz-dev-quiz-crud | CognitoAuthorizer |
+| **Route 3** | `POST` | `/rooms` | webquiz-dev-room-management | CognitoAuthorizer |
+| **Route 4** | `GET` | `/rooms/{pin}` | webquiz-dev-room-management | **None** (Công khai) |
+| **Route 5** | `POST` | `/rooms/{pin}/join` | webquiz-dev-room-management | **None** (Công khai) |
 
 *Các bước cấu hình cho từng Route:*
 1. Nhấp chọn **Create**, nhập **Method** và **Path** tương ứng.
 2. Click vào route vừa tạo → Chọn **Attach integration** và gán hàm Lambda tương ứng.
-3. Chọn **Attach authorizer** (nếu bảng yêu cầu) và gán `CognitoAuthorizer`.
+3. Chọn **Attach authorizer** (nếu bảng yêu cầu) và gán CognitoAuthorizer.
 
 ---
 

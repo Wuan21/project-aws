@@ -11,19 +11,19 @@ Trong bước này, bạn sẽ triển khai nhóm hàm AWS Lambda đầu tiên. 
 
 ---
 
-### 1. Tạo hàm Quiz CRUD (`webquiz-dev-quiz-crud`)
+### 1. Tạo hàm Quiz CRUD (webquiz-dev-quiz-crud)
 
 Hàm này thực hiện các thao tác CRUD cơ bản cho bộ câu hỏi (quizzes) và các câu hỏi chi tiết (questions).
 
 1. Mở **[AWS Lambda console](https://console.aws.amazon.com/lambda/)**.
 2. Nhấp chọn **Create function**.
 3. Chọn **Author from scratch** và cấu hình các thông số:
-   * **Function name:** `webquiz-dev-quiz-crud`
+   * **Function name:** webquiz-dev-quiz-crud
    * **Runtime:** Chọn **Node.js 20.x**.
    * **Architecture:** Chọn **x86_64**.
    * Mở mục **Change default execution role**:
      * Chọn **Use an existing role**.
-     * **Existing role:** Chọn `webquiz-dev-lambda-role`.
+     * **Existing role:** Chọn webquiz-dev-lambda-role.
    * Nhấp chọn **Create function**.
 4. Sau khi tạo xong, di chuyển tới tab **Configuration**:
    * Tại mục **General configuration** → Nhấp chọn **Edit**:
@@ -32,8 +32,8 @@ Hàm này thực hiện các thao tác CRUD cơ bản cho bộ câu hỏi (quizz
      * Nhấp chọn **Save**.
    * Tại mục **Environment variables** → Nhấp chọn **Edit** → **Add environment variable**:
      * Nhập 3 biến môi trường sau:
-       * `QUIZZES_TABLE` = `webquiz-dev-quizzes`
-       * `QUESTIONS_TABLE` = `webquiz-dev-questions`
+       * `QUIZZES_TABLE` = webquiz-dev-quizzes
+       * `QUESTIONS_TABLE` = webquiz-dev-questions
        * `ENVIRONMENT` = `dev`
      * Nhấp chọn **Save**.
 5. Di chuyển tới tab **Code**, xóa toàn bộ mã nguồn mẫu mặc định và dán đoạn code sau:
@@ -196,19 +196,19 @@ Hàm này thực hiện các thao tác CRUD cơ bản cho bộ câu hỏi (quizz
 
 ---
 
-### 2. Tạo hàm quản lý phòng chơi (`webquiz-dev-room-management`)
+### 2. Tạo hàm quản lý phòng chơi (webquiz-dev-room-management)
 
 Hàm này thực hiện tạo phòng chơi, sinh mã PIN ngẫu nhiên 6 chữ số và xử lý cho người chơi tham gia.
 
 1. Nhấp chọn **Create function**:
-   * **Function name:** `webquiz-dev-room-management`
+   * **Function name:** webquiz-dev-room-management
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** Chọn `webquiz-dev-lambda-role`.
+   * **Existing role:** Chọn webquiz-dev-lambda-role.
 2. Tại tab **Configuration**:
    * **General configuration** → Nhấp chọn **Edit**: Cấu hình **Memory** `256` MB và **Timeout** `30` giây.
    * **Environment variables** → Nhấp chọn **Edit** → **Add environment variable**:
-     * `ROOMS_TABLE` = `webquiz-dev-rooms`
-     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
+     * `ROOMS_TABLE` = webquiz-dev-rooms
+     * `GAME_STATE_TABLE` = webquiz-dev-game-state
      * `ENVIRONMENT` = `dev`
 3. Tại tab **Code**, xóa code mẫu và dán đoạn mã sau:
    ```javascript
