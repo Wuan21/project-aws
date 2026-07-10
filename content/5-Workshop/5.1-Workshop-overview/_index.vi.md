@@ -20,3 +20,11 @@ Trong workshop này, bạn sẽ thực hành xây dựng hệ thống với các
 *   **Tầng Cơ sở dữ liệu (Database Tier):** Sử dụng cơ sở dữ liệu NoSQL **Amazon DynamoDB** chạy ở chế độ **On-demand** (co giãn theo yêu cầu và tối ưu chi phí) để lưu trữ thông tin người dùng, câu hỏi, kết nối và quản lý trạng thái trò chơi trực tiếp thay thế cho **Redis**.
 *   **Tầng Định tuyến Sự kiện bất đồng bộ (Event Routing):** Sử dụng **Amazon EventBridge Custom Event Bus** (webquiz-dev-game-events) để định tuyến các sự kiện chơi game (người chơi nộp bài, kết thúc game) bất đồng bộ sang các hàm Lambda xử lý nền (tính điểm, lưu kết quả chung cuộc).
 *   **Dịch vụ Giám sát & Dashboard:** Thiết lập **Amazon CloudWatch** logs ghi nhận lỗi, CloudWatch metrics đo lường hiệu năng, **CloudWatch Alarms** gửi cảnh báo khi có sự cố và xây dựng **CloudWatch Dashboard** để giám sát toàn diện sức khỏe hệ thống theo thời gian thực.
+
+---
+
+## Sơ đồ kiến trúc Workshop
+
+Sơ đồ dưới đây mô tả tổng quan kiến trúc và các dịch vụ AWS chính được sử dụng trong workshop.
+
+![Sơ đồ kiến trúc Workshop](/project-aws/images/5-Workshop/5.1-Workshop-overview/diagram.jpg)
