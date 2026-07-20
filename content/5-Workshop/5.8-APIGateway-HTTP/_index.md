@@ -13,43 +13,43 @@ Amazon API Gateway HTTP API is used in the SyncQuiz project to build backend API
 
 Open the AWS Management Console and access the API Gateway service. On the APIs page, you can view the list of APIs created in your AWS account. To create a new API, click Create API.
 
-![Access API Gateway](/images/5-Workshop/5.8-APIGateway-HTTP/api1.jpg)
+![Access API Gateway](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api1.jpg)
 
 ### Step 2: Select HTTP API Type
 
 On the Choose an API type page, locate HTTP API and click Build. HTTP APIs are suitable for simple REST APIs, offering low latency and easy integration with Lambda backends.
 
-![Select HTTP API Type](/images/5-Workshop/5.8-APIGateway-HTTP/api2.jpg)
+![Select HTTP API Type](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api2.jpg)
 
 ### Step 3: Configure API Information
 
 In the Configure API section, enter the API name as webquiz-dev-http-api. Under IP address type, select IPv4. At this step, you do not need to add integrations immediately, as integrations and routes can be configured after the API is created.
 
-![Configure HTTP API](/images/5-Workshop/5.8-APIGateway-HTTP/api3.jpg)
+![Configure HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api3.jpg)
 
 ### Step 4: Skip Initial Routes Configuration
 
 In the Configure routes step, you can skip creating initial routes if you do not have specific Lambda integrations set up yet. Routes will be added later depending on backend features like creating quizzes, getting quizzes, creating rooms, or processing results.
 
-![Configure Routes](/images/5-Workshop/5.8-APIGateway-HTTP/api4.jpg)
+![Configure Routes](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api4.jpg)
 
 ### Step 5: Configure Stage
 
 In the Define stages step, enter the stage name as dev and enable Auto-deploy. The dev stage is used for the development environment. When Auto-deploy is enabled, changes in the API will be deployed automatically to this stage.
 
-![Configure Stage dev](/images/5-Workshop/5.8-APIGateway-HTTP/api5.jpg)
+![Configure Stage dev](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api5.jpg)
 
 ### Step 6: Review and Create API
 
 In the Review and create step, verify the API information, Routes, and Stages. If the details are correct, click Create to create the HTTP API.
 
-![Review and Create HTTP API](/images/5-Workshop/5.8-APIGateway-HTTP/api6.jpg)
+![Review and Create HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api6.jpg)
 
 ### Step 7: Verify HTTP API After Creation
 
 After successful creation, API Gateway will display the Routes page of the newly created API. Here, you can continue to create routes, configure authorization, add integrations with Lambda, and deploy the API.
 
-![HTTP API Created Successfully](/images/5-Workshop/5.8-APIGateway-HTTP/api7.jpg)
+![HTTP API Created Successfully](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api7.jpg)
 
 ---
 
@@ -59,7 +59,7 @@ To allow frontend requests from different domains or local hosts:
 
 1. Inside your HTTP API detail menu on the left, select **CORS** and click **Configure**.
 
-![Access and configure CORS](/images/workshop/5.8-apigateway/cors1.jpg)
+![Access and configure CORS](/project-aws/images/workshop/5.8-apigateway/cors1.jpg)
 
 2. Add the following CORS settings:
    * **Access-Control-Allow-Origin:** Enter `*`.
@@ -67,11 +67,11 @@ To allow frontend requests from different domains or local hosts:
    * **Access-Control-Allow-Methods:** Enter `GET, POST, PUT, DELETE, OPTIONS`.
    * **Access-Control-Max-Age:** Enter `300`.
 
-![Enter CORS configuration settings](/images/workshop/5.8-apigateway/cors2.jpg)
+![Enter CORS configuration settings](/project-aws/images/workshop/5.8-apigateway/cors2.jpg)
 
 3. Click **Save** to complete the configuration.
 
-![CORS configuration saved successfully](/images/workshop/5.8-apigateway/cors3.jpg)
+![CORS configuration saved successfully](/project-aws/images/workshop/5.8-apigateway/cors3.jpg)
 
 ---
 

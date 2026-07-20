@@ -20,3 +20,11 @@ In this workshop, you will practice building the system with the following core 
 *   **Database Tier:** Utilize **Amazon DynamoDB** NoSQL database in **On-demand** capacity mode to store user data, quizzes, connections, and live game states, eliminating the need for expensive **Redis** clusters.
 *   **Asynchronous Event Routing Tier:** Use an **Amazon EventBridge Custom Event Bus** (webquiz-dev-game-events) to route real-time game events (answer submission, game ending) asynchronously to background Lambda workers (scoring, results saving).
 *   **Monitoring & Dashboard Services:** Configure **Amazon CloudWatch** logs for error tracking, metrics for performance, **CloudWatch Alarms** for system alerts, and build a **CloudWatch Dashboard** for real-time system observability.
+
+---
+
+## Workshop Architecture Diagram
+
+The following diagram illustrates the overall architecture and main AWS services used in the workshop.
+
+![Workshop Architecture Diagram](/project-aws/images/5-Workshop/5.1-Workshop-overview/diagram.jpg)

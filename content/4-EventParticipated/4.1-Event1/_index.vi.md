@@ -83,12 +83,12 @@ Tích cực thu thập kiến thức có chủ đích thay vì tiêu thụ thụ
 
 
 #### Một số hình ảnh khi tham gia sự kiện
-![Event 1](/images/events/event1-1.jpg)
-![Event 2](/images/events/event1-2.jpg)
-![Event 3](/images/events/event1-3.jpg)
-![Event 4](/images/events/event1-4.jpg)
-![Event 5](/images/events/event1-5.jpg)
-![Event 6](/images/events/event1-6.jpg)
+![Event 1](/project-aws/images/events/event1-1.jpg)
+![Event 2](/project-aws/images/events/event1-2.jpg)
+![Event 3](/project-aws/images/events/event1-3.jpg)
+![Event 4](/project-aws/images/events/event1-4.jpg)
+![Event 5](/project-aws/images/events/event1-5.jpg)
+![Event 6](/project-aws/images/events/event1-6.jpg)
 
 
 > Tham gia workshop **“AWS Event (09/05/2026)”** không chỉ mang lại kiến thức chuyên môn mà còn là cơ hội để thay đổi tư duy, học cách làm việc hiệu quả, và đặc biệt là tăng cường kỹ năng giao tiếp, phối hợp với đồng nghiệp và đối tác.

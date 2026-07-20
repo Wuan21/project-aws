@@ -28,7 +28,7 @@ chapter: false
 
 &emsp; **Internship Duration:** From April 20, 2026 to July 10, 2026
 
-<img src="/images/anhquan.jpg" alt="Your profile picture" style="width: 150px; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 10px; margin-bottom: 20px;">
+<img src="/project-aws/images/anhquan.jpg" alt="Your profile picture" style="width: 150px; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-top: 10px; margin-bottom: 20px;">
 
 ### Report Content
 
