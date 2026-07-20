@@ -13,43 +13,43 @@ Amazon API Gateway HTTP API được sử dụng trong dự án SyncQuiz để x
 
 Mở AWS Management Console và truy cập dịch vụ API Gateway. Tại trang APIs, có thể xem danh sách các API đã tạo trong tài khoản AWS. Để tạo API mới, chọn Create API.
 
-![Truy cập API Gateway](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api1.jpg)
+![Truy cập API Gateway](/images/5-Workshop/5.8-APIGateway-HTTP/api1.jpg)
 
 ### Bước 2: Chọn loại HTTP API
 
 Ở trang Choose an API type, chọn HTTP API và bấm Build. HTTP API phù hợp cho các REST API đơn giản, có độ trễ thấp và dễ tích hợp với Lambda backend.
 
-![Chọn HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api2.jpg)
+![Chọn HTTP API](/images/5-Workshop/5.8-APIGateway-HTTP/api2.jpg)
 
 ### Bước 3: Cấu hình thông tin API
 
 Trong phần Configure API, nhập tên API là webquiz-dev-http-api. Ở phần IP address type, chọn IPv4. Ở bước này có thể chưa cần thêm integration ngay, vì integration và routes có thể cấu hình sau khi API được tạo.
 
-![Cấu hình HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api3.jpg)
+![Cấu hình HTTP API](/images/5-Workshop/5.8-APIGateway-HTTP/api3.jpg)
 
 ### Bước 4: Bỏ qua cấu hình Routes ban đầu
 
 Ở bước Configure routes, có thể bỏ qua việc tạo route ban đầu nếu chưa có Lambda integration cụ thể. Routes sẽ được thêm sau tùy theo chức năng backend như tạo quiz, lấy quiz, tạo phòng hoặc xử lý kết quả.
 
-![Cấu hình Routes](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api4.jpg)
+![Cấu hình Routes](/images/5-Workshop/5.8-APIGateway-HTTP/api4.jpg)
 
 ### Bước 5: Cấu hình Stage
 
 Ở bước Define stages, nhập stage name là dev và bật Auto-deploy. Stage dev được dùng cho môi trường phát triển. Khi Auto-deploy được bật, các thay đổi trong API sẽ được triển khai tự động lên stage này.
 
-![Cấu hình Stage dev](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api5.jpg)
+![Cấu hình Stage dev](/images/5-Workshop/5.8-APIGateway-HTTP/api5.jpg)
 
 ### Bước 6: Kiểm tra và tạo API
 
 Ở bước Review and create, kiểm tra lại thông tin API, Routes và Stages. Nếu thông tin đúng, chọn Create để tạo HTTP API.
 
-![Kiểm tra và tạo HTTP API](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api6.jpg)
+![Kiểm tra và tạo HTTP API](/images/5-Workshop/5.8-APIGateway-HTTP/api6.jpg)
 
 ### Bước 7: Kiểm tra HTTP API sau khi tạo
 
 Sau khi tạo thành công, API Gateway sẽ hiển thị trang Routes của API vừa tạo. Tại đây có thể tiếp tục tạo routes, cấu hình authorization, thêm integrations với Lambda và deploy API.
 
-![HTTP API được tạo thành công](/project-aws/images/5-Workshop/5.8-APIGateway-HTTP/api7.jpg)
+![HTTP API được tạo thành công](/images/5-Workshop/5.8-APIGateway-HTTP/api7.jpg)
 
 ---
 
@@ -59,7 +59,7 @@ Sau khi tạo thành công, API Gateway sẽ hiển thị trang Routes của API
 
 1. Trong menu bên trái của API vừa tạo, chọn **CORS** và nhấp chọn **Configure**.
 
-![Truy cập và cấu hình CORS](/project-aws/images/workshop/5.8-apigateway/cors1.jpg)
+![Truy cập và cấu hình CORS](/images/workshop/5.8-apigateway/cors1.jpg)
 
 2. Nhập các thông số cấu hình CORS như sau:
    * **Access-Control-Allow-Origin:** Nhập `*`.
@@ -67,11 +67,11 @@ Sau khi tạo thành công, API Gateway sẽ hiển thị trang Routes của API
    * **Access-Control-Allow-Methods:** Nhập `GET, POST, PUT, DELETE, OPTIONS`.
    * **Access-Control-Max-Age:** Nhập `300`.
 
-![Nhập thông số cấu hình CORS](/project-aws/images/workshop/5.8-apigateway/cors2.jpg)
+![Nhập thông số cấu hình CORS](/images/workshop/5.8-apigateway/cors2.jpg)
 
 3. Nhấp chọn **Save** để hoàn tất cấu hình.
 
-![Lưu cấu hình CORS thành công](/project-aws/images/workshop/5.8-apigateway/cors3.jpg)
+![Lưu cấu hình CORS thành công](/images/workshop/5.8-apigateway/cors3.jpg)
 
 ---
 

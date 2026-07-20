@@ -1,5 +1,5 @@
 baseURL = "https://wuan21.github.io/project-aws/"
-relativeURLs = false
+relativeURLs = true
 canonifyURLs = false
 defaultContentLanguage = "en"
 

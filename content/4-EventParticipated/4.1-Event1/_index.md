@@ -115,11 +115,11 @@ Attending the **“GenAI-powered App-DB Modernization”** workshop was extremel
 - AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
 
 #### Some event photos
-![Event 1](/project-aws/images/events/event1-1.jpg)
-![Event 2](/project-aws/images/events/event1-2.jpg)
-![Event 3](/project-aws/images/events/event1-3.jpg)
-![Event 4](/project-aws/images/events/event1-4.jpg)
-![Event 5](/project-aws/images/events/event1-5.jpg)
-![Event 6](/project-aws/images/events/event1-6.jpg)
+![Event 1](/images/events/event1-1.jpg)
+![Event 2](/images/events/event1-2.jpg)
+![Event 3](/images/events/event1-3.jpg)
+![Event 4](/images/events/event1-4.jpg)
+![Event 5](/images/events/event1-5.jpg)
+![Event 6](/images/events/event1-6.jpg)
 
 >Participating in the “AWS Event (09/05/2026)” workshop not only provides professional expertise but also offers an opportunity to shift one’s mindset, learn efficient working methods, and—importantly—enhance communication and collaboration skills with colleagues and partners.
