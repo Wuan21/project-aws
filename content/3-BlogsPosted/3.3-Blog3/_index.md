@@ -33,7 +33,7 @@ Amazon ECR delivers an enterprise-grade, fully managed private container registr
 
 #### 1. Container Repository Management
 Amazon ECR allows you to create designated repositories for organizing your Docker images. Developers simply spin up a registry repository, then leverage standard Docker tools to build, tag, and push images to the cloud.
-![Image 1](/images/blog3.1.png)
+![Image 1](/project-aws/images/blog3.1.png)
 
 #### 2. Streamlined Image Ingestion (Push Workflows)
 Once a repository is initialized, AWS provides the exact Docker CLI commands needed to:
@@ -43,8 +43,8 @@ Once a repository is initialized, AWS provides the exact Docker CLI commands nee
 * Safely push the image to the designated ECR repository.
 
 Every image artifact is then centrally tracked, versioned, and managed within the unified ECR Console interface.
-![Image 2](/images/blog3.2.png)
-![Image 3](/images/blog3.3.png)
+![Image 2](/project-aws/images/blog3.2.png)
+![Image 3](/project-aws/images/blog3.3.png)
 
 #### 3. Granular Access Control (IAM Permissions)
 Amazon ECR utilizes AWS Identity and Access Management (IAM) policies to define distinct resource permissions at both the registry and individual repository levels.
@@ -54,8 +54,8 @@ Systems administrators can:
 * Explicitly allow or deny interactions based on fine-grained access policies.
 * Delegate specific permissions to IAM Users, Roles, or external AWS Accounts.
 * Strictly control pull-only, push-and-pull, or administrative-level access boundaries.
-![Image 4](/images/blog3.4.png)
-![Image 5](/images/blog3.5.png)
+![Image 4](/project-aws/images/blog3.4.png)
+![Image 5](/project-aws/images/blog3.5.png)
 
 #### 4. Native Synergy with Amazon ECS
 Amazon ECR interfaces directly with container orchestrators like Amazon ECS.
@@ -65,8 +65,8 @@ The automated deployment pipeline comprises:
 * Pushing the finalized production Docker image to an ECR repository.
 * Defining an ECS Task Definition pointing to the specific ECR image URI.
 * Initiating the task, which triggers ECS to automatically pull the image securely from ECR and execute the containers across the cluster.
-![Image 6](/images/blog3.6.png)
-![Image 7](/images/blog3.7.png)
+![Image 6](/project-aws/images/blog3.6.png)
+![Image 7](/project-aws/images/blog3.7.png)
 
 ## Key Benefits
 Amazon ECR brings major advantages to continuous integration and continuous deployment (CI/CD) lifecycles:

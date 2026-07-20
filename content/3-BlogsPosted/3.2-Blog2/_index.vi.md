@@ -39,12 +39,12 @@ Không cần triển khai hay quản lý máy chủ.
 ### 1. Hỗ trợ nhiều Foundation Models
 
 Amazon Bedrock cung cấp nhiều mô hình AI từ các nhà cung cấp khác nhau, giúp doanh nghiệp dễ dàng lựa chọn mô hình phù hợp với từng bài toán như tạo văn bản, sinh ảnh hoặc chatbot.
-![Ảnh 1](/images/blog2.1.png)
+![Ảnh 1](/project-aws/images/blog2.1.png)
 ### 2. Playground để thử nghiệm mô hình
 
 Bedrock cung cấp Chat Playground, Text Playground và Image Playground, cho phép người dùng thử nghiệm Prompt với nhiều mô hình khác nhau trước khi đưa vào ứng dụng thực tế.
-![Ảnh 2](/images/blog2.1.png)
-![Ảnh 3](/images/blog2.1.png)
+![Ảnh 2](/project-aws/images/blog2.1.png)
+![Ảnh 3](/project-aws/images/blog2.1.png)
 ### 3. Tùy chỉnh mô hình AI
 
 Bedrock hỗ trợ:
@@ -55,7 +55,7 @@ Bedrock hỗ trợ:
 * Agents.
 
 Nhờ đó doanh nghiệp có thể xây dựng AI dựa trên dữ liệu nội bộ mà vẫn đảm bảo tính bảo mật.
-![Ảnh 4](/images/blog2.4.png)
+![Ảnh 4](/project-aws/images/blog2.4.png)
 ### 4. Serverless và tích hợp AWS
 
 Amazon Bedrock hoạt động theo mô hình Serverless, vì vậy người dùng không cần quản lý hạ tầng.
@@ -68,7 +68,7 @@ Dịch vụ tích hợp sẵn với:
 * KMS.
 
 Điều này giúp giám sát, ghi log và bảo vệ dữ liệu hiệu quả.
-![Ảnh 5](/images/blog2.5.png)
+![Ảnh 5](/project-aws/images/blog2.5.png)
 ## Lợi ích
 * Triển khai Generative AI nhanh chóng.
 * Không cần quản lý hạ tầng.

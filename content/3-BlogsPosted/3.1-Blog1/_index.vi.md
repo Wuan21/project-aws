@@ -9,20 +9,20 @@ pre: " <b> 3.1. </b> "
 
 # AWS SYSTEMS MANAGER: "TRỢ LÝ VẠN NĂNG" GIÚP BẠN LÀM CHỦ HẠ TẦNG CLOUD VÀ HYBRID
 AWS Systems Manager (SSM) là dịch vụ quản lý tập trung của AWS, cho phép quản trị và vận hành hạ tầng trên AWS, môi trường On-Premises và Multi-Cloud thông qua một giao diện thống nhất. Dịch vụ giúp đơn giản hóa việc quản lý tài nguyên, tự động hóa các tác vụ vận hành, rút ngắn thời gian phát hiện và xử lý sự cố, đồng thời nâng cao tính bảo mật và khả năng quản lý ở quy mô lớn
-![Ảnh 1](/images/blog1.1.png)
+![Ảnh 1](/project-aws/images/blog1.1.png)
 Những điểm nổi bật của AWS Systems Manager
 ## 1. Quản lý tài nguyên tập trung (Resource Groups)
 Systems Manager cho phép nhóm các tài nguyên AWS bằng Tags, chẳng hạn như EC2, S3, RDS, VPC và nhiều dịch vụ khác. Nhờ đó, người quản trị có thể theo dõi và thực hiện các tác vụ trên toàn bộ tài nguyên thuộc cùng một ứng dụng hoặc môi trường chỉ từ một giao diện duy nhất.
-![Ảnh 2](/images/blog1.2.png)
+![Ảnh 2](/project-aws/images/blog1.2.png)
 ## 2. Giám sát và tổng hợp thông tin vận hành (Insights)
 
 Systems Manager tổng hợp dữ liệu từ nhiều dịch vụ như Amazon CloudWatch, AWS CloudTrail, AWS Config và AWS Trusted Advisor để hiển thị trạng thái vận hành, mức độ tuân thủ và tình trạng của hệ thống trên một Dashboard tập trung. Điều này giúp việc theo dõi và xử lý sự cố trở nên nhanh chóng hơn.
-![Ảnh 3](/images/blog1.3.png)
-![Ảnh 4](/images/blog1.4.png)
+![Ảnh 3](/project-aws/images/blog1.3.png)
+![Ảnh 4](/project-aws/images/blog1.4.png)
 ## 3. Tự động hóa tác vụ (Automation)
 
 Với Automation, người dùng có thể xây dựng các quy trình tự động (Runbook) để thực hiện các công việc như khởi động hoặc dừng EC2, cập nhật cấu hình, sao lưu dữ liệu và nhiều tác vụ quản trị khác. Các quy trình này có thể được chạy theo lịch hoặc kích hoạt tự động khi có sự kiện xảy ra.
-![Ảnh 5](/images/blog1.5.png)
+![Ảnh 5](/project-aws/images/blog1.5.png)
 ## 4. Thực thi lệnh từ xa (Run Command)
 
 Run Command cho phép chạy lệnh trên nhiều máy chủ cùng lúc mà không cần đăng nhập SSH hoặc Remote Desktop. Quản trị viên có thể quản lý hàng trăm hoặc hàng nghìn máy chủ từ xa, đồng thời kiểm soát quyền truy cập thông qua IAM để tăng cường bảo mật.
