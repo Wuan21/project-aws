@@ -5,53 +5,44 @@ weight: 5
 pre: " <b> 5.5. </b> "
 ---
 
-## IAM Role and Amazon EventBridge Configuration
+# IAM Permissions & EventBridge Setup
 
-In this section, the SyncQuiz system configures the IAM Role for AWS Lambda and creates the EventBridge Event Bus to handle internal event processing. The IAM Role grants Lambda permissions to write logs to CloudWatch and can be extended to access other services as needed. EventBridge is used to route system events, such as game starting, game ending, or result saving events.
+In this step, you will set up security and configuration policies for execution permissions and the asynchronous messaging backend bus.
 
-### Step 1: Access the IAM Dashboard
+---
 
-Open the AWS Management Console and access the Identity and Access Management service. On the IAM Dashboard, you can see an overview of IAM resources like users, roles, policies, and security recommendations.
+### 1. Create Lambda Execution Role
 
-![Access IAM Dashboard](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam1.jpg)
+First, create the IAM role that all Lambda functions will use to interact securely with AWS resources.
 
-### Step 2: Open the Roles List
+1. Open the **[Amazon IAM console](https://console.aws.amazon.com/iam/)**.
+![Image 1](/images/5-Workshop/5.5/5.5.1.png)
+2. Select **Roles** on the left menu, then click **Create role**.
+![Image 2](/images/5-Workshop/5.5/5.5.2.png)
+3. **Step 1 - Select trusted entity:**
+   * **Trusted entity type:** Select **AWS service**.
+   * **Service or use case:** Select **Lambda** from the dropdown.
+   * Click **Next**.
+![Image 3](/images/5-Workshop/5.5/5.5.3.png)
+4. **Step 2 - Add permissions:**
+   * Search for and select the managed policy **`AWSLambdaBasicExecutionRole`** (this allows Lambdas to write execution logs to CloudWatch).
+   * Click **Next**.
+![Image 4](/images/5-Workshop/5.5/5.5.4.png)
+5. **Step 3 - Name, review, and create:**
+   * **Role name:** Enter `webquiz-dev-lambda-role`.
+   * Click **Create role**.
+![Image 5](/images/5-Workshop/5.5/5.5.5.png)
 
-In the left menu, select Roles to view the list of existing IAM Roles. This is where you manage roles used by Lambda, API Gateway, RDS, CloudWatch, or other AWS services.
+---
 
-![Open IAM Roles List](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam2.jpg)
+### 2. Attach Custom Inline Policy
 
-### Step 3: Create an IAM Role for Lambda
+Now, grant this role permission to access your specific DynamoDB tables, write events to EventBridge, and manage WebSocket connections.
 
-Click Create role. Under Trusted entity type, select AWS service. Under Use case, select Lambda to allow Lambda functions to use this role when executing.
-
-![Create IAM Role for Lambda](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam3.jpg)
-
-### Step 4: Attach the AWSLambdaBasicExecutionRole Policy
-
-In the Add permissions step, search for the policy AWSLambdaBasicExecutionRole and select it. This policy allows Lambda to write logs to Amazon CloudWatch Logs, helping track errors and function execution.
-
-![Attach AWSLambdaBasicExecutionRole](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam4.jpg)
-
-### Step 5: Name the IAM Role
-
-In the Name, review, and create step, enter the role name as webquiz-dev-lambda-role. The role name should clearly reflect the environment and purpose for easier management during development.
-
-![Name the IAM Role](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam5.jpg)
-
-### Step 6: Verify the Created IAM Role
-
-After successfully creating the role, open webquiz-dev-lambda-role to verify the attached permissions. This role currently has AWSLambdaBasicExecutionRole attached, and you can add a custom inline policy if Lambda needs to access other services like DynamoDB or EventBridge.
-
-![Verify IAM Role](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam6.jpg)
-
-### Step 6.1: Attach Custom Inline Policy
-
-To grant this role permission to access your specific DynamoDB tables, write events to EventBridge, and manage WebSocket connections, you must attach a custom inline policy:
-
-1. Find and click on the newly created role webquiz-dev-lambda-role.
+1. Find and click on the newly created role `webquiz-dev-lambda-role`.
 2. Under the **Permissions** tab, click **Add permissions** → Select **Create inline policy**.
 3. Select the **JSON** tab and paste the following policy:
+![Image 6](/images/5-Workshop/5.5/5.5.6.png)
    ```json
    {
        "Version": "2012-10-17",
@@ -70,8 +61,8 @@ To grant this role permission to access your specific DynamoDB tables, write eve
                    "dynamodb:BatchWriteItem"
                ],
                "Resource": [
-                   "arn:aws:dynamodb:us-east-1:*:table/webquiz-dev-*",
-                   "arn:aws:dynamodb:us-east-1:*:table/webquiz-dev-*/index/*"
+                   "arn:aws:dynamodb:ap-southeast-1:*:table/webquiz-dev-*",
+                   "arn:aws:dynamodb:ap-southeast-1:*:table/webquiz-dev-*/index/*"
                ]
            },
            {
@@ -80,7 +71,7 @@ To grant this role permission to access your specific DynamoDB tables, write eve
                "Action": [
                    "events:PutEvents"
                ],
-               "Resource": "arn:aws:events:us-east-1:*:event-bus/webquiz-dev-game-events"
+               "Resource": "arn:aws:events:ap-southeast-1:*:event-bus/webquiz-dev-game-events"
            },
            {
                "Sid": "WebSocketManagement",
@@ -88,52 +79,29 @@ To grant this role permission to access your specific DynamoDB tables, write eve
                "Action": [
                    "execute-api:ManageConnections"
                ],
-               "Resource": "arn:aws:execute-api:us-east-1:*:*/dev/*"
+               "Resource": "arn:aws:execute-api:ap-southeast-1:*:*/dev/*"
            }
        ]
    }
    ```
 4. Click **Next**.
-5. **Policy name:** Enter webquiz-dev-lambda-policy.
-6. Click **Create policy** to complete the process.
-
-![Attach Custom Inline Policy](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/policy1.png)
+5. **Policy name:** Enter `webquiz-dev-lambda-policy`.
+6. Click **Create policy**.
 
 ---
 
-### Step 7: Access Amazon EventBridge
+### 3. Create Custom EventBus in EventBridge
 
-Open the Amazon EventBridge service and select the Event buses section. An Event bus receives and routes events from your application or AWS services.
+Create the EventBridge bus that will route live gameplay events (like answer submissions) asynchronously.
 
-![Access Amazon EventBridge](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam7.jpg)
-
-### Step 8: Create a Custom Event Bus
-
-Under Custom event bus, select Create event bus to create a separate event bus for the SyncQuiz system. Creating a dedicated event bus helps isolate application events from the default event bus.
-
-![Create Custom Event Bus](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam8.jpg)
-
-### Step 9: Enter the Event Bus Name
-
-On the Create event bus page, enter the event bus name as webquiz-dev-game-events. This event bus will be used to route events related to games, quiz rooms, and results in the system.
-
-![Enter Event Bus Name](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam9.jpg)
-
-### Step 10: Complete Event Bus Creation
-
-Keep the default options if no advanced configuration is required, then select Create to generate the event bus. Once created successfully, the system can use this event bus to send and process asynchronous events.
-
-![Complete Event Bus Creation](/project-aws/images/5-Workshop/5.5-IAM-EventBridge/iam10.jpg)
-
-## Expected Outcomes
-
-After completing the steps:
-- The IAM Role for Lambda has been successfully created.
-- Lambda has permissions to write logs to CloudWatch via AWSLambdaBasicExecutionRole.
-- The webquiz-dev-lambda-role is ready to be attached to Lambda functions in the project.
-- The custom Event Bus webquiz-dev-game-events has been created in Amazon EventBridge.
-- The system has the foundation to handle internal events and support asynchronous workflows.
-
-## Role in the SyncQuiz Project
-
-In the SyncQuiz project, the IAM Role is used to grant secure access permissions to Lambda instead of using AWS account credentials directly. EventBridge handles event routing in the system, allowing backend components such as Lambdas that process game logic, save results, or update state to run asynchronously, decoupled, and in a highly scalable manner.
+1. Open the **[Amazon EventBridge console](https://console.aws.amazon.com/events/)**.
+![Image 7](/images/5-Workshop/5.5/5.5.7.png)
+2. Select **Event buses** on the left menu, then click **Create event bus**.
+![Image 8](/images/5-Workshop/5.5/5.5.8.png)
+3. In the creation wizard:
+   * **Name:** Enter `webquiz-dev-game-events`.
+   * **Encryption:** Select **Use AWS owned key** (default).
+   * Keep other settings blank/default.
+   * Click **Create**.
+![Image 9](/images/5-Workshop/5.5/5.5.9.png)
+![Image 10](/images/5-Workshop/5.5/5.5.10.png)

@@ -17,14 +17,17 @@ This function manages standard CRUD operations for quizzes and questions.
 
 1. Open the **[AWS Lambda console](https://console.aws.amazon.com/lambda/)**.
 2. Click **Create function**.
+![Image 1](/images/5-Workshop/5.6/5.6.1.png)
 3. Select **Author from scratch** and configure:
-   * **Function name:** webquiz-dev-quiz-crud
+   * **Function name:** `webquiz-dev-quiz-crud`
    * **Runtime:** Select **Node.js 20.x**.
    * **Architecture:** Select **x86_64**.
    * Open **Change default execution role**:
      * Select **Use an existing role**.
-     * **Existing role:** Select webquiz-dev-lambda-role.
+     * **Existing role:** Select `webquiz-dev-lambda-role`.
    * Click **Create function**.
+![Image 2](/images/5-Workshop/5.6/5.6.2.png)
+![Image 3](/images/5-Workshop/5.6/5.6.3.png)
 4. In the function details screen, go to the **Configuration** tab:
    * **General configuration** → Click **Edit**:
      * Set **Memory** to `256` MB.
@@ -32,8 +35,8 @@ This function manages standard CRUD operations for quizzes and questions.
      * Click **Save**.
    * **Environment variables** → Click **Edit** → **Add environment variable**:
      * Add the following keys and values:
-       * `QUIZZES_TABLE` = webquiz-dev-quizzes
-       * `QUESTIONS_TABLE` = webquiz-dev-questions
+       * `QUIZZES_TABLE` = `webquiz-dev-quizzes`
+       * `QUESTIONS_TABLE` = `webquiz-dev-questions`
        * `ENVIRONMENT` = `dev`
      * Click **Save**.
 5. Switch to the **Code** tab, delete the default template, and paste the following code:
@@ -201,14 +204,14 @@ This function manages standard CRUD operations for quizzes and questions.
 This function manages game rooms, room PIN code generation, and player registration.
 
 1. Click **Create function**:
-   * **Function name:** webquiz-dev-room-management
+   * **Function name:** `webquiz-dev-room-management`
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** webquiz-dev-lambda-role.
+   * **Existing role:** `webquiz-dev-lambda-role`.
 2. Under the **Configuration** tab:
    * **General configuration** → Click **Edit**: Set **Memory** to `256` MB and **Timeout** to `30` seconds.
    * **Environment variables** → Click **Edit** → **Add environment variable**:
-     * `ROOMS_TABLE` = webquiz-dev-rooms
-     * `GAME_STATE_TABLE` = webquiz-dev-game-state
+     * `ROOMS_TABLE` = `webquiz-dev-rooms`
+     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
      * `ENVIRONMENT` = `dev`
 3. Under the **Code** tab, paste the following code:
    ```javascript

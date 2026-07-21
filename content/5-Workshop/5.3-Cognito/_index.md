@@ -5,154 +5,71 @@ weight: 3
 pre: " <b> 5.3. </b> "
 ---
 
-## Amazon Cognito Configuration Guide
+# Setting up Cognito Authentication
 
-Amazon Cognito is used in the SyncQuiz project to manage user registration, authentication, and secure access. It allows the system to create User Pools, configure App Clients, perform email-based verification, and issue secure tokens to the frontend upon successful login.
+In this step, you will configure **Amazon Cognito** to manage user registration, authentication, and secure access tokens for host users. We will use the new application-centric Cognito console interface.
 
-### Step 1: Access Amazon Cognito Service
+### 1. Create Amazon Cognito User Pool for Web Application (SPA)
 
-Description:
-Go to the AWS Management Console and search for the Amazon Cognito service. This service manages user identities and controls access to the application.
+1. Open the **[Amazon Cognito console](https://console.aws.amazon.com/cognito/)**.
+![Image 1](/images/5-Workshop/5.3/5.3.1.png)
+2. Click **Create user pool**.
+![Image 2](/images/5-Workshop/5.3/5.3.2.png)
+3. **Step 1 - Define your application:**
+   * **Application type:** Select **Single-page application (SPA)**.
+   * Click **Next**.
+![Image 3](/images/5-Workshop/5.3/5.3.3.png)
+4. **Step 2 - Name your application:**
+   * **Application name:** Enter `webquiz-dev-web-client`.
+   * Click **Next**.
+![Image 4](/images/5-Workshop/5.3/5.3.4.png)
+5. **Step 3 - Configure options:**
+   * **Options for sign-in identifiers:** Check ✅ **Email**.
+   * **Required attributes for sign-up:** `email` (default).
+   * Click **Next**.
+![Image 5](/images/5-Workshop/5.3/5.3.5.png)
+6. **Step 4 - Add a return URL:**
+   * **Return URL:** Enter `http://localhost:3000/callback` (you will use this for local frontend integration).
+   * Click **Next**.
+![Image 6](/images/5-Workshop/5.3/5.3.6.png)
+7. **Step 5 - Review and create:**
+   * Review all configuration details.
+   * Click **Create your application**.
+8. **Step 6 - Set up your application:**
+   * Cognito will display code integration examples.
+   * Click **Go to overview** to access your User Pool.
 
-Image:
-![Access Amazon Cognito](/project-aws/images/5.3-Cognito/cog1.jpg)
+---
 
-### Step 2: Select Add login and signup experiences to your app
+### 2. Configure Additional User Pool Settings
 
-Description:
-On the Amazon Cognito homepage, select the option Add login and signup experiences to your app. This option is used to set up the authentication flow for web applications.
+Once the User Pool is created, you must configure security policies:
 
-Image:
-![Select Add login and signup experiences](/project-aws/images/5.3-Cognito/cog2.jpg)
+1. Inside your User Pool details page, select the **Authentication methods** tab:
+   * Verify the **Password policy** configuration:
+     * Minimum length: `8` characters.
+     * Check ✅ **Requires numbers**.
+     * Check ✅ **Requires lowercase**.
+     * Check ✅ **Requires uppercase**.
+     * Uncheck ☐ **Requires symbols** (or keep checked if preferred).
+2. Select the **Sign-up** tab:
+   * **Self-service sign-up:** Check ✅ **Enabled** (to allow users to register themselves).
+   * **Cognito-assisted verification:** Check ✅ **Enabled**.
+   * **Verification method:** Select **Send email message**.
+3. Select the **App clients** tab:
+   * Click on the client named `webquiz-dev-web-client`.
+   * Verify **Client secret** is set to **No client secret** (since it is a public SPA client).
+   * Verify **Authentication flows** has:
+     * ✅ `ALLOW_USER_SRP_AUTH`
+     * ✅ `ALLOW_REFRESH_TOKEN_AUTH`
 
-### Step 3: Choose Single-page application type
+---
 
-Description:
-Under Define your application, select Single-page application (SPA) because the SyncQuiz frontend is built with React. This application type is suitable for frontend websites running on client browsers.
+### 3. Record Cognito Details
 
-Image:
-![Choose Single-page application](/project-aws/images/5.3-Cognito/cog3.jpg)
+Make sure you copy and save the following credentials from the **User Pool Overview** page:
+*   **User Pool ID:** `ap-southeast-1_xxxxxxxxx`
+*   **App Client ID** (found in the App Clients tab): `xxxxxxxxxxxxxxxxxxxxxxxxxx`
 
-### Step 4: Name your application client
-
-Description:
-Enter the name of your application client in the Name your application field. In this example, the app client name is set to webquiz-dev-web-client to serve the development environment of the WebQuiz/SyncQuiz system.
-
-Image:
-![Name your Cognito application](/project-aws/images/5.3-Cognito/cog4.jpg)
-
-### Step 5: Select email-based sign-in
-
-Description:
-Under Options for login credentials, select E-mail. With this setting, users can register and log in using their email addresses.
-
-Image:
-![Select email sign-in](/project-aws/images/5.3-Cognito/cog5.jpg)
-
-### Step 6: Enter application Return URL
-
-Description:
-Under Add a return URL, enter the callback URL of the frontend. This is the URL that Cognito will redirect users to after successful authentication.
-
-Example for local environment:
-http://localhost:3000/callback
-
-For production, replace this with your actual CloudFront domain or deployed website URL.
-
-Image:
-![Enter Return URL](/project-aws/images/5.3-Cognito/cog6.jpg)
-
-### Step 7: Create User Directory
-
-Description:
-After completing the necessary details, click Create a user directory to allow Cognito to set up the User Pool and App Client.
-
-Image:
-![Create User Directory](/project-aws/images/5.3-Cognito/cog7.jpg)
-
-### Step 8: Verify the User Pool is created
-
-Description:
-Once created, go back to the User groups list to verify your newly created User Pool. This User Pool will manage all user accounts within the system.
-
-Image:
-![Verify User Pool](/project-aws/images/5.3-Cognito/cog8.jpg)
-
-### Step 9: Access Authentication Methods
-
-Description:
-Within your User Pool details, navigate to the Authentication tab and select Authentication methods. Here, you can review and configure authentication mechanisms such as email, SMS, and signing policies.
-
-Image:
-![Authentication Methods](/project-aws/images/5.3-Cognito/cog9.jpg)
-
-### Step 10: Configure Password Policy
-
-Description:
-Select the password policy to modify settings. In this example, the password requires a minimum length of 8 characters, along with numbers, lowercase letters, uppercase letters, and special characters.
-
-Image:
-![Configure Password Policy](/project-aws/images/5.3-Cognito/cog10.jpg)
-
-### Step 11: Review Registration Settings
-
-Description:
-Switch to the Register tab to check the configuration for user account verification. This section defines how Cognito verifies email addresses or phone numbers when users sign up.
-
-Image:
-![Review Registration Settings](/project-aws/images/5.3-Cognito/cog11.jpg)
-
-### Step 12: Modify Account Verification settings
-
-Description:
-Click To modify to update the registration verification settings. This step ensures that users must verify their email addresses before they can access their accounts.
-
-Image:
-![Modify Registration Settings](/project-aws/images/5.3-Cognito/cog12.jpg)
-
-### Step 13: Configure verification email sending
-
-Description:
-Under Attribute verification and user account confirmation, select the option to allow Cognito to automatically send verification messages. Then select Send an email, verify the email address to trigger a confirmation email to new users.
-
-Image:
-![Configure email verification](/project-aws/images/5.3-Cognito/cog13.jpg)
-
-### Step 14: Save verification changes
-
-Description:
-After selecting email verification, click Save changes. From now on, any registering user will be required to confirm their email address.
-
-Image:
-![Save email verification settings](/project-aws/images/5.3-Cognito/cog14.jpg)
-
-### Step 15: Verify Application Client
-
-Description:
-Navigate to the Applications tab and select Application clients to check the generated app client. This app client provides the Client ID used by the React frontend to integrate authentication with Cognito.
-
-Image:
-![Verify Application Client](/project-aws/images/5.3-Cognito/cog15.jpg)
-
-### Step 16: Complete Cognito Configuration
-
-Description:
-With the User Pool, App Client, email login, return URL, password policy, and email verification successfully configured, Amazon Cognito is now ready for frontend integration.
-
-Image:
-![Complete Cognito Configuration](/project-aws/images/5.3-Cognito/cog16.jpg)
-
-## Expected Outcomes
-
-After completing the steps:
-- The User Pool has been successfully created.
-- The SPA configuration is set up for the React frontend.
-- Users can sign up and sign in using their email.
-- The Return URL is configured to handle redirects post-login.
-- A strong Password Policy is enforced for enhanced security.
-- Email verification is enabled to authenticate user credentials.
-- The App Client is ready to be integrated into the SyncQuiz frontend.
-
-## Role of Cognito in the SyncQuiz Project
-
-In the SyncQuiz project, Amazon Cognito serves as the main authentication and identity service. When users sign up or log in, Cognito handles account credentials, verifies email authenticity, and issues JSON Web Tokens (JWT). The React frontend uses these tokens to secure API Gateway endpoints, ensuring only authorized hosts can create quizzes, open game rooms, and manage quiz contents.
+> [!IMPORTANT]
+> You will need these two values when configuring the API Gateway authorizer and local frontend application variables later.

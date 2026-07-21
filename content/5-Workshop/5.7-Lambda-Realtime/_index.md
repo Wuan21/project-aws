@@ -11,19 +11,19 @@ In this step, you will deploy the remaining 5 AWS Lambda functions that handle p
 
 ---
 
-### 1. Create WebSocket Connect Function (webquiz-dev-ws-connect)
+### 1. Create WebSocket Connect Function (`webquiz-dev-ws-connect`)
 
 This function manages incoming WebSocket handshakes and registers client connections in DynamoDB.
 
 1. Click **Create function** in the Lambda console:
-   * **Function name:** webquiz-dev-ws-connect
+   * **Function name:** `webquiz-dev-ws-connect`
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** webquiz-dev-lambda-role.
+   * **Existing role:** `webquiz-dev-lambda-role`.
 2. Under **Configuration** tab:
    * **General configuration:** Set Memory to `256` MB, Timeout to `30` seconds.
    * **Environment variables:**
-     * `CONNECTIONS_TABLE` = webquiz-dev-connections
-     * `GAME_STATE_TABLE` = webquiz-dev-game-state
+     * `CONNECTIONS_TABLE` = `webquiz-dev-connections`
+     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
 3. Paste the code into the **Code** tab:
    ```javascript
    const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
@@ -72,18 +72,18 @@ This function manages incoming WebSocket handshakes and registers client connect
 
 ---
 
-### 2. Create WebSocket Disconnect Function (webquiz-dev-ws-disconnect)
+### 2. Create WebSocket Disconnect Function (`webquiz-dev-ws-disconnect`)
 
 This function removes the registered connection ID from DynamoDB when a user closes their connection.
 
 1. Click **Create function**:
-   * **Function name:** webquiz-dev-ws-disconnect
+   * **Function name:** `webquiz-dev-ws-disconnect`
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** webquiz-dev-lambda-role.
+   * **Existing role:** `webquiz-dev-lambda-role`.
 2. Under **Configuration** tab:
    * **Environment variables:**
-     * `CONNECTIONS_TABLE` = webquiz-dev-connections
-     * `GAME_STATE_TABLE` = webquiz-dev-game-state
+     * `CONNECTIONS_TABLE` = `webquiz-dev-connections`
+     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
 3. Paste the code into the **Code** tab:
    ```javascript
    const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
@@ -125,21 +125,21 @@ This function removes the registered connection ID from DynamoDB when a user clo
 
 ---
 
-### 3. Create WebSocket Message Function (webquiz-dev-ws-message)
+### 3. Create WebSocket Message Function (`webquiz-dev-ws-message`)
 
 This function routes real-time game actions (`START_GAME`, `NEXT_QUESTION`, `SUBMIT_ANSWER`, `END_GAME`), publishes events to EventBridge, and broadcasts updates to connected players.
 
 1. Click **Create function**:
-   * **Function name:** webquiz-dev-ws-message
+   * **Function name:** `webquiz-dev-ws-message`
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** webquiz-dev-lambda-role.
+   * **Existing role:** `webquiz-dev-lambda-role`.
 2. Under **Configuration** tab:
    * **General configuration:** Set Memory to `512` MB, Timeout to `30` seconds.
    * **Environment variables:**
-     * `CONNECTIONS_TABLE` = webquiz-dev-connections
-     * `ROOMS_TABLE` = webquiz-dev-rooms
-     * `GAME_STATE_TABLE` = webquiz-dev-game-state
-     * `EVENT_BUS_NAME` = webquiz-dev-game-events
+     * `CONNECTIONS_TABLE` = `webquiz-dev-connections`
+     * `ROOMS_TABLE` = `webquiz-dev-rooms`
+     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
+     * `EVENT_BUS_NAME` = `webquiz-dev-game-events`
      * `WEBSOCKET_ENDPOINT` = `https://temp-endpoint.com` (Note: You will update this URL after creating the WebSocket API Gateway in the next sections).
 3. Paste the code into the **Code** tab:
    ```javascript
@@ -378,18 +378,18 @@ This function routes real-time game actions (`START_GAME`, `NEXT_QUESTION`, `SUB
 
 ---
 
-### 4. Create Score Calculator Function (webquiz-dev-score-calculator)
+### 4. Create Score Calculator Function (`webquiz-dev-score-calculator`)
 
 This function is triggered by EventBridge rules when a player submits an answer. It reads the correct answer from DynamoDB, calculates the score based on remaining time and streak, updates the player state, and notifies the player via WebSocket.
 
 1. Click **Create function**:
-   * **Function name:** webquiz-dev-score-calculator
+   * **Function name:** `webquiz-dev-score-calculator`
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** webquiz-dev-lambda-role.
+   * **Existing role:** `webquiz-dev-lambda-role`.
 2. Under **Configuration** tab:
    * **Environment variables:**
-     * `GAME_STATE_TABLE` = webquiz-dev-game-state
-     * `CONNECTIONS_TABLE` = webquiz-dev-connections
+     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
+     * `CONNECTIONS_TABLE` = `webquiz-dev-connections`
      * `WEBSOCKET_ENDPOINT` = `https://temp-endpoint.com` (You will update this later).
 3. Paste the code into the **Code** tab:
    ```javascript
@@ -491,19 +491,19 @@ This function is triggered by EventBridge rules when a player submits an answer.
 
 ---
 
-### 5. Create Game Results Saver Function (webquiz-dev-game-results-saver)
+### 5. Create Game Results Saver Function (`webquiz-dev-game-results-saver`)
 
 This function is triggered by EventBridge rules when the host ends the game. It extracts all player stats from the game-state and saves them permanently into the game results table.
 
 1. Click **Create function**:
-   * **Function name:** webquiz-dev-game-results-saver
+   * **Function name:** `webquiz-dev-game-results-saver`
    * **Runtime:** **Node.js 20.x**.
-   * **Existing role:** webquiz-dev-lambda-role.
+   * **Existing role:** `webquiz-dev-lambda-role`.
 2. Under **Configuration** tab:
    * **General configuration:** Set Timeout to `60` seconds.
    * **Environment variables:**
-     * `GAME_RESULTS_TABLE` = webquiz-dev-game-results
-     * `GAME_STATE_TABLE` = webquiz-dev-game-state
+     * `GAME_RESULTS_TABLE` = `webquiz-dev-game-results`
+     * `GAME_STATE_TABLE` = `webquiz-dev-game-state`
 3. Paste the code into the **Code** tab:
    ```javascript
    const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');

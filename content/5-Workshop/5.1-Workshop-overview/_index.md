@@ -18,13 +18,5 @@ In this workshop, you will practice building the system with the following core 
 *   **Communication & API Gateway Tier:** Establish **API Gateway HTTP API** for RESTful requests (quiz/room management) and **API Gateway WebSocket API** to maintain persistent **real-time bidirectional communication** with low latency between the host and players.
 *   **Compute Tier (API Compute):** Program and configure **AWS Lambda** functions (**Node.js runtime**) to execute backend logic **on-demand** (quiz CRUD, room management, WebSocket connections/message routing).
 *   **Database Tier:** Utilize **Amazon DynamoDB** NoSQL database in **On-demand** capacity mode to store user data, quizzes, connections, and live game states, eliminating the need for expensive **Redis** clusters.
-*   **Asynchronous Event Routing Tier:** Use an **Amazon EventBridge Custom Event Bus** (webquiz-dev-game-events) to route real-time game events (answer submission, game ending) asynchronously to background Lambda workers (scoring, results saving).
+*   **Asynchronous Event Routing Tier:** Use an **Amazon EventBridge Custom Event Bus** (`webquiz-dev-game-events`) to route real-time game events (answer submission, game ending) asynchronously to background Lambda workers (scoring, results saving).
 *   **Monitoring & Dashboard Services:** Configure **Amazon CloudWatch** logs for error tracking, metrics for performance, **CloudWatch Alarms** for system alerts, and build a **CloudWatch Dashboard** for real-time system observability.
-
----
-
-## Workshop Architecture Diagram
-
-The following diagram illustrates the overall architecture and main AWS services used in the workshop.
-
-![Workshop Architecture Diagram](/project-aws/images/5-Workshop/5.1-Workshop-overview/diagram.jpg)

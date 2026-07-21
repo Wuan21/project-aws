@@ -2,6 +2,7 @@
 title: "Kiểm thử hệ thống"
 date: 2024-01-01
 weight: 12
+chapter: false
 pre: " <b> 5.12. </b> "
 ---
 
@@ -48,7 +49,7 @@ Mở **Postman** (hoặc dùng `curl`) để gửi request tạo bộ câu hỏi
 
 1. **Thông tin Request:**
    * **Phương thức:** `POST`
-   * **URL:** `https://YOUR_HTTP_API_ID.execute-api.us-east-1.amazonaws.com/dev/quizzes`
+   * **URL:** `https://YOUR_HTTP_API_ID.execute-api.ap-southeast-1.amazonaws.com/dev/quizzes`
    * **Headers:**
      * `Authorization`: `Bearer YOUR_ID_TOKEN`
      * `Content-Type`: `application/json`
@@ -70,7 +71,7 @@ Khởi tạo một game show trực tiếp:
 
 1. **Thông tin Request:**
    * **Phương thức:** `POST`
-   * **URL:** `https://YOUR_HTTP_API_ID.execute-api.us-east-1.amazonaws.com/dev/rooms`
+   * **URL:** `https://YOUR_HTTP_API_ID.execute-api.ap-southeast-1.amazonaws.com/dev/rooms`
    * **Headers:**
      * `Authorization`: `Bearer YOUR_ID_TOKEN`
    * **Body (JSON):**
@@ -87,7 +88,7 @@ Khởi tạo một game show trực tiếp:
 
 1. **Thông tin Request:**
    * **Phương thức:** `POST`
-   * **URL:** `https://YOUR_HTTP_API_ID.execute-api.us-east-1.amazonaws.com/dev/rooms/582914/join` (thay `582914` bằng mã PIN phòng thực tế vừa tạo).
+   * **URL:** `https://YOUR_HTTP_API_ID.execute-api.ap-southeast-1.amazonaws.com/dev/rooms/582914/join` (thay `582914` bằng mã PIN phòng thực tế vừa tạo).
    * **Headers:**
      * `Content-Type`: `application/json`
    * **Body (JSON):**
@@ -107,13 +108,13 @@ Tiếp theo, mở hai cửa sổ terminal để mô phỏng tương tác giữa 
 #### 5.1 Kết nối phía Quản trò (Terminal 1)
 Mở terminal và kết nối với vai trò host:
 ```bash
-wscat -c "wss://YOUR_WS_API_ID.execute-api.us-east-1.amazonaws.com/dev?roomPin=582914&role=host"
+wscat -c "wss://YOUR_WS_API_ID.execute-api.ap-southeast-1.amazonaws.com/dev?roomPin=582914&role=host"
 ```
 
 #### 5.2 Kết nối phía Người chơi (Terminal 2)
 Mở cửa sổ terminal khác và kết nối với vai trò người chơi (Alice):
 ```bash
-wscat -c "wss://YOUR_WS_API_ID.execute-api.us-east-1.amazonaws.com/dev?roomPin=582914&orderId=YOUR_PLAYER_ORDER_ID&role=player"
+wscat -c "wss://YOUR_WS_API_ID.execute-api.ap-southeast-1.amazonaws.com/dev?roomPin=582914&orderId=YOUR_PLAYER_ORDER_ID&role=player"
 ```
 
 ---
@@ -159,8 +160,6 @@ Thực hiện gửi các tin nhắn điều phối trận đấu trên terminal:
 ### 7. Xác minh Kết quả trong Cơ sở dữ liệu
 
 Truy cập **[Amazon DynamoDB console](https://console.aws.amazon.com/dynamodb/)**:
-1. Chọn bảng **webquiz-dev-game-results**.
+1. Chọn bảng **`webquiz-dev-game-results`**.
 2. Nhấp chọn **Explore table items**.
 3. Xác nhận sự hiện diện của bản ghi lưu trữ điểm số, thứ hạng và số câu trả lời đúng của Alice.
-### 8. Demo Link
-https://syncquiz-frontend.onrender.com
