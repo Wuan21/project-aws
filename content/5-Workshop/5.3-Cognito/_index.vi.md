@@ -1,4 +1,4 @@
----
+﻿---
 title: "Xác thực Cognito"
 date: 2024-01-01
 weight: 3
@@ -13,27 +13,27 @@ Trong bước này, bạn sẽ cấu hình dịch vụ **Amazon Cognito** để 
 ### 1. Tạo Amazon Cognito User Pool cho ứng dụng Web (SPA)
 
 1. Mở **[Amazon Cognito console](https://console.aws.amazon.com/cognito/)**.
-![Ảnh 1](/images/5-Workshop/5.3/5.3.1.png)
+![Ảnh 1](/project-aws/images/5-Workshop/5.3/5.3.1.png)
 
 2. Nhấn **Create user pool**.
-![Ảnh 2](/images/5-Workshop/5.3/5.3.2.png)
+![Ảnh 2](/project-aws/images/5-Workshop/5.3/5.3.2.png)
 3. **Step 1 - Define your application:**
    * **Application type:** Chọn **Single-page application (SPA)**.
    * Nhấn **Next**.
-![Ảnh 3](/images/5-Workshop/5.3/5.3.3.png)
+![Ảnh 3](/project-aws/images/5-Workshop/5.3/5.3.3.png)
 4. **Step 2 - Name your application:**
    * **Application name:** Nhập `webquiz-dev-web-client`.
    * Nhấn **Next**.
-![Ảnh 4](/images/5-Workshop/5.3/5.3.4.png)
+![Ảnh 4](/project-aws/images/5-Workshop/5.3/5.3.4.png)
 5. **Step 3 - Configure options:**
    * **Options for sign-in identifiers:** Tick chọn ✅ **Email**.
    * **Required attributes for sign-up:** Mặc định là `email`.
    * Nhấn **Next**.
-![Ảnh 5](/images/5-Workshop/5.3/5.3.5.png)
+![Ảnh 5](/project-aws/images/5-Workshop/5.3/5.3.5.png)
 6. **Step 4 - Add a return URL:**
    * **Return URL:** Nhập `http://localhost:3000/callback` (sẽ dùng để kiểm thử ứng dụng chạy frontend ở local).
    * Nhấn **Next**.
-![Ảnh 6](/images/5-Workshop/5.3/5.3.6.png)
+![Ảnh 6](/project-aws/images/5-Workshop/5.3/5.3.6.png)
 7. **Step 5 - Review and create:**
    * Kiểm tra kỹ lại toàn bộ cấu hình.
    * Nhấn **Create your application**.

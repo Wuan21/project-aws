@@ -1,4 +1,4 @@
----
+﻿---
 title: "Cognito Authentication"
 date: 2024-01-01
 weight: 3
@@ -12,26 +12,26 @@ In this step, you will configure **Amazon Cognito** to manage user registration,
 ### 1. Create Amazon Cognito User Pool for Web Application (SPA)
 
 1. Open the **[Amazon Cognito console](https://console.aws.amazon.com/cognito/)**.
-![Image 1](/images/5-Workshop/5.3/5.3.1.png)
+![Image 1](/project-aws/images/5-Workshop/5.3/5.3.1.png)
 2. Click **Create user pool**.
-![Image 2](/images/5-Workshop/5.3/5.3.2.png)
+![Image 2](/project-aws/images/5-Workshop/5.3/5.3.2.png)
 3. **Step 1 - Define your application:**
    * **Application type:** Select **Single-page application (SPA)**.
    * Click **Next**.
-![Image 3](/images/5-Workshop/5.3/5.3.3.png)
+![Image 3](/project-aws/images/5-Workshop/5.3/5.3.3.png)
 4. **Step 2 - Name your application:**
    * **Application name:** Enter `webquiz-dev-web-client`.
    * Click **Next**.
-![Image 4](/images/5-Workshop/5.3/5.3.4.png)
+![Image 4](/project-aws/images/5-Workshop/5.3/5.3.4.png)
 5. **Step 3 - Configure options:**
    * **Options for sign-in identifiers:** Check ✅ **Email**.
    * **Required attributes for sign-up:** `email` (default).
    * Click **Next**.
-![Image 5](/images/5-Workshop/5.3/5.3.5.png)
+![Image 5](/project-aws/images/5-Workshop/5.3/5.3.5.png)
 6. **Step 4 - Add a return URL:**
    * **Return URL:** Enter `http://localhost:3000/callback` (you will use this for local frontend integration).
    * Click **Next**.
-![Image 6](/images/5-Workshop/5.3/5.3.6.png)
+![Image 6](/project-aws/images/5-Workshop/5.3/5.3.6.png)
 7. **Step 5 - Review and create:**
    * Review all configuration details.
    * Click **Create your application**.

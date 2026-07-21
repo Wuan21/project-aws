@@ -1,4 +1,4 @@
----
+﻿---
 title: "Hàm Lambda REST API"
 date: 2024-01-01
 weight: 6
@@ -17,7 +17,7 @@ Hàm này thực hiện các thao tác CRUD cơ bản cho bộ câu hỏi (quizz
 
 1. Mở **[AWS Lambda console](https://console.aws.amazon.com/lambda/)**.
 2. Nhấp chọn **Create function**.
-![Ảnh 1](/images/5-Workshop/5.6/5.6.1.png)
+![Ảnh 1](/project-aws/images/5-Workshop/5.6/5.6.1.png)
 3. Chọn **Author from scratch** và cấu hình các thông số:
    * **Function name:** `webquiz-dev-quiz-crud`
    * **Runtime:** Chọn **Node.js 20.x**.
@@ -26,8 +26,8 @@ Hàm này thực hiện các thao tác CRUD cơ bản cho bộ câu hỏi (quizz
      * Chọn **Use an existing role**.
      * **Existing role:** Chọn `webquiz-dev-lambda-role`.
    * Nhấp chọn **Create function**.
-![Ảnh 2](/images/5-Workshop/5.6/5.6.2.png)
-![Ảnh 3](/images/5-Workshop/5.6/5.6.3.png)
+![Ảnh 2](/project-aws/images/5-Workshop/5.6/5.6.2.png)
+![Ảnh 3](/project-aws/images/5-Workshop/5.6/5.6.3.png)
 4. Sau khi tạo xong, di chuyển tới tab **Configuration**:
    * Tại mục **General configuration** → Nhấp chọn **Edit**:
      * Đặt **Memory** là `256` MB.
