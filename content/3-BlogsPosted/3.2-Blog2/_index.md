@@ -37,12 +37,12 @@ The service empowers organizations to:
 
 ### 1. Broad Support for Multi-Vendor Foundation Models
 Amazon Bedrock hosts diverse model families from multiple top-tier providers, making it easy for businesses to match the ideal model to distinct tasks such as text generation, synthetic image creation, semantic search, or conversational chatbots.
-![Image 1](/project-aws/images/blog2.1.png)
+![Image 1](/project-aws/images/3-Blog/blog2.1.png)
 
 ### 2. Interactive Playgrounds for Fast Prototyping
 Bedrock offers Chat, Text, and Image Playgrounds directly inside the console, allowing developers to test prompts, iterate parameters, and compare model responses side-by-side before writing application code.
-![Image 2](/project-aws/images/blog2.1.png)
-![Image 3](/project-aws/images/blog2.1.png)
+![Image 2](/project-aws/images/3-Blog/blog2.2.png)
+![Image 3](/project-aws/images/3-Blog/blog2.3.png)
 
 ### 3. Secure and Private Model Customization
 Bedrock natively supports advanced optimization workflows:
@@ -53,7 +53,7 @@ Bedrock natively supports advanced optimization workflows:
 * Agents for Amazon Bedrock
 
 These components allow businesses to securely train AI applications using private corporate data boundaries without compromising intellectual property.
-![Image 4](/project-aws/images/blog2.4.png)
+![Image 4](/project-aws/images/3-Blog/blog2.4.png)
 
 ### 4. Serverless Architecture and Deep AWS Integration
 As a serverless offering, Amazon Bedrock auto-scales without manual capacity planning. 
@@ -66,7 +66,7 @@ It integrates natively with core infrastructure guardrails:
 * AWS Key Management Service (KMS)
 
 This guarantees comprehensive operational monitoring, immutable audit logging, and industry-grade data encryption.
-![Image 5](/project-aws/images/blog2.5.png)
+![Image 5](/project-aws/images/3-Blog/blog2.5.png)
 
 ## Key Benefits
 * Accelerates the production lifecycle of Generative AI apps.
